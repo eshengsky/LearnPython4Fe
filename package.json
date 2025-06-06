@@ -1,0 +1,11 @@
+{
+  "name": "learnpython4fe",
+  "version": "1.0.0",
+  "description": "给前端开发看的Python入门教程",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
