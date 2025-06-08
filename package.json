@@ -1,11 +1,20 @@
 {
   "name": "learnpython4fe",
   "version": "1.0.0",
-  "description": "给前端开发看的Python入门教程",
-  "main": "index.js",
+  "description": "给前端开发者的Python入门教程",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.16"
+  },
+  "dependencies": {
+    "markdown-it-container": "^4.0.0"
+  }
 }
