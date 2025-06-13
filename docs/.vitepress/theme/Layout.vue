@@ -32,7 +32,6 @@ export default {
     
     // 监听路由变化
     watch(() => route.path, async () => {
-      console.log('🚀 Route changed to:', route.path)
       await handleCodeBlocks()
     }, { flush: 'post' })
 
@@ -54,11 +53,8 @@ function base64DecodeUtf8(str) {
 
 // 处理交互式代码块的函数
 async function processInteractiveCodeBlocks() {
-  console.log('🔍 Looking for interactive code blocks...')
-  
   // 查找所有需要处理的标记
   const blocks = document.querySelectorAll('.interactive-code-block')
-  console.log('📋 Found blocks:', blocks.length)
   
   if (blocks.length === 0) return
 
@@ -68,15 +64,13 @@ async function processInteractiveCodeBlocks() {
   blocks.forEach((block, index) => {
     // 检查是否已经处理过了（避免重复处理）
     if (block.querySelector('.interactive-code')) {
-      console.log(`⏭️ Block ${index + 1} already processed, skipping`)
       return
     }
-    
-    console.log(`🔧 Processing block ${index + 1}:`, block)
-    
+        
     const lang = block.dataset.lang
     const encodedTitle = block.dataset.title
     const encodedCode = block.dataset.code
+    const runnable = block.dataset.runnable === 'true'  // 读取 runnable 属性
     
     if (!lang || !encodedCode) {
       console.warn('⚠️ Invalid block data:', { lang, encodedTitle, encodedCode })
@@ -88,12 +82,6 @@ async function processInteractiveCodeBlocks() {
       const decodedCode = base64DecodeUtf8(encodedCode)
       const decodedTitle = encodedTitle ? base64DecodeUtf8(encodedTitle) : ''
       
-      console.log('📝 Decoded code:', { 
-        lang, 
-        title: decodedTitle, 
-        code: decodedCode.substring(0, 100) + '...' 
-      })
-      
       // 清空原有内容
       block.innerHTML = ''
       
@@ -101,13 +89,12 @@ async function processInteractiveCodeBlocks() {
       const app = createApp(InteractiveCode, {
         lang: lang,
         title: decodedTitle,
-        code: decodedCode
+        code: decodedCode,
+        runnable: runnable  // 传递 runnable 属性
       })
       
       // 挂载到当前位置
       app.mount(block)
-      
-      console.log('✅ Successfully mounted block', index + 1)
     } catch (error) {
       console.error('❌ Error processing block:', error)
       console.error('Raw data:', { lang, encodedTitle, encodedCode })

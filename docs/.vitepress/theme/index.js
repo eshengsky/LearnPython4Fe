@@ -1,7 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import InteractiveCode from '../components/InteractiveCode.vue'
 import Layout from './Layout.vue'
-import './custom.css'
+import './tailwind.css'
 
 export default {
   extends: DefaultTheme,
