@@ -1,10 +1,10 @@
 # 布尔值
 
-在JavaScript中，我们使用`true`和`false`来表示布尔值，这是编程中最基础的逻辑概念。Python的布尔值概念相同，但有一些细节差异值得注意，特别是在类型转换和真值判断方面，Python提供了更加灵活和直观的处理方式。
+在 JavaScript 中，我们使用`true`和`false`来表示布尔值，这是编程中最基础的逻辑概念。Python 的布尔值概念相同，但有一些细节差异值得注意，特别是在类型转换和真值判断方面，Python 提供了更加灵活和直观的处理方式。
 
 ## 基本使用
 
-JavaScript中布尔值使用小写：
+JavaScript 中布尔值使用小写：
 
 ```javascript runner
 // JavaScript 布尔值
@@ -16,7 +16,7 @@ console.log(isComplete);   // false
 console.log(typeof isActive); // "boolean"
 ```
 
-Python中布尔值必须首字母大写，这是Python的一个重要特点：
+Python 中布尔值必须首字母大写，这是 Python 的一个重要特点：
 
 ```python runner
 # Python 布尔值 - 注意大写
@@ -28,7 +28,7 @@ print(is_complete)   # False
 print(type(is_active).__name__)  # bool
 ```
 
-这个大写的要求源于Python的设计哲学：`True`和`False`实际上是内置的常量对象，就像`None`一样。
+这个大写的要求源于 Python 的设计哲学：`True`和`False`实际上是内置的常量对象，就像`None`一样。
 
 ## 创建
 
@@ -49,9 +49,9 @@ print(f"bool(0): {result4}")
 
 ## 真值判断
 
-这是Python布尔值最有趣的部分。JavaScript有复杂的真值转换规则，而Python的规则更加直观和一致。
+这是 Python 布尔值最有趣的部分。JavaScript 有复杂的真值转换规则，而 Python 的规则更加直观和一致。
 
-### JavaScript的真值转换
+### JavaScript 的真值转换
 
 ```javascript runner
 // JavaScript 的真值转换（有时令人困惑）
@@ -63,9 +63,9 @@ console.log(Boolean("0"));      // true (字符串"0"是真值)
 console.log(Boolean("false")); // true (字符串"false"也是真值)
 ```
 
-### Python的真值转换
+### Python 的真值转换
 
-Python的规则更符合直觉：空的容器、零、`None`都被认为是假值，非空的容器和非零数字都是真值。
+Python 的规则更符合直觉：空的容器、零、`None`都被认为是假值，非空的容器和非零数字都是真值。
 
 ```python runner
 # Python 的真值转换 - 更直观
@@ -80,16 +80,16 @@ print(f"bool('hello'): {bool('hello')}")  # True (非空字符串)
 print(f"bool([1]): {bool([1])}")       # True (非空列表)
 print(f"bool({{'a': 1}}): {bool({'a': 1})}")  # True (非空字典)
 
-# 特别注意：和JavaScript相同的"陷阱"情况
+# 特别注意：和 JavaScript 相同的"陷阱"情况
 print(f"bool('0'): {bool('0')}")       # True (字符串"0"是真值!)
 print(f"bool('false'): {bool('false')}")  # True (字符串"false"也是真值!)
 ```
 
-这里需要特别注意：Python和JavaScript在处理字符串`"0"`和`"false"`时是相同的——它们都是真值！因为它们是非空字符串。这是一个常见陷阱。
+这里需要特别注意：Python 和 JavaScript 在处理字符串`"0"`和`"false"`时是相同的——它们都是真值！因为它们是非空字符串。这是一个常见陷阱。
 
 ### 假值的完整列表
 
-Python中被认为是假值的情况：
+Python 中被认为是假值的情况：
 
 ```python runner
 # Python 中所有的假值情况
@@ -115,7 +115,7 @@ for value in false_values:
 
 ## 比较运算符
 
-JavaScript和Python的比较运算符基本相同：
+JavaScript 和 Python 的比较运算符基本相同：
 
 ```python runner
 # 基本比较运算符
@@ -132,40 +132,40 @@ print(f"{a} <= {b}: {a <= b}")    # False (小于等于)
 
 ### 类型比较的差异
 
-JavaScript允许不同类型之间的比较，会进行隐式转换：
+JavaScript 允许不同类型之间的比较，会进行隐式转换：
 
 ```javascript runner
 // JavaScript 的隐式类型转换
-console.log(5 == "5");     // true  (字符串"5"转为数字5)
+console.log(5 == "5");     // true  (字符串"5"转为数字 5)
 console.log(5 === "5");    // false (严格相等，不转换类型)
 console.log(true == 1);    // true  (布尔值转为数字)
 console.log(false == 0);   // true
 ```
 
-Python的比较更加严格，不会进行隐式转换：
+Python 的比较更加严格，不会进行隐式转换：
 
 ```python runner
 # Python 的严格比较
-print(f"5 == '5': {5 == '5'}")         # False (不同类型直接返回False)
+print(f"5 == '5': {5 == '5'}")         # False (不同类型直接返回 False)
 print(f"True == 1: {True == 1}")       # True  (但布尔值是整数的子类)
 print(f"False == 0: {False == 0}")     # True
 print(f"True is 1: {True is 1}")       # False (is 检查身份，不是值)
 
 # 演示布尔值与数字的特殊关系
-print(f"True + 5: {True + 5}")         # 6 (True在算术运算中等于1)
-print(f"False + 5: {False + 5}")       # 5 (False在算术运算中等于0)
+print(f"True + 5: {True + 5}")         # 6 (True 在算术运算中等于 1)
+print(f"False + 5: {False + 5}")       # 5 (False 在算术运算中等于 0)
 ```
 
-这里有个有趣的事实：在Python中，`bool`类型实际上是`int`类型的子类，所以`True`和`False`在数学运算中分别等于 1 和 0。
+这里有个有趣的事实：在 Python 中，`bool`类型实际上是`int`类型的子类，所以`True`和`False`在数学运算中分别等于 1 和 0。
 
-### Python没有===操作符
+### Python 没有===操作符
 
-前端开发者经常问：Python有没有类似JavaScript`===`的严格相等操作符？
+前端开发者经常问：Python 有没有类似 JavaScript`===`的严格相等操作符？
 
-**答案是不需要，因为Python的`==`本身就是严格的，不会进行类型转换。**
+**答案是不需要，因为 Python 的`==`本身就是严格的，不会进行类型转换。**
 
 ```python runner
-# Python的==默认就是严格比较
+# Python 的==默认就是严格比较
 print(f"5 == '5': {5 == '5'}")       # False (不同类型)
 print(f"5 == 5: {5 == 5}")           # True (相同类型相同值)
 
@@ -178,7 +178,7 @@ print(f"a is b: {a is b}")    # False (不同对象)
 
 ## 逻辑运算符
 
-JavaScript使用`&&`、`||`、`!`，而Python使用更接近自然语言的关键字：
+JavaScript 使用`&&`、`||`、`!`，而 Python 使用更接近自然语言的关键字：
 
 ```javascript runner
 // JavaScript 逻辑运算符
@@ -202,7 +202,7 @@ print(f"not {a}: {not a}")          # False (非运算)
 
 ### 短路求值
 
-两种语言都支持短路求值，但Python的行为更加一致：
+两种语言都支持短路求值，但 Python 的行为更加一致：
 
 ```python runner
 # 短路求值演示
@@ -225,7 +225,7 @@ print(f"结果: {result2}")
 
 ### 返回值的差异
 
-JavaScript的逻辑运算符返回参与运算的值之一，而Python也有类似行为：
+JavaScript 的逻辑运算符返回参与运算的值之一，而 Python 也有类似行为：
 
 ```javascript runner
 // JavaScript 逻辑运算符返回值
@@ -247,7 +247,7 @@ print(f"显示名称: {display_name}")
 
 ## 链式比较
 
-Python支持数学式的链式比较，这是JavaScript没有的特性：
+Python 支持数学式的链式比较，这是 JavaScript 没有的特性：
 
 ```python runner
 # Python 的链式比较
@@ -288,7 +288,7 @@ test_values = [
     [],           # 空列表
     {"key": "value"},  # 非空字典
     {},           # 空字典
-    None,         # None值
+    None,         # None 值
 ]
 
 print("各种值的布尔转换:")
@@ -315,13 +315,13 @@ print(f"str(False): '{str(false_val)}'")  # 'False'
 
 ## 小结
 
-Python的布尔值系统虽然看起来简单，但提供了强大而直观的逻辑处理能力：
+Python 的布尔值系统虽然看起来简单，但提供了强大而直观的逻辑处理能力：
 
-1. **语法差异**：Python使用大写的`True`/`False`，逻辑运算符使用英文单词`and`/`or`/`not`
-2. **真值判断**：Python的真值转换规则更直观，空容器、零值、`None`都是假值
+1. **语法差异**：Python 使用大写的`True`/`False`，逻辑运算符使用英文单词`and`/`or`/`not`
+2. **真值判断**：Python 的真值转换规则更直观，空容器、零值、`None`都是假值
 3. **类型关系**：`bool`是`int`的子类，`True`/`False`在数学运算中等于 1/0
 4. **比较运算**：支持数学风格的链式比较，如`18 <= age < 65`
 5. **短路求值**：逻辑运算符支持短路求值和返回参与运算的值
 6. **实际应用**：在条件判断、表单验证、特性开关、状态管理等场景中广泛使用
 
-掌握布尔值的这些特性，能让你写出更简洁、更易读的Python代码。特别是Python的真值判断规则和链式比较语法，能让条件逻辑的表达更加自然和直观。 
+掌握布尔值的这些特性，能让你写出更简洁、更易读的 Python 代码。特别是 Python 的真值判断规则和链式比较语法，能让条件逻辑的表达更加自然和直观。 

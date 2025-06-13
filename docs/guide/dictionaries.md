@@ -1,10 +1,10 @@
 # 字典
 
-在JavaScript中，对象是存储键值对数据的核心方式，我们使用大括号和键值对来组织相关数据。Python的字典与JavaScript对象在概念上非常相似，都是用来存储键值对的数据结构，但在语法和功能上有一些有趣的差异。
+在 JavaScript 中，对象是存储键值对数据的核心方式，我们使用大括号和键值对来组织相关数据。Python 的字典与 JavaScript 对象在概念上非常相似，都是用来存储键值对的数据结构，但在语法和功能上有一些有趣的差异。
 
 ## 创建字典
 
-JavaScript中创建对象很直观，属性名可以加引号也可以不加：
+JavaScript 中创建对象很直观，属性名可以加引号也可以不加：
 
 ```javascript runner
 // JavaScript 对象创建 - 属性名可以不加引号
@@ -26,7 +26,7 @@ console.log(person);
 console.log(scores);
 ```
 
-Python字典的键名必须用引号包围，这是与JavaScript的一个重要差异：
+Python 字典的键名必须用引号包围，这是与 JavaScript 的一个重要差异：
 
 ```python runner
 # Python 字典创建
@@ -48,7 +48,7 @@ print(scores)
 
 ### 使用构造函数创建
 
-JavaScript可以使用`Object()`或其他方式，Python有`dict()`构造函数：
+JavaScript 可以使用`Object()`或其他方式，Python 有`dict()`构造函数：
 
 ```python runner
 # 使用 dict() 构造函数
@@ -75,37 +75,37 @@ print(f"复制字典: {copy_dict}")
 
 # 从其他数据结构创建字典的更多方式
 zip_dict = dict(zip(['a', 'b', 'c'], [1, 2, 3]))
-print(f"使用zip创建: {zip_dict}")
+print(f"使用 zip 创建: {zip_dict}")
 ```
 
 ## 键类型
 
-JavaScript对象的属性名总是字符串类型（ES6后也支持Symbol），数字键会自动转换：
+JavaScript 对象的属性名总是字符串类型（ES6 后也支持 Symbol），数字键会自动转换：
 
 ```javascript runner
 // JavaScript 对象的键会被转换为字符串
 let jsObj = {
-    1: "数字1",
-    "1": "字符串1",  // 会覆盖上面的值！
-    true: "布尔true",
-    "true": "字符串true"  // 会覆盖上面的值！
+    1: "数字 1",
+    "1": "字符串 1",  // 会覆盖上面的值！
+    true: "布尔 true",
+    "true": "字符串 true"  // 会覆盖上面的值！
 };
 
 console.log(jsObj);
-console.log("键的数量:", Object.keys(jsObj).length);  // 只有2个键
-console.log("访问数字1:", jsObj[1]);      // "字符串true"（被覆盖了）
-console.log("访问字符串1:", jsObj["1"]);  // "字符串true"
+console.log("键的数量:", Object.keys(jsObj).length);  // 只有 2 个键
+console.log("访问数字 1:", jsObj[1]);      // "字符串 true"（被覆盖了）
+console.log("访问字符串 1:", jsObj["1"]);  // "字符串 true"
 ```
 
-Python字典支持多种键类型且不会自动转换：
+Python 字典支持多种键类型且不会自动转换：
 
 ```python runner
 # Python 字典可以使用多种不可变类型作为键
 py_dict = {
-    1: "数字1",
-    "1": "字符串1",        # 不会覆盖数字键
-    True: "布尔True",      # 注意：1 和 True 在Python中相等
-    "True": "字符串True",
+    1: "数字 1",
+    "1": "字符串 1",        # 不会覆盖数字键
+    True: "布尔 True",      # 注意：1 和 True 在 Python 中相等
+    "True": "字符串 True",
     (1, 2): "元组键",
     3.14: "浮点数键"
 }
@@ -114,12 +114,12 @@ print("字典内容:", py_dict)
 print("键的数量:", len(py_dict))
 
 # 分别访问不同类型的键
-print(f"数字键1: {py_dict[1]}")          # 注意：会返回布尔True的值
+print(f"数字键 1: {py_dict[1]}")          # 注意：会返回布尔 True 的值
 print(f"字符串键'1': {py_dict['1']}")
-print(f"元组键(1,2): {py_dict[(1, 2)]}")
-print(f"浮点数键3.14: {py_dict[3.14]}")
+print(f"元组键 (1,2): {py_dict[(1, 2)]}")
+print(f"浮点数键 3.14: {py_dict[3.14]}")
 
-# 演示1和True的特殊情况
+# 演示 1 和 True 的特殊情况
 print(f"1 == True: {1 == True}")  # True，所以它们是同一个键
 ```
 
@@ -165,7 +165,7 @@ pos = (1, 2)
 if pos in game_board:
     print(f"位置 {pos} 有: {game_board[pos]}")
 
-# 使用数字作为ID，字符串作为名称
+# 使用数字作为 ID，字符串作为名称
 student_records = {
     20230001: {"name": "张三", "grade": 90},
     20230002: {"name": "李四", "grade": 85},
@@ -177,11 +177,11 @@ for student_id, info in student_records.items():
     print(f"  {student_id}: {info['name']} - {info['grade']}")
 ```
 
-这种灵活的键类型设计让Python字典比JavaScript对象在某些场景下更加强大和直观。
+这种灵活的键类型设计让 Python 字典比 JavaScript 对象在某些场景下更加强大和直观。
 
 ## 访问值
 
-JavaScript中使用点号或方括号访问对象属性：
+JavaScript 中使用点号或方括号访问对象属性：
 
 ```javascript runner
 // JavaScript 对象访问
@@ -196,7 +196,7 @@ console.log(person["age"]);    // 方括号访问（任何字符串都可以）
 console.log(person["data-science"]); // 特殊字符必须用方括号
 ```
 
-Python字典只能使用方括号语法，不支持点号访问，但提供了更安全的访问方法：
+Python 字典只能使用方括号语法，不支持点号访问，但提供了更安全的访问方法：
 
 ```python runner
 person = {
@@ -218,7 +218,7 @@ print(person.get("phone", "未知"))  # 不存在的键，返回默认值
 # print(person.name)  # 错误：字典不支持点号访问
 ```
 
-访问不存在的键时，Python的行为更安全：
+访问不存在的键时，Python 的行为更安全：
 
 ```python runner
 person = {"name": "张三", "age": 25}
@@ -239,7 +239,7 @@ else:
 
 ## 检查键是否存在
 
-JavaScript使用`in`操作符或`hasOwnProperty()`方法：
+JavaScript 使用`in`操作符或`hasOwnProperty()`方法：
 
 ```javascript runner
 // JavaScript 检查属性是否存在
@@ -256,7 +256,7 @@ console.log(person.hasOwnProperty("email"));      // false
 // hasOwnProperty() 避免原型链属性的干扰
 ```
 
-Python使用`in`关键字，语法更简洁且没有原型链的困扰：
+Python 使用`in`关键字，语法更简洁且没有原型链的困扰：
 
 ```python runner
 person = {
@@ -300,7 +300,7 @@ person["email"] = "zhangsan@example.com"
 print(f"修改后: {person}")
 
 # setdefault() 方法的特殊用途
-# 除了基本的修改操作，Python还提供了 setdefault() 方法来安全地设置键值：
+# 除了基本的修改操作，Python 还提供了 setdefault() 方法来安全地设置键值：
 # 它的作用是：如果键不存在则设置默认值，如果键已存在则不修改并返回现有值
 inventory = {"apple": 50, "banana": 30}
 print(f"原始库存: {inventory}")
@@ -312,13 +312,13 @@ print(f"设置默认值后: {inventory}")
 
 # 如果键已存在，返回现有值，不会修改
 apple_count = inventory.setdefault("apple", 100)
-print(f"苹果数量: {apple_count}")  # 返回50，不是100
+print(f"苹果数量: {apple_count}")  # 返回 50，不是 100
 print(f"苹果数量未被修改: {inventory}")
 ```
 
 ## 删除项目
 
-JavaScript使用`delete`操作符：
+JavaScript 使用`delete`操作符：
 
 ```javascript runner
 // JavaScript 删除对象属性
@@ -334,7 +334,7 @@ delete person.phone;
 console.log("删除后:", person);
 ```
 
-Python提供了多种删除方式，每种都有不同的特点和使用场景：
+Python 提供了多种删除方式，每种都有不同的特点和使用场景：
 
 - **`del`关键字**：直接删除指定键，如果键不存在会抛出`KeyError`异常
 - **`pop()`方法**：删除指定键并返回其值，可以提供默认值避免异常
@@ -354,16 +354,16 @@ print(f"原始字典: {person}")
 
 # 使用 del 关键字删除
 del person["email"]
-print(f"删除email后: {person}")
+print(f"删除 email 后: {person}")
 
 # 使用 pop() 方法删除并返回值
 phone = person.pop("phone")
 print(f"删除的电话: {phone}")
-print(f"删除phone后: {person}")
+print(f"删除 phone 后: {person}")
 
 # 使用 pop() 安全删除（提供默认值）
 website = person.pop("website", "无网站")
-print(f"尝试删除website: {website}")
+print(f"尝试删除 website: {website}")
 print(f"最终字典: {person}")
 
 # popitem() - 删除并返回最后插入的键值对
@@ -386,7 +386,7 @@ print(f"恢复数据: {inventory}")
 
 ## 遍历字典
 
-在遍历字典之前，我们需要了解如何获取字典的键、值和项目。JavaScript使用`Object.keys()`、`Object.values()`和`Object.entries()`：
+在遍历字典之前，我们需要了解如何获取字典的键、值和项目。JavaScript 使用`Object.keys()`、`Object.values()`和`Object.entries()`：
 
 ```javascript runner
 // JavaScript 获取对象的键、值、项目
@@ -401,7 +401,7 @@ console.log("值:", Object.values(scores));
 console.log("项目:", Object.entries(scores));
 ```
 
-Python提供了对应的方法，但语法更直接：
+Python 提供了对应的方法，但语法更直接：
 
 ```python runner
 scores = {
@@ -416,7 +416,7 @@ print(f"值: {list(scores.values())}")
 print(f"项目: {list(scores.items())}")
 
 # 这些方法返回的是视图对象，可以直接遍历
-print("\n直接遍历:")
+print("\n 直接遍历:")
 for key in scores.keys():
     print(f"科目: {key}")
 
@@ -429,7 +429,7 @@ for key, value in scores.items():
 
 ### 字典遍历的各种方式
 
-JavaScript中遍历对象的常见方式：
+JavaScript 中遍历对象的常见方式：
 
 ```javascript runner
 // JavaScript 遍历对象
@@ -446,13 +446,13 @@ for (let key in person) {
 }
 
 // 使用 Object.entries()
-console.log("\n使用 Object.entries():");
+console.log("\n 使用 Object.entries():");
 for (let [key, value] of Object.entries(person)) {
     console.log(`${key}: ${value}`);
 }
 ```
 
-Python的遍历方式更简洁自然：
+Python 的遍历方式更简洁自然：
 
 ```python runner
 person = {
@@ -467,24 +467,24 @@ for key in person:
     print(f"键: {key}")
 
 # 遍历值
-print("\n遍历值:")
+print("\n 遍历值:")
 for value in person.values():
     print(f"值: {value}")
 
 # 同时遍历键和值
-print("\n同时遍历键和值:")
+print("\n 同时遍历键和值:")
 for key, value in person.items():
     print(f"{key}: {value}")
 
 # 带索引的遍历
-print("\n带索引的遍历:")
+print("\n 带索引的遍历:")
 for index, (key, value) in enumerate(person.items()):
     print(f"{index}: {key} = {value}")
 ```
 
 ## 字典推导式
 
-Python提供了类似列表推导式的字典推导式，这是JavaScript所没有的强大特性：
+Python 提供了类似列表推导式的字典推导式，这是 JavaScript 所没有的强大特性：
 
 ```python runner
 # 基本字典推导式
@@ -547,7 +547,7 @@ def get_nested_value(data, keys, default=None):
 
 # 使用安全访问函数
 math_score = get_nested_value(students, ["张三", "grades", "math"])
-print(f"\n张三数学成绩: {math_score}")
+print(f"\n 张三数学成绩: {math_score}")
 
 missing_score = get_nested_value(students, ["王五", "grades", "math"], "未找到")
 print(f"王五数学成绩: {missing_score}")
@@ -555,7 +555,7 @@ print(f"王五数学成绩: {missing_score}")
 
 ## 字典拷贝
 
-在JavaScript中，对象拷贝一直是一个重要话题，因为对象赋值默认是引用传递：
+在 JavaScript 中，对象拷贝一直是一个重要话题，因为对象赋值默认是引用传递：
 
 ```javascript runner
 // JavaScript 对象的引用问题
@@ -581,7 +581,7 @@ let deepCopy = JSON.parse(JSON.stringify(originalObj));  // 简单深拷贝（�
 console.log("深拷贝对象:", deepCopy);
 ```
 
-Python字典拷贝的概念和JavaScript类似，但提供了更明确的方法：
+Python 字典拷贝的概念和 JavaScript 类似，但提供了更明确的方法：
 
 ```python runner
 # Python 字典的引用行为
@@ -621,11 +621,11 @@ print(f"深拷贝字典: {deep_copy}")
 - **浅拷贝**：当字典只包含不可变对象，或者你确定不会修改嵌套对象时
 - **深拷贝**：当字典包含嵌套的可变对象，且需要完全独立的副本时
 
-相比JavaScript的对象拷贝，Python提供了更明确和统一的方法，`copy.deepcopy()`比JavaScript的各种深拷贝技巧更可靠。
+相比 JavaScript 的对象拷贝，Python 提供了更明确和统一的方法，`copy.deepcopy()`比 JavaScript 的各种深拷贝技巧更可靠。
 
 ## 字典合并
 
-JavaScript中合并对象主要使用展开语法或`Object.assign()`方法：
+JavaScript 中合并对象主要使用展开语法或`Object.assign()`方法：
 
 ```javascript runner
 // JavaScript 对象合并
@@ -643,10 +643,10 @@ console.log("多对象合并:", result2);
 
 // 使用 Object.assign()（ES5+）
 let result3 = Object.assign({}, obj1, obj2);
-console.log("Object.assign合并:", result3);
+console.log("Object.assign 合并:", result3);
 ```
 
-Python提供了更多种合并字典的方式，语法上也更直观：
+Python 提供了更多种合并字典的方式，语法上也更直观：
 
 ```python runner
 # 传统合并方式
@@ -657,7 +657,7 @@ dict3 = {"b": 20, "e": 5}  # 注意键 "b" 重复
 # 使用 update() 方法
 result1 = dict1.copy()
 result1.update(dict2)
-print(f"使用update合并: {result1}")
+print(f"使用 update 合并: {result1}")
 
 # 使用解包语法合并（Python 3.5+）
 result2 = {**dict1, **dict2, **dict3}
@@ -675,7 +675,7 @@ print(f"键冲突演示: {conflict_demo}")  # dict3 的值会覆盖 dict1 的值
 
 ## 小结
 
-Python字典是一种强大而灵活的数据结构，与JavaScript对象相比有以下特点：
+Python 字典是一种强大而灵活的数据结构，与 JavaScript 对象相比有以下特点：
 
 **相似之处：**
 - 都使用大括号语法创建
@@ -683,7 +683,7 @@ Python字典是一种强大而灵活的数据结构，与JavaScript对象相比�
 - 都支持动态添加和删除项目
 - 都可以存储不同类型的值
 
-**Python字典的优势：**
+**Python 字典的优势：**
 - 提供了`get()`方法进行安全访问
 - `in`关键字检查键存在性更简洁
 - 字典推导式功能强大
@@ -698,4 +698,4 @@ Python字典是一种强大而灵活的数据结构，与JavaScript对象相比�
 - 提供了更多内置方法来操作字典
 - 键可以是任何不可变类型（字符串、数字、元组等），不仅限于字符串
 
-字典在Python中被广泛用于配置信息、数据缓存、对象属性存储等场景，是Python编程中不可或缺的数据结构。 
+字典在 Python 中被广泛用于配置信息、数据缓存、对象属性存储等场景，是 Python 编程中不可或缺的数据结构。 

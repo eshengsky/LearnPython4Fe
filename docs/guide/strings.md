@@ -1,10 +1,10 @@
 # 字符串
 
-字符串是编程中最常用的数据类型之一，用于存储和处理文本数据。在前端开发中，我们经常使用JavaScript的字符串来处理DOM内容、API响应等，而Python的字符串在数据处理、文件操作等方面同样强大。
+字符串是编程中最常用的数据类型之一，用于存储和处理文本数据。在前端开发中，我们经常使用 JavaScript 的字符串来处理 DOM 内容、API 响应等，而 Python 的字符串在数据处理、文件操作等方面同样强大。
 
 ## 创建
 
-在JavaScript中，我们可以使用单引号、双引号或反引号来创建字符串：
+在 JavaScript 中，我们可以使用单引号、双引号或反引号来创建字符串：
 
 ```javascript runner
 // JavaScript 字符串创建
@@ -17,7 +17,7 @@ console.log(message2);
 console.log(message3);
 ```
 
-Python的字符串创建方式类似，但更加灵活：
+Python 的字符串创建方式类似，但更加灵活：
 
 ```python runner
 # Python 字符串创建
@@ -30,7 +30,7 @@ print(message2)
 
 ### 引号的灵活使用
 
-Python允许我们巧妙地混合使用单引号和双引号：
+Python 允许我们巧妙地混合使用单引号和双引号：
 
 ```python runner
 # 在字符串中包含引号
@@ -45,7 +45,7 @@ print(text3)
 
 ### 多行字符串
 
-JavaScript使用模板字面量（反引号）来创建多行字符串，而Python提供了三重引号的优雅方式：
+JavaScript 使用模板字面量（反引号）来创建多行字符串，而 Python 提供了三重引号的优雅方式：
 
 ```python runner
 # Python 多行字符串 - 使用三重双引号
@@ -63,7 +63,7 @@ print("---")
 print(text2)
 ```
 
-这种三重引号的方式比JavaScript的反引号更清晰，特别适合编写文档字符串或SQL查询。
+这种三重引号的方式比 JavaScript 的反引号更清晰，特别适合编写文档字符串或 SQL 查询。
 
 ## 赋值
 
@@ -74,7 +74,7 @@ print(name)
 
 ## 字符串序列特性
 
-这是Python字符串的一个重要特性：字符串是字符序列，类似于数组。JavaScript中字符串也可以像数组一样访问：
+这是 Python 字符串的一个重要特性：字符串是字符序列，类似于数组。JavaScript 中字符串也可以像数组一样访问：
 
 ```javascript runner
 // JavaScript 字符串索引访问
@@ -82,7 +82,7 @@ let text = "Hello, World!";
 console.log(text[1]); // 输出: e
 ```
 
-Python的字符串访问方式完全相同：
+Python 的字符串访问方式完全相同：
 
 ```python runner
 # Python 字符串索引访问
@@ -91,11 +91,11 @@ print(text[1])  # 输出: e
 print(text[0])  # 输出: H
 ```
 
-需要注意的是，Python没有单独的字符数据类型，单个字符实际上就是长度为1的字符串。
+需要注意的是，Python 没有单独的字符数据类型，单个字符实际上就是长度为 1 的字符串。
 
 ## 遍历
 
-JavaScript中使用for循环遍历：
+JavaScript 中使用 for 循环遍历：
 
 ```javascript runner
 let text = "banana";
@@ -104,7 +104,7 @@ for (let char of text) {
 }
 ```
 
-Python的语法更简洁：
+Python 的语法更简洁：
 
 ```python runner
 for char in "banana":
@@ -113,7 +113,7 @@ for char in "banana":
 
 ## 长度
 
-在JavaScript中，我们使用`.length`属性来获取字符串长度：
+在 JavaScript 中，我们使用`.length`属性来获取字符串长度：
 
 ```javascript runner
 // JavaScript 获取字符串长度
@@ -121,7 +121,7 @@ let text = "Hello, World!";
 console.log(text.length);  // 输出: 13
 ```
 
-Python则使用`len()`函数来获取字符串长度：
+Python 则使用`len()`函数来获取字符串长度：
 
 ```python runner
 # Python 获取字符串长度
@@ -130,11 +130,11 @@ length = len(text)
 print(f"字符串长度: {length}")
 ```
 
-Python的函数式方法保持了一致性，因为同样的`len()`函数也适用于列表、元组等其他数据类型，这体现了Python设计的统一性。
+Python 的函数式方法保持了一致性，因为同样的`len()`函数也适用于列表、元组等其他数据类型，这体现了 Python 设计的统一性。
 
 ## 检查子字符串
 
-JavaScript中我们使用`.includes()`方法检查子字符串：
+JavaScript 中我们使用`.includes()`方法检查子字符串：
 
 ```javascript runner
 // JavaScript 检查子字符串
@@ -144,7 +144,7 @@ console.log(text.includes("free"));      // 输出: true
 console.log(text.includes("expensive")); // 输出: false
 ```
 
-Python使用更直观的`in`关键字：
+Python 使用更直观的`in`关键字：
 
 ```python runner
 text = "The best things in life are free!"
@@ -155,7 +155,7 @@ print("expensive" in text) # 输出: False
 
 ### 在条件语句中使用
 
-JavaScript中的条件检查：
+JavaScript 中的条件检查：
 
 ```javascript runner
 let text = "The best things in life are free!";
@@ -169,7 +169,7 @@ if (!text.includes("expensive")) {
 }
 ```
 
-Python的条件检查更简洁：
+Python 的条件检查更简洁：
 
 ```python runner
 text = "The best things in life are free!"
@@ -181,60 +181,60 @@ if "expensive" not in text:
     print("No, 'expensive' is NOT present.")
 ```
 
-`in`和`not in`关键字让代码读起来更像自然语言，这是Python的一大优势。
+`in`和`not in`关键字让代码读起来更像自然语言，这是 Python 的一大优势。
 
 ## 切片
 
-JavaScript中使用`.slice()`方法进行切片：
+JavaScript 中使用`.slice()`方法进行切片：
 
 ```javascript runner
 let text = "Hello, World!";
 
 console.log(text.slice(2, 5));  // 输出: llo
-console.log(text.slice(0, 5));  // 从开头到索引5
-console.log(text.slice(2));     // 从索引2到结尾
+console.log(text.slice(0, 5));  // 从开头到索引 5
+console.log(text.slice(2));     // 从索引 2 到结尾
 ```
 
-Python的切片语法更简洁：
+Python 的切片语法更简洁：
 
 ```python runner
 text = "Hello, World!"
 
 print(text[2:5])    # 输出: llo
-print(text[:5])     # 从开头到索引5
-print(text[2:])     # 从索引2到结尾
+print(text[:5])     # 从开头到索引 5
+print(text[2:])     # 从索引 2 到结尾
 print(text[:])      # 完整字符串副本
 ```
 
 ### 负索引切片
 
-JavaScript需要通过计算来实现：
+JavaScript 需要通过计算来实现：
 
 ```javascript runner
 let text = "Hello, World!";
 
 console.log(text[text.length - 1]);           // 最后一个字符
-console.log(text.slice(-5, -2));              // 倒数第5到倒数第2个字符
-console.log(text.slice(0, -2));               // 除了最后2个字符
+console.log(text.slice(-5, -2));              // 倒数第 5 到倒数第 2 个字符
+console.log(text.slice(0, -2));               // 除了最后 2 个字符
 ```
 
-Python的负索引更直观：
+Python 的负索引更直观：
 
 ```python runner
 text = "Hello, World!"
 
 print(text[-1])     # 最后一个字符: !
-print(text[-5:-2])  # 倒数第5到倒数第2个字符: rld
-print(text[:-2])    # 除了最后2个字符的所有字符
+print(text[-5:-2])  # 倒数第 5 到倒数第 2 个字符: rld
+print(text[:-2])    # 除了最后 2 个字符的所有字符
 ```
 
 ## 字符串修改
 
-虽然JavaScript和Python的字符串都是不可变的，但Python提供了丰富的字符串方法：
+虽然 JavaScript 和 Python 的字符串都是不可变的，但 Python 提供了丰富的字符串方法：
 
 ### 大小写转换
 
-JavaScript的大小写转换：
+JavaScript 的大小写转换：
 
 ```javascript runner
 let text = "Hello World";
@@ -243,7 +243,7 @@ console.log(text.toUpperCase());  // 全部大写
 console.log(text.toLowerCase());  // 全部小写
 ```
 
-Python提供了更丰富的大小写转换选项：
+Python 提供了更丰富的大小写转换选项：
 
 ```python runner
 text = "Hello World"
@@ -256,7 +256,7 @@ print(text.title())      # 每个单词首字母大写
 
 ### 去除空白
 
-JavaScript的空白处理：
+JavaScript 的空白处理：
 
 ```javascript runner
 let text = "  Hello World  ";
@@ -267,7 +267,7 @@ console.log(`去除左端空白: '${text.trimStart()}'`);
 console.log(`去除右端空白: '${text.trimEnd()}'`);
 ```
 
-Python提供了类似功能：
+Python 提供了类似功能：
 
 ```python runner
 text = "  Hello World  "
@@ -280,7 +280,7 @@ print(f"去除右端空白: '{text.rstrip()}'")
 
 ### 字符串替换
 
-JavaScript的字符串替换：
+JavaScript 的字符串替换：
 
 ```javascript runner
 let text = "Hello World";
@@ -290,7 +290,7 @@ console.log(newText);
 console.log(text); // 原字符串不变
 ```
 
-Python的字符串替换方式相同：
+Python 的字符串替换方式相同：
 
 ```python runner
 text = "Hello World"
@@ -302,7 +302,7 @@ print(text)  # 原字符串不变
 
 ## 字符串拼接
 
-JavaScript中我们使用`+`操作符或模板字面量进行拼接：
+JavaScript 中我们使用`+`操作符或模板字面量进行拼接：
 
 ```javascript runner
 // JavaScript 字符串拼接
@@ -316,7 +316,7 @@ console.log(fullName1);
 console.log(fullName2);
 ```
 
-Python也支持多种拼接方式：
+Python 也支持多种拼接方式：
 
 ### 使用 + 操作符
 
@@ -330,7 +330,7 @@ print(full_name)
 
 ### 使用 += 操作符
 
-JavaScript中同样支持：
+JavaScript 中同样支持：
 
 ```javascript runner
 let message = "Hello";
@@ -339,7 +339,7 @@ message += "World";
 console.log(message);
 ```
 
-Python的用法相同：
+Python 的用法相同：
 
 ```python runner
 message = "Hello"
@@ -352,7 +352,7 @@ print(message)
 
 ### 基本语法对比
 
-JavaScript ES6引入了模板字面量（反引号语法）来处理字符串格式化：
+JavaScript ES6 引入了模板字面量（反引号语法）来处理字符串格式化：
 
 ```javascript runner
 // JavaScript 模板字符串
@@ -368,7 +368,7 @@ let formattedPrice = `Price: $${price.toFixed(2)}`;
 console.log(formattedPrice);
 ```
 
-Python的f-string语法与JavaScript的模板字符串非常相似，但格式化选项更丰富：
+Python 的 f-string 语法与 JavaScript 的模板字符串非常相似，但格式化选项更丰富：
 
 ```python runner
 name = "Alice"
@@ -379,14 +379,14 @@ price = 19.99
 message = f"Hello, {name}! You are {age} years old."
 print(message)
 
-# 格式化数字 - 注意Python的格式化语法更丰富
+# 格式化数字 - 注意 Python 的格式化语法更丰富
 formatted_price = f"Price: ${price:.2f}"
 print(formatted_price)
 ```
 
 ### 高级用法
 
-两种语法都支持在格式化字符串中进行表达式计算、函数调用等高级操作，但Python的f-string在格式化控制方面更强大：
+两种语法都支持在格式化字符串中进行表达式计算、函数调用等高级操作，但 Python 的 f-string 在格式化控制方面更强大：
 
 ```javascript runner
 // JavaScript 高级用法
@@ -440,20 +440,20 @@ print(altitude)
 
 # Python f-string 的格式化优势
 pi = 3.14159
-print(f"圆周率: {pi:.3f}")        # 保留3位小数
+print(f"圆周率: {pi:.3f}")        # 保留 3 位小数
 print(f"百分比: {0.85:.1%}")       # 百分比格式
 print(f"科学计数法: {1234567:.2e}") # 科学计数法
 ```
 
-Python f-string的主要优势在于内置了丰富的格式化选项（如 `:.2f`、`:.1%`、`:.2e`），而JavaScript需要调用相应的方法（如 `toFixed()`、百分比需要手动计算）来实现类似效果。
+Python f-string 的主要优势在于内置了丰富的格式化选项（如 `:.2f`、`:.1%`、`:.2e`），而 JavaScript 需要调用相应的方法（如 `toFixed()`、百分比需要手动计算）来实现类似效果。
 
 ## 字符串方法
 
-Python提供了丰富的字符串方法，比JavaScript更加全面：
+Python 提供了丰富的字符串方法，比 JavaScript 更加全面：
 
 ### 查找和检查
 
-JavaScript的查找方法：
+JavaScript 的查找方法：
 
 ```javascript runner
 let text = "Hello World Programming";
@@ -463,7 +463,7 @@ console.log(text.startsWith("Hello"));    // 检查开头
 console.log(text.endsWith("ing"));        // 检查结尾
 ```
 
-Python提供了更多选项：
+Python 提供了更多选项：
 
 ```python runner
 text = "Hello World Programming"
@@ -476,7 +476,7 @@ print(text.endswith("ing"))      # 检查结尾
 
 ### 分割和连接
 
-JavaScript的分割和连接：
+JavaScript 的分割和连接：
 
 ```javascript runner
 let text = "apple,banana,orange";
@@ -490,7 +490,7 @@ let result = fruits.join(" | ");
 console.log(result);
 ```
 
-Python的分割和连接语法相似：
+Python 的分割和连接语法相似：
 
 ```python runner
 text = "apple,banana,orange"
@@ -504,7 +504,7 @@ print(result)
 
 ### 字符类型检查
 
-JavaScript需要使用正则表达式：
+JavaScript 需要使用正则表达式：
 
 ```javascript runner
 console.log(/^\d+$/.test("123"));         // 是否全为数字
@@ -512,7 +512,7 @@ console.log(/^[a-zA-Z]+$/.test("abc"));   // 是否全为字母
 console.log(/^[a-zA-Z0-9]+$/.test("abc123")); // 是否为字母和数字
 ```
 
-Python提供了便捷的内置方法：
+Python 提供了便捷的内置方法：
 
 ```python runner
 print("123".isdigit())           # 是否全为数字
@@ -523,7 +523,7 @@ print("Hello World".istitle())   # 是否为标题格式
 
 ## 转义字符
 
-JavaScript的转义字符：
+JavaScript 的转义字符：
 
 ```javascript runner
 let text1 = "He said, \"Hello!\"";
@@ -539,7 +539,7 @@ console.log(text4);
 console.log(text5);
 ```
 
-Python的转义字符用法相同：
+Python 的转义字符用法相同：
 
 ```python runner
 text1 = "He said, \"Hello!\""
@@ -557,7 +557,7 @@ print(text5)
 
 ## 字符串重复
 
-JavaScript使用`.repeat()`方法：
+JavaScript 使用`.repeat()`方法：
 
 ```javascript runner
 let separator = "-".repeat(20);
@@ -567,7 +567,7 @@ let greeting = "Hello! ".repeat(3);
 console.log(greeting);
 ```
 
-Python使用`*`操作符更简洁：
+Python 使用`*`操作符更简洁：
 
 ```python runner
 separator = "-" * 20
@@ -585,14 +585,14 @@ print(border)
 
 ## 小结
 
-Python字符串系统提供了强大而优雅的文本处理能力：
+Python 字符串系统提供了强大而优雅的文本处理能力：
 
 1. **创建方式灵活**：单引号、双引号、三重引号各有用途，三重引号支持多行文本
 2. **不可变序列特性**：字符串一旦创建不可修改，所有操作返回新字符串对象
 3. **索引和切片**：支持正负索引访问，`[start:end:step]`切片语法功能强大
 4. **成员检查直观**：`in`和`not in`关键字提供简洁的子字符串检查方式
 5. **方法体系完整**：内置丰富的字符串方法，涵盖大小写转换、空白处理、查找分割等常见需求
-6. **格式化功能先进**：f-string提供现代化的字符串格式化方案，支持表达式和精确格式控制
+6. **格式化功能先进**：f-string 提供现代化的字符串格式化方案，支持表达式和精确格式控制
 7. **操作符简洁**：`+`拼接、`*`重复，语法直观易读
 
 **核心方法分类**：
@@ -603,9 +603,9 @@ Python字符串系统提供了强大而优雅的文本处理能力：
 - **检查类**：`isdigit()`、`isalpha()`、`isalnum()`、`istitle()`等
 
 **最佳实践建议**：
-- 优先使用f-string进行字符串格式化
+- 优先使用 f-string 进行字符串格式化
 - 使用`strip()`方法处理用户输入
 - 合理使用`join()`方法拼接大量字符串
 - 利用字符串的不可变特性避免意外修改
 
-掌握这些字符串操作技能，为后续学习文件处理、数据解析、Web开发等高级主题奠定了坚实基础。 
+掌握这些字符串操作技能，为后续学习文件处理、数据解析、Web 开发等高级主题奠定了坚实基础。 

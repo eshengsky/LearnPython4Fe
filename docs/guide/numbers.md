@@ -1,10 +1,10 @@
 # 数字
 
-在JavaScript中，我们只有一种数字类型`number`，它能处理整数和浮点数。Python将数字进行了更细致的分类，提供了三种主要的数值类型：整数（`int`）、浮点数（`float`）和复数（`complex`），每种类型都有其特定的用途和优势。
+在 JavaScript 中，我们只有一种数字类型`number`，它能处理整数和浮点数。Python 将数字进行了更细致的分类，提供了三种主要的数值类型：整数（`int`）、浮点数（`float`）和复数（`complex`），每种类型都有其特定的用途和优势。
 
 ## 类型概述
 
-Python的数值类型比JavaScript更加丰富：
+Python 的数值类型比 JavaScript 更加丰富：
 
 ```python runner
 # Python 的三种数值类型
@@ -19,7 +19,7 @@ print(f"复数: {complex_num} ({type(complex_num).__name__})")
 
 ## 整数（int）
 
-JavaScript中所有数字都是浮点数类型，即使看起来像整数：
+JavaScript 中所有数字都是浮点数类型，即使看起来像整数：
 
 ```javascript runner
 // JavaScript 中的"整数"实际上是浮点数
@@ -28,7 +28,7 @@ console.log(typeof num);        // "number"
 console.log(Number.isInteger(num)); // true，但底层还是浮点数
 ```
 
-Python的整数是真正的整数类型，并且支持任意精度。这是与JavaScript的一个重要区别：
+Python 的整数是真正的整数类型，并且支持任意精度。这是与 JavaScript 的一个重要区别：
 
 ```javascript runner
 // JavaScript 数字有精度限制
@@ -36,9 +36,9 @@ console.log(Number.MAX_SAFE_INTEGER);        // 9007199254740991
 console.log(Number.MAX_SAFE_INTEGER + 1);    // 9007199254740992
 console.log(Number.MAX_SAFE_INTEGER + 2);    // 9007199254740992 (精度丢失!)
 
-// 超过安全范围的大数需要用字符串或BigInt
+// 超过安全范围的大数需要用字符串或 BigInt
 let bigNumber = "123456789012345678901234567890";  // 字符串形式
-let bigInt = 123456789012345678901234567890n;      // BigInt类型
+let bigInt = 123456789012345678901234567890n;      // BigInt 类型
 console.log(typeof bigInt);  // "bigint"
 ```
 
@@ -52,19 +52,19 @@ print(f"大整数: {big_int}")
 print(f"大整数类型: {type(big_int).__name__}")
 
 # 计算一个非常大的数
-huge_number = 2 ** 1000  # 2的1000次方
-print(f"2的1000次方有 {len(str(huge_number))} 位数字")
+huge_number = 2 ** 1000  # 2 的 1000 次方
+print(f"2 的 1000 次方有 {len(str(huge_number))} 位数字")
 
-# Python可以直接进行大数运算
+# Python 可以直接进行大数运算
 result = big_int * 999999999999999999999
 print(f"大数运算结果: {result}")
 ```
 
-JavaScript的数字限制来源于IEEE 754双精度浮点数标准，最大安全整数是2^53-1。超过这个范围就可能失去精度，必须使用BigInt类型或字符串来处理。而Python的任意精度整数让大数计算变得非常简单，这在密码学、数学计算、金融计算等场景中是巨大的优势。
+JavaScript 的数字限制来源于 IEEE 754 双精度浮点数标准，最大安全整数是 2^53-1。超过这个范围就可能失去精度，必须使用 BigInt 类型或字符串来处理。而 Python 的任意精度整数让大数计算变得非常简单，这在密码学、数学计算、金融计算等场景中是巨大的优势。
 
 ## 浮点数（float）
 
-JavaScript和Python都使用IEEE 754标准来表示浮点数：
+JavaScript 和 Python 都使用 IEEE 754 标准来表示浮点数：
 
 ```javascript runner
 // JavaScript 浮点数
@@ -98,30 +98,30 @@ print(f"小数: {small_num}")
 
 ## 复数（complex）
 
-这是Python独有的数值类型，JavaScript原生不支持复数：
+这是 Python 独有的数值类型，JavaScript 原生不支持复数：
 
 ```python runner
 # 创建复数
 z1 = 3 + 4j           # 使用 j 表示虚数单位
 z2 = complex(5, 6)    # 使用 complex() 函数创建
 
-print(f"复数1: {z1}")
-print(f"复数2: {z2}")
+print(f"复数 1: {z1}")
+print(f"复数 2: {z2}")
 
 # 复数的实部和虚部
-print(f"z1的实部: {z1.real}")
-print(f"z1的虚部: {z1.imag}")
+print(f"z1 的实部: {z1.real}")
+print(f"z1 的虚部: {z1.imag}")
 
 # 复数运算
 z3 = z1 + z2
 print(f"复数相加: {z1} + {z2} = {z3}")
 ```
 
-注意Python使用`j`而不是数学中常用的`i`来表示虚数单位，这是因为在工程领域（特别是电气工程）习惯使用`j`。
+注意 Python 使用`j`而不是数学中常用的`i`来表示虚数单位，这是因为在工程领域（特别是电气工程）习惯使用`j`。
 
 ## 类型转换
 
-JavaScript的数值转换有时比较宽松：
+JavaScript 的数值转换有时比较宽松：
 
 ```javascript runner
 // JavaScript 类型转换
@@ -132,7 +132,7 @@ console.log(parseInt("123.45")); // 123
 console.log(parseFloat("123.45")); // 123.45
 ```
 
-Python的转换更加严格和明确：
+Python 的转换更加严格和明确：
 
 ```python runner
 # Python 数值转换
@@ -177,7 +177,7 @@ except ValueError as e:
 
 ### 基本运算符
 
-Python和JavaScript的基本运算符基本相同：
+Python 和 JavaScript 的基本运算符基本相同：
 
 ```python runner
 a = 10
@@ -189,9 +189,9 @@ print(f"乘法: {a} * {b} = {a * b}")
 print(f"除法: {a} / {b} = {a / b}")
 ```
 
-### Python独有的运算符
+### Python 独有的运算符
 
-Python提供了一些JavaScript没有的有用运算符：
+Python 提供了一些 JavaScript 没有的有用运算符：
 
 ```python runner
 a = 10
@@ -207,7 +207,7 @@ print(f"幂运算: {a} ** {b} = {a ** b}")
 print(f"取模: {a} % {b} = {a % b}")
 ```
 
-JavaScript中需要使用Math对象来实现类似功能：
+JavaScript 中需要使用 Math 对象来实现类似功能：
 
 ```javascript runner
 // JavaScript 需要使用 Math 对象
@@ -257,7 +257,7 @@ print(f"{b} >= {a}: {b >= a}")    # 大于等于
 
 ### 不同类型的数值比较
 
-Python允许不同数值类型之间的比较：
+Python 允许不同数值类型之间的比较：
 
 ```python runner
 int_num = 5
@@ -276,7 +276,7 @@ except TypeError as e:
 
 ## 内置数学函数
 
-Python提供了一些基本的内置数学函数：
+Python 提供了一些基本的内置数学函数：
 
 ```python runner
 numbers = [-4.7, -2, 0, 2, 4.7]
@@ -297,14 +297,14 @@ for num in float_numbers:
 
 ## 数学模块
 
-JavaScript有Math对象，Python有math模块，提供更丰富的数学函数：
+JavaScript 有 Math 对象，Python 有 math 模块，提供更丰富的数学函数：
 
 ```python runner
 import math
 
 print("=== 数学模块函数 ===")
 x = 16
-y = math.pi / 4  # 45度对应的弧度
+y = math.pi / 4  # 45 度对应的弧度
 
 print(f"平方根: sqrt({x}) = {math.sqrt(x)}")
 print(f"向上取整: ceil(4.1) = {math.ceil(4.1)}")
@@ -317,7 +317,7 @@ print(f"tan(π/4) = {math.tan(y):.4f}")
 
 print(f"\n=== 对数和指数 ===")
 print(f"自然对数: log(e) = {math.log(math.e):.4f}")
-print(f"以10为底: log10(100) = {math.log10(100)}")
+print(f"以 10 为底: log10(100) = {math.log10(100)}")
 print(f"指数函数: exp(1) = {math.exp(1):.4f}")
 
 print(f"\n=== 常数 ===")
@@ -327,23 +327,23 @@ print(f"自然常数 e = {math.e:.6f}")
 
 ## 随机数
 
-在Web开发中经常需要生成随机数，JavaScript使用`Math.random()`：
+在 Web 开发中经常需要生成随机数，JavaScript 使用`Math.random()`：
 
 ```javascript runner
 // JavaScript 随机数
-console.log("0-1之间:", Math.random());
-console.log("1-10之间:", Math.floor(Math.random() * 10) + 1);
+console.log("0-1 之间:", Math.random());
+console.log("1-10 之间:", Math.floor(Math.random() * 10) + 1);
 ```
 
-Python使用random模块：
+Python 使用 random 模块：
 
 ```python runner
 import random
 
 print("=== 随机数生成 ===")
-print(f"0-1之间: {random.random():.4f}")
-print(f"1-10之间: {random.randint(1, 10)}")
-print(f"浮点数(1-10): {random.uniform(1, 10):.2f}")
+print(f"0-1 之间: {random.random():.4f}")
+print(f"1-10 之间: {random.randint(1, 10)}")
+print(f"浮点数 (1-10): {random.uniform(1, 10):.2f}")
 
 # 从列表中随机选择
 fruits = ["apple", "banana", "orange", "grape"]
@@ -366,14 +366,14 @@ console.log(num.toFixed(2));        // "1234.57"
 console.log(num.toLocaleString());  // "1,234.568" (根据地区)
 ```
 
-Python提供了多种格式化方式：
+Python 提供了多种格式化方式：
 
 ```python runner
 # Python 数字格式化
 num = 1234.5678
 
 # 使用 f-string（推荐）
-print(f"保留2位小数: {num:.2f}")
+print(f"保留 2 位小数: {num:.2f}")
 print(f"百分比格式: {0.156:.1%}")
 print(f"科学计数法: {num:.2e}")
 
@@ -391,9 +391,9 @@ print(f"四舍五入: {round(num, 2)}")
 number = 42
 
 print(f"十进制: {number}")
-print(f"二进制: {bin(number)}")    # 0b前缀
-print(f"八进制: {oct(number)}")    # 0o前缀  
-print(f"十六进制: {hex(number)}")  # 0x前缀
+print(f"二进制: {bin(number)}")    # 0b 前缀
+print(f"八进制: {oct(number)}")    # 0o 前缀  
+print(f"十六进制: {hex(number)}")  # 0x 前缀
 
 # 去掉前缀
 print(f"纯二进制: {bin(number)[2:]}")
@@ -408,7 +408,7 @@ print(f"十六进制 '{hex_str}' -> {int(hex_str, 16)}")
 
 ## 数值检查
 
-Python提供了一些有用的数值检查函数：
+Python 提供了一些有用的数值检查函数：
 
 ```python runner
 import math
@@ -418,10 +418,10 @@ test_values = [42, 3.14, float('inf'), float('-inf'), float('nan')]
 
 print("=== 数值检查 ===")
 for val in test_values:
-    print(f"\n值: {val}")
+    print(f"\n 值: {val}")
     print(f"  是否有限: {math.isfinite(val)}")
     print(f"  是否无穷: {math.isinf(val)}")
-    print(f"  是否NaN: {math.isnan(val)}")
+    print(f"  是否 NaN: {math.isnan(val)}")
 
 # 整数检查
 mixed_numbers = [42, 42.0, 42.5, "42"]
@@ -436,7 +436,7 @@ for num in mixed_numbers:
 
 ## 数值精度问题
 
-浮点数精度是编程中的常见问题，JavaScript和Python都会遇到：
+浮点数精度是编程中的常见问题，JavaScript 和 Python 都会遇到：
 
 ```javascript runner
 // JavaScript 精度问题
@@ -450,10 +450,10 @@ result = 0.1 + 0.2
 print(f"0.1 + 0.2 = {result}")
 print(f"0.1 + 0.2 == 0.3: {result == 0.3}")
 
-# 解决方案1: 使用 round()
+# 解决方案 1: 使用 round()
 print(f"round(0.1 + 0.2, 1) == 0.3: {round(0.1 + 0.2, 1) == 0.3}")
 
-# 解决方案2: 使用 decimal 模块实现精确计算
+# 解决方案 2: 使用 decimal 模块实现精确计算
 from decimal import Decimal
 
 decimal_result = Decimal('0.1') + Decimal('0.2')
@@ -461,7 +461,7 @@ print(f"使用 Decimal: {decimal_result}")
 print(f"Decimal 结果等于 0.3: {decimal_result == Decimal('0.3')}")
 ```
 
-### 使用decimal模块处理金融计算
+### 使用 decimal 模块处理金融计算
 
 ```python runner
 from decimal import Decimal, getcontext
@@ -488,14 +488,14 @@ print(f"总计: ${total}")
 
 ## 小结
 
-Python的数值系统相比JavaScript更加丰富和精确：
+Python 的数值系统相比 JavaScript 更加丰富和精确：
 
 1. **类型细分明确**：`int`、`float`、`complex`三种类型各司其职，整数支持任意精度
 2. **运算符丰富**：提供`//`（整数除法）和`**`（幂运算）等便利运算符
 3. **类型转换严格**：避免隐式转换带来的意外结果，错误处理更明确
-4. **数学功能强大**：内置函数和math模块提供丰富的数学运算功能
-5. **精度控制**：decimal模块解决浮点数精度问题，适合金融等精确计算场景
-6. **格式化灵活**：f-string和format方法提供强大的数值格式化能力
+4. **数学功能强大**：内置函数和 math 模块提供丰富的数学运算功能
+5. **精度控制**：decimal 模块解决浮点数精度问题，适合金融等精确计算场景
+6. **格式化灵活**：f-string 和 format 方法提供强大的数值格式化能力
 7. **进制转换便利**：内置函数支持多种进制转换操作
 
-理解这些数值类型的特性和使用场景，能帮助你在数据处理、科学计算、Web开发等不同场景中选择合适的数值类型和处理方法。特别是Python在处理大整数和精确小数方面的优势，让它在数据科学和金融计算领域广受欢迎。 
+理解这些数值类型的特性和使用场景，能帮助你在数据处理、科学计算、Web 开发等不同场景中选择合适的数值类型和处理方法。特别是 Python 在处理大整数和精确小数方面的优势，让它在数据科学和金融计算领域广受欢迎。 

@@ -1,30 +1,30 @@
 # 集合
 
-在JavaScript中，ES6引入了Set对象来存储唯一值的集合，它帮助我们轻松处理数据去重问题。Python的集合概念与JavaScript的Set非常相似，都用于存储不重复的元素，但Python集合提供了更丰富的数学运算功能，让集合操作更加强大和直观。
+在 JavaScript 中，ES6 引入了 Set 对象来存储唯一值的集合，它帮助我们轻松处理数据去重问题。Python 的集合概念与 JavaScript 的 Set 非常相似，都用于存储不重复的元素，但 Python 集合提供了更丰富的数学运算功能，让集合操作更加强大和直观。
 
 ## 创建集合
 
-JavaScript中使用`new Set()`创建集合：
+JavaScript 中使用`new Set()`创建集合：
 
 ```javascript runner
 // JavaScript Set 创建
 let jsSet = new Set();
-console.log("空Set:", jsSet);
+console.log("空 Set:", jsSet);
 
-// 从数组创建Set（自动去重）
+// 从数组创建 Set（自动去重）
 let numbers = new Set([1, 2, 2, 3, 3, 4]);
-console.log("数字Set:", numbers);
+console.log("数字 Set:", numbers);
 
-// 从字符串创建Set
+// 从字符串创建 Set
 let chars = new Set("hello");
-console.log("字符Set:", chars);
+console.log("字符 Set:", chars);
 
-// Set的size属性
-console.log("数字Set大小:", numbers.size);
-console.log("字符Set大小:", chars.size);
+// Set 的 size 属性
+console.log("数字 Set 大小:", numbers.size);
+console.log("字符 Set 大小:", chars.size);
 ```
 
-Python使用花括号或`set()`函数创建集合：
+Python 使用花括号或`set()`函数创建集合：
 
 ```python runner
 # 创建空集合
@@ -62,20 +62,20 @@ print(f"字符集合大小: {len(chars)}")
 
 ### 重要语法陷阱：{} 的歧义性
 
-JavaScript中的对象和Set语法完全不同，不存在歧义：
+JavaScript 中的对象和 Set 语法完全不同，不存在歧义：
 
 ```javascript runner
-// JavaScript中没有歧义
+// JavaScript 中没有歧义
 let obj = {};           // 空对象
-let set = new Set();    // 空Set
+let set = new Set();    // 空 Set
 console.log("对象:", obj, typeof obj);
 console.log("Set:", set, set.constructor.name);
 ```
 
-Python中却存在一个重要的语法陷阱，这是前端开发者需要特别注意的：**空的花括号 `{}` 表示字典而不是集合**。这与直觉不符，因为非空的花括号（如 `{1, 2, 3}`）确实表示集合。
+Python 中却存在一个重要的语法陷阱，这是前端开发者需要特别注意的：**空的花括号 `{}` 表示字典而不是集合**。这与直觉不符，因为非空的花括号（如 `{1, 2, 3}`）确实表示集合。
 
 ```python runner
-# Python中的语法陷阱演示
+# Python 中的语法陷阱演示
 print("=== 空数据结构 ===")
 empty_dict = {}
 empty_set = set()
@@ -98,7 +98,7 @@ print("3. {元素} → 集合（没有冒号）")
 print("4. set() → 空集合（唯一方式）")
 ```
 
-这个设计的历史背景是Python中字典的`{}`语法出现得比集合更早。当Python 2.7引入集合的字面量语法时，`{}`已经被字典使用了，为了保持向后兼容性，空的花括号仍然表示字典。这就是为什么我们必须用`set()`来创建空集合的原因。
+这个设计的历史背景是 Python 中字典的`{}`语法出现得比集合更早。当 Python 2.7 引入集合的字面量语法时，`{}`已经被字典使用了，为了保持向后兼容性，空的花括号仍然表示字典。这就是为什么我们必须用`set()`来创建空集合的原因。
 
 **总结一下集合的创建方式：**
 - **创建空集合**：只能用 `set()`
@@ -133,21 +133,21 @@ except TypeError as e:
 
 ## 添加和删除元素
 
-JavaScript使用`add()`、`delete()`、`clear()`方法操作Set：
+JavaScript 使用`add()`、`delete()`、`clear()`方法操作 Set：
 
 ```javascript runner
 let fruits = new Set(["apple", "banana"]);
-console.log("初始Set:", fruits);
+console.log("初始 Set:", fruits);
 
 fruits.add("orange");
 fruits.add("apple");  // 重复元素不会被添加
 console.log("添加后:", fruits);
 
 fruits.delete("banana");
-console.log("删除banana后:", fruits);
+console.log("删除 banana 后:", fruits);
 
-console.log("是否包含apple:", fruits.has("apple"));
-console.log("是否包含banana:", fruits.has("banana"));
+console.log("是否包含 apple:", fruits.has("apple"));
+console.log("是否包含 banana:", fruits.has("banana"));
 
 let backup = new Set(fruits);
 fruits.clear();
@@ -155,7 +155,7 @@ console.log("清空后:", fruits);
 console.log("备份:", backup);
 ```
 
-Python提供了更丰富的集合操作方法：
+Python 提供了更丰富的集合操作方法：
 
 **添加元素：**
 - `add(element)` - 添加单个元素
@@ -187,17 +187,17 @@ print(f"批量添加后: {fruits}")
 fruits.update("kiwi")
 print(f"添加字符后: {fruits}")
 
-# 删除指定元素，如果元素不存在会抛出KeyError异常
+# 删除指定元素，如果元素不存在会抛出 KeyError 异常
 fruits.remove("k")
-print(f"删除k后: {fruits}")
+print(f"删除 k 后: {fruits}")
 
 # 安全删除，元素不存在也不会报错
 fruits.discard("banana")  # 存在，被删除
 fruits.discard("mango")   # 不存在，但不报错
-print(f"discard后: {fruits}")
+print(f"discard 后: {fruits}")
 
 # 删除并返回任意一个元素，由于集合无序所以无法预测哪个被删除
-# 这与字典pop(key)和列表pop(index)不同，集合pop()不接受参数
+# 这与字典 pop(key) 和列表 pop(index) 不同，集合 pop() 不接受参数
 popped = fruits.pop()
 print(f"删除的元素: {popped}")
 print(f"删除后: {fruits}")
@@ -209,37 +209,37 @@ print(f"清空后: {fruits}")
 print(f"备份: {backup}")
 ```
 
-### pop()方法的差异对比
+### pop() 方法的差异对比
 
 集合的`pop()`方法与其他数据类型确实有很大差异，这是由数据结构的特性决定的：
 
 ```python runner
-# 列表的pop() - 删除指定位置（默认最后一个）
+# 列表的 pop() - 删除指定位置（默认最后一个）
 my_list = [1, 2, 3, 4, 5]
 last_item = my_list.pop()      # 删除最后一个
-second_item = my_list.pop(1)   # 删除索引1的元素
-print(f"列表pop结果: last={last_item}, second={second_item}")
+second_item = my_list.pop(1)   # 删除索引 1 的元素
+print(f"列表 pop 结果: last={last_item}, second={second_item}")
 print(f"列表剩余: {my_list}")
 
-# 字典的pop() - 删除指定键
+# 字典的 pop() - 删除指定键
 my_dict = {"a": 1, "b": 2, "c": 3}
 value_b = my_dict.pop("b")     # 删除键"b"
 value_default = my_dict.pop("d", "默认值")  # 键不存在时返回默认值
-print(f"字典pop结果: b={value_b}, d={value_default}")
+print(f"字典 pop 结果: b={value_b}, d={value_default}")
 print(f"字典剩余: {my_dict}")
 
-# 集合的pop() - 删除任意元素（因为无序且无键）
+# 集合的 pop() - 删除任意元素（因为无序且无键）
 my_set = {10, 20, 30, 40}
-# my_set.pop(10)  # 错误！集合pop()不接受参数
+# my_set.pop(10)  # 错误！集合 pop() 不接受参数
 popped_element = my_set.pop()  # 只能删除"某个"元素
-print(f"集合pop结果: {popped_element}")
+print(f"集合 pop 结果: {popped_element}")
 print(f"集合剩余: {my_set}")
-print("注意：每次运行集合pop的结果可能不同")
+print("注意：每次运行集合 pop 的结果可能不同")
 ```
 
 ## 检查元素是否存在
 
-与字典和列表一样，Python使用`in`关键字：
+与字典和列表一样，Python 使用`in`关键字：
 
 ```python runner
 fruits = {"apple", "banana", "orange"}
@@ -262,9 +262,9 @@ else:
 
 ## 集合运算
 
-这是Python集合相比JavaScript Set的一个重要优势。JavaScript的Set缺乏内置的数学运算支持，而Python提供了丰富的集合运算功能。
+这是 Python 集合相比 JavaScript Set 的一个重要优势。JavaScript 的 Set 缺乏内置的数学运算支持，而 Python 提供了丰富的集合运算功能。
 
-Python集合支持四种基本的数学运算，每种运算都提供运算符和方法两种语法：
+Python 集合支持四种基本的数学运算，每种运算都提供运算符和方法两种语法：
 
 **并集运算** - 所有元素的合集：
 - 运算符：`set_a | set_b`
@@ -274,11 +274,11 @@ Python集合支持四种基本的数学运算，每种运算都提供运算符�
 - 运算符：`set_a & set_b`  
 - 方法：`set_a.intersection(set_b)`
 
-**差集运算** - 在A中但不在B中的元素：
+**差集运算** - 在 A 中但不在 B 中的元素：
 - 运算符：`set_a - set_b`
 - 方法：`set_a.difference(set_b)`
 
-**对称差集运算** - 在A或B中但不在交集中的元素：
+**对称差集运算** - 在 A 或 B 中但不在交集中的元素：
 - 运算符：`set_a ^ set_b`
 - 方法：`set_a.symmetric_difference(set_b)`
 
@@ -286,8 +286,8 @@ Python集合支持四种基本的数学运算，每种运算都提供运算符�
 set_a = {1, 2, 3, 4, 5}
 set_b = {4, 5, 6, 7, 8}
 
-print(f"集合A: {set_a}")
-print(f"集合B: {set_b}")
+print(f"集合 A: {set_a}")
+print(f"集合 B: {set_b}")
 
 # 并集：两个集合中所有不重复的元素
 union_result = set_a | set_b
@@ -301,11 +301,11 @@ intersection_method = set_a.intersection(set_b)
 print(f"交集 (&): {intersection_result}")
 print(f"交集 (.intersection()): {intersection_method}")
 
-# 差集：在集合A中但不在集合B中的元素
+# 差集：在集合 A 中但不在集合 B 中的元素
 difference_result = set_a - set_b
 difference_method = set_a.difference(set_b)
-print(f"差集A-B (-): {difference_result}")
-print(f"差集A-B (.difference()): {difference_method}")
+print(f"差集 A-B (-): {difference_result}")
+print(f"差集 A-B (.difference()): {difference_method}")
 
 # 对称差集：在任一集合中但不在两者交集中的元素
 symmetric_diff = set_a ^ set_b
@@ -316,15 +316,15 @@ print(f"对称差集 (.symmetric_difference()): {symmetric_method}")
 
 ### 集合关系检查
 
-除了基本运算，Python还提供了检查集合间关系的方法，这些在逻辑判断和条件检查中非常有用：
+除了基本运算，Python 还提供了检查集合间关系的方法，这些在逻辑判断和条件检查中非常有用：
 
 **子集关系检查**：
-- `set_a.issubset(set_b)` 或 `set_a <= set_b` - 检查set_a是否为set_b的子集
-- `set_a < set_b` - 检查set_a是否为set_b的真子集（子集且不相等）
+- `set_a.issubset(set_b)` 或 `set_a <= set_b` - 检查 set_a 是否为 set_b 的子集
+- `set_a < set_b` - 检查 set_a 是否为 set_b 的真子集（子集且不相等）
 
 **超集关系检查**：
-- `set_a.issuperset(set_b)` 或 `set_a >= set_b` - 检查set_a是否为set_b的超集  
-- `set_a > set_b` - 检查set_a是否为set_b的真超集（超集且不相等）
+- `set_a.issuperset(set_b)` 或 `set_a >= set_b` - 检查 set_a 是否为 set_b 的超集  
+- `set_a > set_b` - 检查 set_a 是否为 set_b 的真超集（超集且不相等）
 
 **交集关系检查**：
 - `set_a.isdisjoint(set_b)` - 检查两个集合是否无交集（完全不重叠）
@@ -411,18 +411,18 @@ for fruit in fruits:
     print(f"  水果: {fruit}")
 
 # 带索引的遍历
-print("\n带索引的遍历:")
+print("\n 带索引的遍历:")
 for index, fruit in enumerate(fruits):
     print(f"  {index}: {fruit}")
 
 # 条件遍历
-print("\n条件遍历（包含字母'a'的水果）:")
+print("\n 条件遍历（包含字母'a'的水果）:")
 for fruit in fruits:
     if 'a' in fruit:
         print(f"  {fruit}")
 
 # 遍历时修改集合（需要注意）
-print("\n安全修改集合的方法:")
+print("\n 安全修改集合的方法:")
 fruits_copy = fruits.copy()
 for fruit in fruits_copy:
     if len(fruit) > 5:
@@ -434,7 +434,7 @@ print(f"修改后的集合: {fruits}")
 
 ## 集合推导式
 
-Python集合也支持推导式语法，类似列表推导式：
+Python 集合也支持推导式语法，类似列表推导式：
 
 ```python runner
 # 基本集合推导式
@@ -504,17 +504,17 @@ only_in_list1 = set(list1) - set(list2)
 only_in_list2 = set(list2) - set(list1)
 common_items = set(list1) & set(list2)
 
-print(f"只在列表1中: {only_in_list1}")
-print(f"只在列表2中: {only_in_list2}")
+print(f"只在列表 1 中: {only_in_list1}")
+print(f"只在列表 2 中: {only_in_list2}")
 print(f"两个列表共有: {common_items}")
 ```
 
 ## 冻结集合（frozenset）
 
-Python还提供了不可变的集合类型`frozenset`，这是普通集合的不可变版本。由于frozenset是不可变的，它可以用在普通集合无法使用的地方。
+Python 还提供了不可变的集合类型`frozenset`，这是普通集合的不可变版本。由于 frozenset 是不可变的，它可以用在普通集合无法使用的地方。
 
-**frozenset的特点**：
-- **不可变性** - 创建后无法修改，没有add、remove、update等修改方法
+**frozenset 的特点**：
+- **不可变性** - 创建后无法修改，没有 add、remove、update 等修改方法
 - **可哈希性** - 可以作为字典的键，也可以作为其他集合的元素
 - **集合运算** - 支持所有集合运算（并集、交集、差集等）
 - **创建方式** - 使用`frozenset()`构造函数，接受任何可迭代对象
@@ -625,13 +625,13 @@ print(f"调查数据分析: {analysis}")
 
 ## 小结
 
-Python集合是处理唯一元素集合的强大数据结构，相比JavaScript的Set有以下特点：
+Python 集合是处理唯一元素集合的强大数据结构，相比 JavaScript 的 Set 有以下特点：
 
 **核心特性：**
 - 自动去重，存储唯一元素
 - 无序存储（不保证元素顺序）
 - 元素必须是不可变类型
-- 高效的成员检查（O(1)时间复杂度）
+- 高效的成员检查（O(1) 时间复杂度）
 
 **创建方式：**
 - 花括号语法：`{1, 2, 3}`（注意空集合必须用`set()`）
@@ -651,4 +651,4 @@ Python集合是处理唯一元素集合的强大数据结构，相比JavaScript�
 **变体类型：**
 - `frozenset`：不可变集合，可作为字典键或集合元素
 
-集合在数据去重、快速成员检查、权限验证、数据分析等场景中都有重要应用，是Python数据处理的重要工具。 
+集合在数据去重、快速成员检查、权限验证、数据分析等场景中都有重要应用，是 Python 数据处理的重要工具。 

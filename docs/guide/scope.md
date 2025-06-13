@@ -2,10 +2,10 @@
 
 ## 什么是作用域
 
-在JavaScript中，我们已经深刻理解了作用域的重要性。JavaScript有几种不同的作用域类型：全局作用域、函数作用域和块级作用域。这些概念帮助我们控制变量的可见性和生命周期：
+在 JavaScript 中，我们已经深刻理解了作用域的重要性。JavaScript 有几种不同的作用域类型：全局作用域、函数作用域和块级作用域。这些概念帮助我们控制变量的可见性和生命周期：
 
 ```javascript runner
-// JavaScript的作用域示例
+// JavaScript 的作用域示例
 var globalVar = "全局变量";
 let blockScopedVar = "块级作用域变量";
 
@@ -14,13 +14,13 @@ function demonstrateScope() {
     let anotherBlockVar = "另一个块级变量";
     
     if (true) {
-        var insideIf = "if内的var变量";
-        let blockOnly = "if内的let变量";
-        console.log("if块内可访问:", insideIf, blockOnly);
+        var insideIf = "if 内的 var 变量";
+        let blockOnly = "if 内的 let 变量";
+        console.log("if 块内可访问:", insideIf, blockOnly);
     }
     
-    console.log("函数内可访问var:", insideIf); // var穿透了块级作用域
-    // console.log(blockOnly); // 这会报错，let有块级作用域
+    console.log("函数内可访问 var:", insideIf); // var 穿透了块级作用域
+    // console.log(blockOnly); // 这会报错，let 有块级作用域
     
     return "函数执行完成";
 }
@@ -30,20 +30,20 @@ console.log("全局可访问:", globalVar);
 // console.log(functionVar); // 这会报错，函数作用域变量在外部不可访问
 ```
 
-Python的作用域概念相对简单直观，它遵循 **LEGB规则**：Local(局部) → Enclosing(嵌套) → Global(全局) → Built-in(内置)。Python没有块级作用域的概念，这让作用域规则更加清晰：
+Python 的作用域概念相对简单直观，它遵循 **LEGB 规则**：Local(局部) → Enclosing(嵌套) → Global(全局) → Built-in(内置)。Python 没有块级作用域的概念，这让作用域规则更加清晰：
 
 ```python runner
-# Python的作用域基本概念
+# Python 的作用域基本概念
 global_var = "全局变量"
 
 def demonstrate_scope():
     function_var = "函数局部变量"
     
     if True:
-        inside_if = "if内的变量"
-        print("if块内可访问:", inside_if)
+        inside_if = "if 内的变量"
+        print("if 块内可访问:", inside_if)
     
-    # Python没有块级作用域，在函数内都可以访问
+    # Python 没有块级作用域，在函数内都可以访问
     print("函数内可访问:", inside_if)
     print("函数内也可访问全局变量:", global_var)
     
@@ -54,13 +54,13 @@ print("全局可访问:", global_var)
 # print(function_var)  # 这会报错，函数局部变量在外部不可访问
 ```
 
-**LEGB规则的查找顺序**
+**LEGB 规则的查找顺序**
 
-当Python遇到一个变量名时，它会按照LEGB的顺序查找：
+当 Python 遇到一个变量名时，它会按照 LEGB 的顺序查找：
 
 ```python runner
-# 演示LEGB规则
-built_in_example = len  # Built-in函数
+# 演示 LEGB 规则
+built_in_example = len  # Built-in 函数
 
 global_var = "我是全局变量"
 
@@ -89,10 +89,10 @@ print("真正的全局变量:", global_var)
 
 ## 全局作用域和局部作用域
 
-JavaScript中，我们使用`var`、`let`、`const`在不同位置声明变量来控制作用域。全局变量可能意外污染全局命名空间，这是前端开发中需要特别注意的问题：
+JavaScript 中，我们使用`var`、`let`、`const`在不同位置声明变量来控制作用域。全局变量可能意外污染全局命名空间，这是前端开发中需要特别注意的问题：
 
 ```javascript runner
-// JavaScript的全局和局部作用域
+// JavaScript 的全局和局部作用域
 let globalCounter = 0;
 
 function incrementCounter() {
@@ -108,20 +108,20 @@ incrementCounter();
 incrementCounter();
 
 console.log("最终全局计数:", globalCounter);
-// console.log(localStep); // 报错：localStep在函数外不可访问
+// console.log(localStep); // 报错：localStep 在函数外不可访问
 ```
 
-Python的全局和局部作用域概念类似，但语法更简洁。特别值得注意的是`global`关键字的使用：
+Python 的全局和局部作用域概念类似，但语法更简洁。特别值得注意的是`global`关键字的使用：
 
 ```python runner
-# Python的全局和局部作用域
+# Python 的全局和局部作用域
 global_counter = 0
 
 def increment_counter():
     # 如果只是读取全局变量，不需要特殊声明
     local_step = 1
     
-    # 但如果要修改全局变量，需要使用global关键字
+    # 但如果要修改全局变量，需要使用 global 关键字
     global global_counter
     global_counter += local_step
     
@@ -132,31 +132,31 @@ increment_counter()
 increment_counter()
 
 print("最终全局计数:", global_counter)
-# print(local_step)  # 报错：local_step在函数外不可访问
+# print(local_step)  # 报错：local_step 在函数外不可访问
 ```
 
-**为什么Python需要`global`关键字？**
+**为什么 Python 需要`global`关键字？**
 
-Python的设计哲学强调明确性。当你在函数内部给变量赋值时，Python默认认为你在创建一个局部变量。如果你真的想修改全局变量，必须显式声明：
+Python 的设计哲学强调明确性。当你在函数内部给变量赋值时，Python 默认认为你在创建一个局部变量。如果你真的想修改全局变量，必须显式声明：
 
 ```python runner
-# 演示不使用global关键字的问题
+# 演示不使用 global 关键字的问题
 counter = 0
 
 def incorrect_increment():
-    # 这里创建了一个新的局部变量counter，而不是修改全局的
+    # 这里创建了一个新的局部变量 counter，而不是修改全局的
     counter = counter + 1  # 这会报错！
-    print("局部counter:", counter)
+    print("局部 counter:", counter)
 
 def correct_increment():
     global counter
     counter = counter + 1
-    print("全局counter:", counter)
+    print("全局 counter:", counter)
 
 # incorrect_increment()  # 取消注释会报错：UnboundLocalError
 
 correct_increment()
-print("全局counter的最终值:", counter)
+print("全局 counter 的最终值:", counter)
 ```
 
 ```python runner
@@ -174,10 +174,10 @@ print("使用函数式风格的计数器:", counter)
 
 ## 嵌套作用域
 
-JavaScript中的闭包是前端开发的重要概念，特别是在事件处理和异步编程中：
+JavaScript 中的闭包是前端开发的重要概念，特别是在事件处理和异步编程中：
 
 ```javascript runner
-// JavaScript的闭包和嵌套作用域
+// JavaScript 的闭包和嵌套作用域
 function createCounter(initialValue) {
     let count = initialValue;
     
@@ -196,10 +196,10 @@ console.log("counter2:", counter2(5)); // 15
 console.log("counter1:", counter1()); // 3
 ```
 
-Python同样支持闭包和嵌套作用域，`nonlocal`关键字的作用类似于`global`，但用于嵌套函数的外层变量：
+Python 同样支持闭包和嵌套作用域，`nonlocal`关键字的作用类似于`global`，但用于嵌套函数的外层变量：
 
 ```python runner
-# Python的闭包和嵌套作用域
+# Python 的闭包和嵌套作用域
 def create_counter(initial_value):
     count = initial_value
     
@@ -222,7 +222,7 @@ print("counter1:", counter1())     # 3
 **`nonlocal`vs`global`的区别**
 
 ```python runner
-# 演示nonlocal和global的区别
+# 演示 nonlocal 和 global 的区别
 global_var = "我是全局变量"
 
 def outer_function():
@@ -250,44 +250,44 @@ print("修改后 - 全局变量:", global_var)
 
 ## 变量遮盖
 
-JavaScript中，内层作用域的变量会遮盖外层的同名变量，这有时会导致意想不到的结果：
+JavaScript 中，内层作用域的变量会遮盖外层的同名变量，这有时会导致意想不到的结果：
 
 ```javascript runner
-// JavaScript的变量遮盖
+// JavaScript 的变量遮盖
 let name = "全局名称";
 
 function demonstrateShadowing() {
-    console.log("函数开始，访问name:", name); // 访问全局变量
+    console.log("函数开始，访问 name:", name); // 访问全局变量
     
     if (true) {
-        let name = "局部名称"; // 遮盖了外层的name
-        console.log("块内访问name:", name);
+        let name = "局部名称"; // 遮盖了外层的 name
+        console.log("块内访问 name:", name);
     }
     
-    console.log("块外访问name:", name); // 又回到全局变量
+    console.log("块外访问 name:", name); // 又回到全局变量
 }
 
 demonstrateShadowing();
 ```
 
-Python中的变量遮盖行为类似，但由于没有块级作用域，情况相对简单：
+Python 中的变量遮盖行为类似，但由于没有块级作用域，情况相对简单：
 
 ```python runner
-# Python的变量遮盖
+# Python 的变量遮盖
 name = "全局名称"
 
 def demonstrate_shadowing():
-    print("函数开始，访问name:", name)  # 访问全局变量
+    print("函数开始，访问 name:", name)  # 访问全局变量
     
-    # Python没有块级作用域，所以在if内定义的变量在整个函数内有效
+    # Python 没有块级作用域，所以在 if 内定义的变量在整个函数内有效
     if True:
         name = "局部名称"  # 在函数内创建了局部变量，遮盖全局变量
-        print("if内访问name:", name)
+        print("if 内访问 name:", name)
     
-    print("if外访问name:", name)  # 仍然是局部变量
+    print("if 外访问 name:", name)  # 仍然是局部变量
 
 demonstrate_shadowing()
-print("全局name仍然是:", name)  # 全局变量没有被修改
+print("全局 name 仍然是:", name)  # 全局变量没有被修改
 ```
 
 **变量遮盖的最佳实践**
@@ -313,22 +313,22 @@ print("全局配置不变:", USER_NAME)
 
 ## 内置作用域
 
-JavaScript有一些全局对象和方法，如`window`、`document`、`console`等，这些是运行环境提供的：
+JavaScript 有一些全局对象和方法，如`window`、`document`、`console`等，这些是运行环境提供的：
 
 ```javascript runner
-// JavaScript的内置对象和方法
-console.log("JavaScript内置方法:");
+// JavaScript 的内置对象和方法
+console.log("JavaScript 内置方法:");
 console.log("数组长度:", [1, 2, 3].length);
 console.log("字符串长度:", "hello".length);
 console.log("解析数字:", parseInt("42"));
 console.log("当前时间:", Date.now());
 ```
 
-Python也有丰富的内置函数和对象，这些构成了Built-in作用域，是LEGB查找链的最后一环：
+Python 也有丰富的内置函数和对象，这些构成了 Built-in 作用域，是 LEGB 查找链的最后一环：
 
 ```python runner
-# Python的内置函数和对象
-print("Python内置函数:")
+# Python 的内置函数和对象
+print("Python 内置函数:")
 print("列表长度:", len([1, 2, 3]))
 print("字符串长度:", len("hello"))
 print("最大值:", max(1, 5, 3))
@@ -342,36 +342,36 @@ print("是否为字符串:", isinstance("hello", str))
 print("字符串转大写:", str.upper("hello"))
 ```
 
-**查看Python的所有内置名称**
+**查看 Python 的所有内置名称**
 
 ```python runner
-# 查看Python的内置名称空间
+# 查看 Python 的内置名称空间
 import builtins
 
-# 获取所有内置名称（只显示前20个，避免输出过长）
+# 获取所有内置名称（只显示前 20 个，避免输出过长）
 builtin_names = dir(builtins)
-print("Python内置名称总数:", len(builtin_names))
-print("前20个内置名称:", builtin_names[:20])
+print("Python 内置名称总数:", len(builtin_names))
+print("前 20 个内置名称:", builtin_names[:20])
 
 # 演示一些常用的内置函数
-print("\n常用内置函数演示:")
+print("\n 常用内置函数演示:")
 numbers = [1, 2, 3, 4, 5]
-print("all()检查是否都为真:", all([True, True, False]))
-print("any()检查是否有真值:", any([False, False, True]))
-print("enumerate()枚举:", list(enumerate(['a', 'b', 'c'])))
-print("zip()压缩:", list(zip([1, 2], ['a', 'b'])))
+print("all() 检查是否都为真:", all([True, True, False]))
+print("any() 检查是否有真值:", any([False, False, True]))
+print("enumerate() 枚举:", list(enumerate(['a', 'b', 'c'])))
+print("zip() 压缩:", list(zip([1, 2], ['a', 'b'])))
 ```
 
 ## 作用域和性能
 
-在JavaScript中，闭包的过度使用可能导致内存泄漏，因为外层作用域的变量会被内层函数引用而无法被垃圾回收：
+在 JavaScript 中，闭包的过度使用可能导致内存泄漏，因为外层作用域的变量会被内层函数引用而无法被垃圾回收：
 
 ```javascript runner
-// JavaScript中需要注意的闭包内存问题
+// JavaScript 中需要注意的闭包内存问题
 function createHeavyClosures() {
     const heavyData = new Array(1000000).fill("heavy data"); // 模拟大量数据
     
-    // 返回的函数会持有对heavyData的引用
+    // 返回的函数会持有对 heavyData 的引用
     return function() {
         return heavyData.length; // 只是简单使用
     };
@@ -379,13 +379,13 @@ function createHeavyClosures() {
 
 // 每次调用都会创建新的闭包和大量数据
 const closure1 = createHeavyClosures();
-console.log("闭包1结果:", closure1());
+console.log("闭包 1 结果:", closure1());
 ```
 
-Python中的闭包同样要注意内存使用，但垃圾回收机制相对更加友好：
+Python 中的闭包同样要注意内存使用，但垃圾回收机制相对更加友好：
 
 ```python runner
-# Python中的闭包内存管理
+# Python 中的闭包内存管理
 def create_heavy_closures():
     heavy_data = ["heavy data"] * 100000  # 模拟大量数据
     
@@ -394,9 +394,9 @@ def create_heavy_closures():
     
     return inner_function
 
-# Python的垃圾回收会更好地处理这种情况
+# Python 的垃圾回收会更好地处理这种情况
 closure1 = create_heavy_closures()
-print("闭包1结果:", closure1())
+print("闭包 1 结果:", closure1())
 
 # 更好的做法：避免不必要的闭包
 def calculate_data_length():
@@ -448,16 +448,16 @@ print("计数器:", counter.increment(), counter.increment(5))
 
 ## 作用域调试技巧
 
-JavaScript开发者常用浏览器的开发者工具来调试作用域问题，查看变量的值和作用域链：
+JavaScript 开发者常用浏览器的开发者工具来调试作用域问题，查看变量的值和作用域链：
 
 ```javascript runner
-// JavaScript中查看作用域的技巧
+// JavaScript 中查看作用域的技巧
 function debugScope() {
     let localVar = "局部变量";
     const globalRef = globalThis || window || global;
     
     console.log("当前函数的局部变量:", localVar);
-    // 在浏览器中可以用debugger语句暂停执行
+    // 在浏览器中可以用 debugger 语句暂停执行
     // debugger;
     
     return "调试完成";
@@ -466,10 +466,10 @@ function debugScope() {
 debugScope();
 ```
 
-Python提供了`globals()`和`locals()`函数来查看当前的作用域信息，这对调试非常有用：
+Python 提供了`globals()`和`locals()`函数来查看当前的作用域信息，这对调试非常有用：
 
 ```python runner
-# Python中的作用域调试技巧
+# Python 中的作用域调试技巧
 global_debug_var = "全局调试变量"
 
 def debug_scope():
@@ -510,7 +510,7 @@ def advanced_scope_debug():
         if not name.startswith('_'):
             print(f"{name}: {value} (类型: {type(value).__name__})")
     
-    # 清理frame引用，避免内存泄漏
+    # 清理 frame 引用，避免内存泄漏
     del frame
 
 def outer_function():
@@ -527,13 +527,13 @@ outer_function()
 
 ## 总结
 
-Python的作用域系统遵循清晰的LEGB规则，相比JavaScript的多层作用域概念更加简单直观。主要要点包括：
+Python 的作用域系统遵循清晰的 LEGB 规则，相比 JavaScript 的多层作用域概念更加简单直观。主要要点包括：
 
-1. **LEGB查找顺序**：Local → Enclosing → Global → Built-in，Python按此顺序查找变量
-2. **没有块级作用域**：Python中的if、for、while等语句块不创建新的作用域
+1. **LEGB 查找顺序**：Local → Enclosing → Global → Built-in，Python 按此顺序查找变量
+2. **没有块级作用域**：Python 中的 if、for、while 等语句块不创建新的作用域
 3. **明确的修改声明**：使用`global`修改全局变量，`nonlocal`修改嵌套作用域变量
 4. **变量遮盖**：内层同名变量会遮盖外层变量，但不会修改外层变量的值
-5. **丰富的内置函数**：Python提供大量内置函数，构成Built-in作用域
+5. **丰富的内置函数**：Python 提供大量内置函数，构成 Built-in 作用域
 6. **调试工具**：`globals()`、`locals()`和`inspect`模块帮助调试作用域问题
 
-理解作用域对于编写可维护的Python代码至关重要，它帮助我们控制变量的可见性，避免命名冲突，并写出更加清晰的代码结构。 
+理解作用域对于编写可维护的 Python 代码至关重要，它帮助我们控制变量的可见性，避免命名冲突，并写出更加清晰的代码结构。 

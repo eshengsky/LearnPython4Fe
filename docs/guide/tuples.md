@@ -1,6 +1,6 @@
 # 元组
 
-在JavaScript中，我们通常使用数组来存储有序的数据集合，这些数组是可变的，可以随时添加、删除或修改元素。Python除了提供类似的列表外，还有一种特殊的数据结构叫做元组(Tuple)，它类似于不可变的数组。
+在 JavaScript 中，我们通常使用数组来存储有序的数据集合，这些数组是可变的，可以随时添加、删除或修改元素。Python 除了提供类似的列表外，还有一种特殊的数据结构叫做元组 (Tuple)，它类似于不可变的数组。
 
 ## 什么是元组
 
@@ -19,7 +19,7 @@ print(f"个人信息: {person}")
 
 ## 创建元组
 
-JavaScript中没有直接对应的数据结构，最接近的是使用`Object.freeze()`冻结数组：
+JavaScript 中没有直接对应的数据结构，最接近的是使用`Object.freeze()`冻结数组：
 
 ```javascript runner
 // JavaScript 创建不可变数组（模拟元组）
@@ -31,7 +31,7 @@ const coordinates = Object.freeze([3, 5]);
 console.log(coordinates);
 ```
 
-Python的元组创建非常简洁，使用圆括号：
+Python 的元组创建非常简洁，使用圆括号：
 
 ```python runner
 # 使用圆括号创建元组
@@ -52,7 +52,7 @@ print(f"坐标点: {point} ({type(point)})")
 
 ### 单元素元组的陷阱
 
-创建单元素元组时必须包含逗号，否则Python会认为括号只是运算符：
+创建单元素元组时必须包含逗号，否则 Python 会认为括号只是运算符：
 
 ```python runner
 # 单元素元组的正确与错误写法
@@ -87,7 +87,7 @@ print(f"从范围创建: {range_to_tuple}")
 
 ## 访问元素
 
-元组的访问方式与JavaScript数组和Python列表完全相同：
+元组的访问方式与 JavaScript 数组和 Python 列表完全相同：
 
 ```javascript runner
 // JavaScript 数组访问
@@ -139,7 +139,7 @@ person[1].append(88)
 print(f"修改成绩后: {person}")
 
 # 元组的引用没变，但内容发生了变化
-print(f"ID保持不变: {id(person)}")
+print(f"ID 保持不变: {id(person)}")
 ```
 
 ## 切片操作
@@ -150,8 +150,8 @@ print(f"ID保持不变: {id(person)}")
 numbers = (0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 print(f"原元组: {numbers}")
-print(f"前5个: {numbers[:5]}")
-print(f"后5个: {numbers[-5:]}")
+print(f"前 5 个: {numbers[:5]}")
+print(f"后 5 个: {numbers[-5:]}")
 print(f"中间部分: {numbers[3:7]}")
 print(f"每隔一个: {numbers[::2]}")
 print(f"反转: {numbers[::-1]}")
@@ -163,7 +163,7 @@ print(f"切片结果类型: {type(slice_result)}")
 
 ## 元组解包
 
-元组的一个强大特性是解包(unpacking)，这让多重赋值变得非常简洁：
+元组的一个强大特性是解包 (unpacking)，这让多重赋值变得非常简洁：
 
 ```javascript runner
 // JavaScript 中的数组解构
@@ -229,9 +229,9 @@ fruits = ("apple", "banana", "cherry", "date")
 print(f"元组长度: {len(fruits)}")
 
 # 检查成员
-print(f"是否包含apple: {'apple' in fruits}")
-print(f"是否包含orange: {'orange' in fruits}")
-print(f"不包含orange: {'orange' not in fruits}")
+print(f"是否包含 apple: {'apple' in fruits}")
+print(f"是否包含 orange: {'orange' in fruits}")
+print(f"不包含 orange: {'orange' not in fruits}")
 ```
 
 ### 计数和查找
@@ -241,11 +241,11 @@ numbers = (1, 2, 3, 2, 4, 2, 5)
 
 # 计算某个值出现的次数
 count_2 = numbers.count(2)
-print(f"数字2出现次数: {count_2}")
+print(f"数字 2 出现次数: {count_2}")
 
 # 查找某个值的第一个索引
 index_3 = numbers.index(3)
-print(f"数字3的索引: {index_3}")
+print(f"数字 3 的索引: {index_3}")
 
 # 查找不存在的值会报错
 try:
@@ -268,11 +268,11 @@ print(f"连接结果: {combined}")
 
 # 重复元组
 repeated = tuple1 * 3
-print(f"重复3次: {repeated}")
+print(f"重复 3 次: {repeated}")
 
 # 原元组保持不变
-print(f"原tuple1: {tuple1}")
-print(f"原tuple2: {tuple2}")
+print(f"原 tuple1: {tuple1}")
+print(f"原 tuple2: {tuple2}")
 ```
 
 ## 元组作为字典键
@@ -283,8 +283,8 @@ print(f"原tuple2: {tuple2}")
 # 元组作为字典键 - 表示坐标点的值
 coordinates_value = {
     (0, 0): "原点",
-    (1, 0): "X轴上的点",
-    (0, 1): "Y轴上的点",
+    (1, 0): "X 轴上的点",
+    (0, 1): "Y 轴上的点",
     (1, 1): "对角点"
 }
 
@@ -294,7 +294,7 @@ for coord, description in coordinates_value.items():
 
 # 访问特定坐标的值
 point = (1, 1)
-print(f"坐标{point}的描述: {coordinates_value[point]}")
+print(f"坐标 {point} 的描述: {coordinates_value[point]}")
 
 # 列表不能作为字典键
 try:
@@ -325,11 +325,11 @@ print(f"用户信息: {user_info}")
 
 # 解包返回值
 name, age, job = get_user_info()
-print(f"解包: {name}, {age}岁, {job}")
+print(f"解包: {name}, {age} 岁, {job}")
 
 # 计算圆的信息
 c, a = get_circle_info(5)
-print(f"半径5的圆: 周长={c:.2f}, 面积={a:.2f}")
+print(f"半径 5 的圆: 周长={c:.2f}, 面积={a:.2f}")
 ```
 
 ### 配置和常量
@@ -347,7 +347,7 @@ DEFAULT_SETTINGS = (
 width, height, bg_color, fullscreen = DEFAULT_SETTINGS
 print(f"窗口配置: {width}x{height}, 背景: {bg_color}, 全屏: {fullscreen}")
 
-# RGB颜色常量
+# RGB 颜色常量
 COLORS = {
     "RED": (255, 0, 0),
     "GREEN": (0, 255, 0),
@@ -359,7 +359,7 @@ COLORS = {
 # 使用颜色
 red_color = COLORS["RED"]
 r, g, b = red_color
-print(f"红色RGB: ({r}, {g}, {b})")
+print(f"红色 RGB: ({r}, {g}, {b})")
 ```
 
 ### 数据库记录
@@ -378,7 +378,7 @@ def query_users():
 users = query_users()
 print("用户列表:")
 for user_id, name, email, age in users:
-    print(f"  ID:{user_id} {name} ({email}) - {age}岁")
+    print(f"  ID:{user_id} {name} ({email}) - {age} 岁")
 
 # 查找特定用户
 target_id = 2
@@ -399,8 +399,8 @@ print("=== 适合使用元组的场景 ===")
 # 1. 坐标、点位等固定结构
 point_2d = (3, 5)
 point_3d = (3, 5, 2)
-print(f"2D坐标: {point_2d}")
-print(f"3D坐标: {point_3d}")
+print(f"2D 坐标: {point_2d}")
+print(f"3D 坐标: {point_3d}")
 
 # 2. 配置信息（不希望被意外修改）
 database_config = ("localhost", 5432, "mydb", "user")
@@ -435,7 +435,7 @@ print(f"排序后: {numbers}")
 
 ## 命名元组
 
-虽然不是本章的重点，但值得了解Python还提供了命名元组，让元组更具可读性：
+虽然不是本章的重点，但值得了解 Python 还提供了命名元组，让元组更具可读性：
 
 ```python runner
 from collections import namedtuple
@@ -462,7 +462,7 @@ print(f"支持解包: {tuple(p1)}")
 
 ## 小结
 
-元组是Python中一种重要的不可变序列类型：
+元组是 Python 中一种重要的不可变序列类型：
 
 1. **不可变性**：一旦创建就不能修改，提供数据安全性和性能优化
 2. **有序性**：保持元素的插入顺序，支持索引和切片操作

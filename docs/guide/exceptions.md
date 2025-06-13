@@ -2,21 +2,21 @@
 
 ## 异常处理基础
 
-在JavaScript中，我们使用`try...catch`来处理运行时错误，这让程序能够优雅地处理异常情况而不是直接崩溃：
+在 JavaScript 中，我们使用`try...catch`来处理运行时错误，这让程序能够优雅地处理异常情况而不是直接崩溃：
 
 ```javascript runner
 try {
-    console.log(undefinedVariable); // 这会抛出ReferenceError
+    console.log(undefinedVariable); // 这会抛出 ReferenceError
 } catch (error) {
     console.log("捕获到错误:", error.message);
 }
 ```
 
-Python采用了类似但更加清晰的异常处理机制。Python使用`try...except`语法，`except`这个词比`catch`更加直观地表达了"处理异常"的含义：
+Python 采用了类似但更加清晰的异常处理机制。Python 使用`try...except`语法，`except`这个词比`catch`更加直观地表达了"处理异常"的含义：
 
 ```python runner
 try:
-    print(x)  # x未定义，会抛出NameError
+    print(x)  # x 未定义，会抛出 NameError
 except:
     print("发生了异常")
 ```
@@ -37,7 +37,7 @@ print("程序继续执行，result =", result)
 
 ## 具体异常类型处理
 
-JavaScript开发者习惯通过检查错误对象的类型或属性来处理不同的错误：
+JavaScript 开发者习惯通过检查错误对象的类型或属性来处理不同的错误：
 
 ```javascript runner
 try {
@@ -55,7 +55,7 @@ try {
 }
 ```
 
-Python提供了更加优雅的多异常处理语法。你可以为不同类型的异常编写专门的处理代码，让错误处理更加精确和有针对性：
+Python 提供了更加优雅的多异常处理语法。你可以为不同类型的异常编写专门的处理代码，让错误处理更加精确和有针对性：
 
 ```python runner
 try:
@@ -76,19 +76,19 @@ except:
 ```python runner
 try:
     # 这里可能出现多种错误
-    value = int(input("请输入一个数字: "))  # 可能的ValueError
-    result = 10 / value  # 可能的ZeroDivisionError
+    value = int(input("请输入一个数字: "))  # 可能的 ValueError
+    result = 10 / value  # 可能的 ZeroDivisionError
 except (ValueError, ZeroDivisionError) as e:
     print(f"输入或计算错误: {e}")
 except Exception as e:
     print(f"其他错误: {e}")
 ```
 
-**Python异常处理的优势**：Python的异常类型系统比JavaScript更加丰富和明确。JavaScript主要有几种基础错误类型，而Python有完整的异常类层次结构，让错误处理更加精确。
+**Python 异常处理的优势**：Python 的异常类型系统比 JavaScript 更加丰富和明确。JavaScript 主要有几种基础错误类型，而 Python 有完整的异常类层次结构，让错误处理更加精确。
 
 ## else 子句
 
-JavaScript的`try...catch`没有直接等价的`else`概念，但Python的`else`子句提供了一个非常实用的功能：**只有当没有异常发生时才执行的代码**。
+JavaScript 的`try...catch`没有直接等价的`else`概念，但 Python 的`else`子句提供了一个非常实用的功能：**只有当没有异常发生时才执行的代码**。
 
 ```python runner
 def divide_numbers(a, b):
@@ -103,15 +103,15 @@ def divide_numbers(a, b):
         return result
 
 # 测试不同情况
-divide_numbers(10, 2)  # 正常情况，会执行else
-divide_numbers(10, 0)  # 异常情况，不会执行else
+divide_numbers(10, 2)  # 正常情况，会执行 else
+divide_numbers(10, 0)  # 异常情况，不会执行 else
 ```
 
 这种设计让代码逻辑更加清晰：异常处理代码在`except`中，正常流程的后续处理在`else`中，避免了逻辑混淆。
 
 ## finally 子句
 
-JavaScript和Python都支持`finally`子句，用于执行无论是否发生异常都需要运行的清理代码：
+JavaScript 和 Python 都支持`finally`子句，用于执行无论是否发生异常都需要运行的清理代码：
 
 ```javascript runner
 let file = null;
@@ -128,7 +128,7 @@ try {
 }
 ```
 
-Python的`finally`用法几乎相同，但在文件处理等资源管理场景中更加常见：
+Python 的`finally`用法几乎相同，但在文件处理等资源管理场景中更加常见：
 
 ```python runner
 def file_operation():
@@ -154,7 +154,7 @@ file_operation()
 
 ## 抛出异常
 
-JavaScript使用`throw`关键字来主动抛出异常，这在参数验证和错误条件检查中很常见：
+JavaScript 使用`throw`关键字来主动抛出异常，这在参数验证和错误条件检查中很常见：
 
 ```javascript runner
 function validateAge(age) {
@@ -162,7 +162,7 @@ function validateAge(age) {
         throw new Error("年龄不能为负数");
     }
     if (age > 150) {
-        throw new Error("年龄不能超过150岁");
+        throw new Error("年龄不能超过 150 岁");
     }
     return "年龄验证通过";
 }
@@ -175,7 +175,7 @@ try {
 }
 ```
 
-Python使用`raise`关键字来抛出异常，功能类似但语法更加简洁。你可以抛出内置的异常类型，也可以创建自定义异常：
+Python 使用`raise`关键字来抛出异常，功能类似但语法更加简洁。你可以抛出内置的异常类型，也可以创建自定义异常：
 
 ```python runner
 def validate_age(age):
@@ -183,7 +183,7 @@ def validate_age(age):
     if age < 0:
         raise ValueError("年龄不能为负数")
     if age > 150:
-        raise ValueError("年龄不能超过150岁")
+        raise ValueError("年龄不能超过 150 岁")
     return "年龄验证通过"
 
 # 测试异常抛出
@@ -209,14 +209,14 @@ except Exception as e:
     print(f"权限检查失败: {e}")
 ```
 
-**Python异常抛出的特点**：
+**Python 异常抛出的特点**：
 - 使用`raise`关键字，比`throw`更加直观
 - 可以抛出具体的异常类型（如`ValueError`、`TypeError`等），让错误信息更准确
 - 支持异常链，可以在处理一个异常时抛出另一个异常，保留原始错误信息
 
 ## 异常链和上下文
 
-Python的一个强大特性是异常链，允许在处理异常时保留原始异常的信息：
+Python 的一个强大特性是异常链，允许在处理异常时保留原始异常的信息：
 
 ```python runner
 def process_data(data):
@@ -240,7 +240,7 @@ except Exception as e:
 
 ## 自定义异常类
 
-Python允许创建自定义异常类，这在大型项目中非常有用：
+Python 允许创建自定义异常类，这在大型项目中非常有用：
 
 ```python runner
 class ValidationError(Exception):
@@ -249,7 +249,7 @@ class ValidationError(Exception):
         self.field = field
         self.value = value
         self.message = message
-        super().__init__(f"{field}字段验证失败: {message}, 值: {value}")
+        super().__init__(f"{field} 字段验证失败: {message}, 值: {value}")
 
 def validate_email(email):
     """邮箱验证示例"""
@@ -285,7 +285,7 @@ except ValueError as e:
 #     print("出错了")  # 信息不够具体
 ```
 
-**2. 合理使用finally进行资源清理**
+**2. 合理使用 finally 进行资源清理**
 
 ```python runner
 def safe_file_operation():
@@ -318,7 +318,7 @@ def calculate_discount(price, discount_rate):
         if price < 0:
             raise ValueError(f"价格不能为负数: {price}")
         if not 0 <= discount_rate <= 1:
-            raise ValueError(f"折扣率必须在0-1之间: {discount_rate}")
+            raise ValueError(f"折扣率必须在 0-1 之间: {discount_rate}")
         
         return price * (1 - discount_rate)
     except ValueError as e:
@@ -333,13 +333,13 @@ calculate_discount(100, 0.2)   # 正常情况
 
 ## 小结
 
-Python的异常处理机制相比JavaScript具有以下特点和优势：
+Python 的异常处理机制相比 JavaScript 具有以下特点和优势：
 
 1. **语法更清晰**：`try...except`比`try...catch`更直观，`raise`比`throw`更明确
-2. **异常类型丰富**：Python提供了完整的异常类层次结构，错误分类更精确
+2. **异常类型丰富**：Python 提供了完整的异常类层次结构，错误分类更精确
 3. **`else`子句独特**：提供了"无异常时执行"的逻辑分支，让代码结构更清晰
-4. **`finally`子句一致**：与JavaScript类似，用于资源清理和必须执行的代码
+4. **`finally`子句一致**：与 JavaScript 类似，用于资源清理和必须执行的代码
 5. **异常链支持**：可以保留原始异常信息，便于调试和错误追踪
 6. **自定义异常灵活**：易于创建业务相关的异常类型
 
-掌握异常处理是编写健壮Python程序的关键技能。合理的异常处理不仅能让程序更稳定，还能提供更好的用户体验和调试信息。记住要捕获具体的异常类型，提供有意义的错误信息，并确保重要资源得到正确清理。 
+掌握异常处理是编写健壮 Python 程序的关键技能。合理的异常处理不仅能让程序更稳定，还能提供更好的用户体验和调试信息。记住要捕获具体的异常类型，提供有意义的错误信息，并确保重要资源得到正确清理。 

@@ -1,15 +1,15 @@
 # 条件判断
 
-JavaScript中使用大括号包围代码块，Python则通过缩进来确定代码结构。这种差异不仅影响条件判断的写法，更体现了两种语言的设计哲学：Python追求简洁优雅，JavaScript追求明确界定。
+JavaScript 中使用大括号包围代码块，Python 则通过缩进来确定代码结构。这种差异不仅影响条件判断的写法，更体现了两种语言的设计哲学：Python 追求简洁优雅，JavaScript 追求明确界定。
 
-## if语句
+## if 语句
 
-在JavaScript中，我们使用大括号来包围条件语句的代码块，即使只有一行代码也推荐使用大括号：
+在 JavaScript 中，我们使用大括号来包围条件语句的代码块，即使只有一行代码也推荐使用大括号：
 
 ```javascript runner
 let age = 20;
 
-// JavaScript的if语句
+// JavaScript 的 if 语句
 if (age >= 18) {
     console.log("你已经成年了");
 }
@@ -21,12 +21,12 @@ if (age >= 18) {
 }
 ```
 
-Python使用冒号和缩进来替代大括号：
+Python 使用冒号和缩进来替代大括号：
 
 ```python runner
 age = 20
 
-# Python的if语句 - 使用冒号和缩进
+# Python 的 if 语句 - 使用冒号和缩进
 if age >= 18:
     print("你已经成年了")
 
@@ -36,14 +36,14 @@ if age >= 18:
     print("可以独立承担法律责任")
 ```
 
-## if-else语句
+## if-else 语句
 
-JavaScript的if-else语句使用大括号明确界定每个分支：
+JavaScript 的 if-else 语句使用大括号明确界定每个分支：
 
 ```javascript runner
 let score = 85;
 
-// JavaScript的if-else
+// JavaScript 的 if-else
 if (score >= 90) {
     console.log("优秀");
 } else if (score >= 80) {
@@ -57,12 +57,12 @@ if (score >= 90) {
 }
 ```
 
-Python使用`elif`关键字替代`else if`，代码更加简洁：
+Python 使用`elif`关键字替代`else if`，代码更加简洁：
 
 ```python runner
 score = 85
 
-# Python的if-elif-else
+# Python 的 if-elif-else
 if score >= 90:
     print("优秀")
 elif score >= 80:
@@ -75,9 +75,9 @@ else:
     print("不及格")
 ```
 
-## else语句
+## else 语句
 
-JavaScript中使用`else`作为默认分支，当所有前面的条件都不满足时执行：
+JavaScript 中使用`else`作为默认分支，当所有前面的条件都不满足时执行：
 
 ```javascript runner
 let age = 16;
@@ -89,18 +89,18 @@ if (age >= 18) {
 }
 ```
 
-Python的`else`语句语法相同：
+Python 的`else`语句语法相同：
 
 ```python runner
 age = 16
 
-# 基本的if-else
+# 基本的 if-else
 if age >= 18:
     print("成年人")
 else:
     print("未成年人")
 
-# 多条件判断中的else
+# 多条件判断中的 else
 score = 75
 
 if score >= 90:
@@ -115,16 +115,16 @@ else:
 print(f"成绩等级: {grade}")
 ```
 
-除了条件判断，Python的`else`还可以与循环语句和异常处理配合使用，这些用法会在后续的循环和异常处理章节中介绍。
+除了条件判断，Python 的`else`还可以与循环语句和异常处理配合使用，这些用法会在后续的循环和异常处理章节中介绍。
 
 ## 三元操作符
 
-JavaScript中的三元操作符是一个常用的简洁条件表达式：
+JavaScript 中的三元操作符是一个常用的简洁条件表达式：
 
 ```javascript runner
 let age = 20;
 
-// JavaScript三元操作符
+// JavaScript 三元操作符
 let status = age >= 18 ? "成年人" : "未成年人";
 console.log(status);
 
@@ -133,12 +133,12 @@ let level = age >= 60 ? "老年人" : (age >= 18 ? "成年人" : "未成年人")
 console.log(level);
 ```
 
-Python也有条件表达式，但语法更接近自然语言：
+Python 也有条件表达式，但语法更接近自然语言：
 
 ```python runner
 age = 20
 
-# Python的条件表达式（类似三元操作符）
+# Python 的条件表达式（类似三元操作符）
 status = "成年人" if age >= 18 else "未成年人"
 print(status)
 
@@ -156,11 +156,11 @@ else:
 print(f"推荐写法结果: {level}")
 ```
 
-Python的条件表达式语法是`value_if_true if condition else value_if_false`，读起来更像英语。
+Python 的条件表达式语法是`value_if_true if condition else value_if_false`，读起来更像英语。
 
 ## 逻辑运算符
 
-在条件判断中，我们经常需要组合多个条件。JavaScript使用`&&`、`||`、`!`，Python使用英文单词`and`、`or`、`not`：
+在条件判断中，我们经常需要组合多个条件。JavaScript 使用`&&`、`||`、`!`，Python 使用英文单词`and`、`or`、`not`：
 
 ```python runner
 age = 25
@@ -178,14 +178,14 @@ if not has_insurance:
     print("建议购买保险")
 ```
 
-详细的逻辑运算符介绍和真值判断规则，请参考[布尔值](./booleans)章节。
+详细的逻辑运算符介绍和真值判断规则，请参考 [布尔值](./booleans) 章节。
 
 ## 成员检查
 
-在JavaScript中，检查数组或对象是否包含某个元素需要使用特定的方法：
+在 JavaScript 中，检查数组或对象是否包含某个元素需要使用特定的方法：
 
 ```javascript runner
-// JavaScript的包含检查
+// JavaScript 的包含检查
 let fruits = ["apple", "banana", "orange"];
 let person = { name: "张三", age: 25 };
 
@@ -196,18 +196,18 @@ if (fruits.includes("apple")) {
 
 // 对象属性检查
 if ("name" in person) {
-    console.log("有name属性");
+    console.log("有 name 属性");
 }
 
 if (person.hasOwnProperty("age")) {
-    console.log("有age属性");
+    console.log("有 age 属性");
 }
 ```
 
-Python使用更直观的`in`关键字：
+Python 使用更直观的`in`关键字：
 
 ```python runner
-# Python的成员检查 - 统一使用in关键字
+# Python 的成员检查 - 统一使用 in 关键字
 fruits = ["apple", "banana", "orange"]
 person = {"name": "张三", "age": 25}
 
@@ -217,7 +217,7 @@ if "apple" in fruits:
 
 # 字典键检查
 if "name" in person:
-    print("有name键")
+    print("有 name 键")
 
 # 字符串子串检查
 if "张" in person["name"]:
@@ -225,76 +225,76 @@ if "张" in person["name"]:
 
 # 范围检查
 if 25 in range(20, 30):
-    print("25在20-30范围内")
+    print("25 在 20-30 范围内")
 ```
 
-## None值检查
+## None 值检查
 
-JavaScript中检查`null`或`undefined`：
+JavaScript 中检查`null`或`undefined`：
 
 ```javascript runner
 let value = null;
 let undefinedValue;
 
-// JavaScript的空值检查
+// JavaScript 的空值检查
 if (value === null) {
-    console.log("value是null");
+    console.log("value 是 null");
 }
 
 if (undefinedValue === undefined) {
-    console.log("undefinedValue是undefined");
+    console.log("undefinedValue 是 undefined");
 }
 
 // 检查是否为"假值"
 if (!value) {
-    console.log("value是假值");
+    console.log("value 是假值");
 }
 ```
 
-Python中主要检查`None`：
+Python 中主要检查`None`：
 
 ```python runner
-# Python的None检查
+# Python 的 None 检查
 value = None
 
-# 推荐的None检查方式 - 使用is
+# 推荐的 None 检查方式 - 使用 is
 if value is None:
-    print("value是None")
+    print("value 是 None")
 
-# 不推荐使用==检查None
+# 不推荐使用==检查 None
 if value == None:  # 可以工作，但不推荐
-    print("这样也能检查None，但不推荐")
+    print("这样也能检查 None，但不推荐")
 
-# 检查不是None
+# 检查不是 None
 if value is not None:
-    print("value不是None")
+    print("value 不是 None")
 else:
-    print("value确实是None")
+    print("value 确实是 None")
 
 # 结合其他条件
 data = None
 if data is not None and len(data) > 0:
     print("数据不为空且有内容")
 else:
-    print("数据为空或是None")
+    print("数据为空或是 None")
 ```
 
-**为什么使用is而不是==？**
+**为什么使用 is 而不是==？**
 
 `is`检查身份（同一个对象），`==`检查值的相等性。对于`None`这样的单例对象，应该使用`is`：
 
 ```python runner
-# 演示is和==的区别
+# 演示 is 和==的区别
 class AlwaysEqual:
     def __eq__(self, other):
-        return True  # 总是返回True
+        return True  # 总是返回 True
 
 weird_obj = AlwaysEqual()
 
 print(f"weird_obj == None: {weird_obj == None}")    # True（被重写的__eq__）
 print(f"weird_obj is None: {weird_obj is None}")    # False（真正的身份检查）
 
-# None的身份检查
+# None 的身份检查
 none1 = None
 none2 = None
 print(f"none1 is none2: {none1 is none2}")         # True（同一个对象）
@@ -304,10 +304,10 @@ print(f"none1 is none2: {none1 is none2}")         # True（同一个对象）
 
 ### 避免深层嵌套
 
-JavaScript中深层嵌套的问题：
+JavaScript 中深层嵌套的问题：
 
 ```javascript runner
-// JavaScript中避免深层嵌套的技巧
+// JavaScript 中避免深层嵌套的技巧
 function processUser(user) {
     // 不好的写法（深层嵌套）
     if (user) {
@@ -336,10 +336,10 @@ processUser({
 });
 ```
 
-Python中的类似改进：
+Python 中的类似改进：
 
 ```python runner
-# Python中避免深层嵌套
+# Python 中避免深层嵌套
 def process_user(user):
     # 不好的写法（深层嵌套）
     if user:
@@ -377,12 +377,12 @@ user_data = {
 process_user_better(user_data)
 ```
 
-### 使用字典替代多重if-elif
+### 使用字典替代多重 if-elif
 
-对于多分支的条件判断，Python可以使用字典来简化：
+对于多分支的条件判断，Python 可以使用字典来简化：
 
 ```python runner
-# 传统的多重if-elif
+# 传统的多重 if-elif
 def get_weekday_traditional(day_num):
     if day_num == 1:
         return "星期一"
@@ -422,10 +422,10 @@ print(f"无效输入: {get_weekday_dict(8)}")
 
 ### 利用布尔值的特性
 
-Python中的真值判断可以让条件语句更简洁：
+Python 中的真值判断可以让条件语句更简洁：
 
 ```python runner
-# 利用Python的真值判断特性
+# 利用 Python 的真值判断特性
 data = []
 message = ""
 count = 0
@@ -453,11 +453,11 @@ if not count:
 # 检查非空的情况
 data_with_content = [1, 2, 3]
 if data_with_content:  # 非空列表是真值
-    print(f"数据有{len(data_with_content)}个元素")
+    print(f"数据有 {len(data_with_content)} 个元素")
 ```
 
 ## 总结
 
-Python的条件判断通过缩进替代大括号，使代码结构更加清晰直观。关键特点包括：使用冒号开始代码块，通过缩进确定代码层级，`elif`关键字简化多分支判断。
+Python 的条件判断通过缩进替代大括号，使代码结构更加清晰直观。关键特点包括：使用冒号开始代码块，通过缩进确定代码层级，`elif`关键字简化多分支判断。
 
-Python的`in`关键字统一了成员检查操作，`is`和`is not`用于None值的身份检查。合理利用字典映射和早期返回模式，可以写出更简洁易读的条件判断代码。记住缩进是语法的一部分，保持一致的缩进风格对代码的正确性至关重要。 
+Python 的`in`关键字统一了成员检查操作，`is`和`is not`用于 None 值的身份检查。合理利用字典映射和早期返回模式，可以写出更简洁易读的条件判断代码。记住缩进是语法的一部分，保持一致的缩进风格对代码的正确性至关重要。 
