@@ -13,6 +13,9 @@ hero:
       text: 开始学习
       link: /guide/
     - theme: alt
+      text: Playground
+      link: /playground
+    - theme: alt
       text: Github
       link: https://github.com/eshengsky/LearnPython4Fe
 

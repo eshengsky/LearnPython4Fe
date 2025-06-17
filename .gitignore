@@ -15,7 +15,10 @@ ehthumbs.db
 Thumbs.db
 
 # VitePress
-.vitepress/cache
+.vitepress/cache/
+.vitepress/cache/**
+docs/.vitepress/cache/
+docs/.vitepress/cache/**
 .vitepress/dist
 .vitepress/temp
 
@@ -34,6 +37,7 @@ out/
 # Editor directories and files
 .vscode/
 .idea/
+.cursor/
 *.swp
 *.swo
 *~

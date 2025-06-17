@@ -8,7 +8,7 @@
     "build": "vitepress build docs",
     "preview": "vitepress preview docs"
   },
-  "author": "",
+  "author": "eshengsky",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^10.4.21",

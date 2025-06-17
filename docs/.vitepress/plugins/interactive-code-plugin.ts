@@ -17,7 +17,7 @@ export function interactiveCodePlugin(md: MarkdownIt): void {
     
     if (codeMatch) {
       const [, lang, isRunner, title] = codeMatch
-      const code = token.content.trim()
+      const code = token.content
       
       // 规范化语言名称
       const normalizedLang = lang === 'javascript' ? 'js' : lang === 'python' ? 'py' : lang === 'typescript' ? 'ts' : lang

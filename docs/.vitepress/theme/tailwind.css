@@ -5,3 +5,8 @@
 code {
   margin: 0 2px;
 }
+
+.custom-block.details {
+  background-color: transparent;
+  padding: 0;
+}

@@ -22,6 +22,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '教程指南', link: '/guide/' },
+      { text: 'Playground', link: '/playground' },
     ],
     
     sidebar: {
@@ -85,7 +86,7 @@ export default defineConfig({
         },
         {
           text: '面向对象编程',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '类和对象', link: '/guide/classes' },
             { text: '继承', link: '/guide/inheritance' },
@@ -95,7 +96,7 @@ export default defineConfig({
         },
         {
           text: '模块和包',
-          collapsed: true,
+          collapsed: false,
           items: [
             { text: '模块使用', link: '/guide/modules' },
             { text: '第三方包管理', link: '/guide/packages' },
@@ -161,18 +162,16 @@ export default defineConfig({
     },
     
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/your-username/LearnPython4Fe' }
+      { icon: 'github', link: 'https://github.com/eshengsky/LearnPython4Fe' }
     ],
     
     footer: {
       message: '基于 MIT 许可发布',
-      copyright: 'Copyright © 2024-present Python for Frontend Developers'
+      copyright: 'Copyright © 2025-present Python for Frontend Developers'
     },
     
     search: {
       provider: 'local'
     },
-
-    outline: [2, 3],
   },
 }) 
