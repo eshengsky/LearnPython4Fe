@@ -187,6 +187,10 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
+
+    outline: {
+      label: '页面导航'
+    },
   },
   base: '/LearnPython4Fe/'
 }) 
