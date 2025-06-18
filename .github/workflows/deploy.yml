@@ -8,7 +8,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    concurrency:
+      group: deploy-pages
+      cancel-in-progress: true
     steps:
       - name: Checkout source
         uses: actions/checkout@v3
