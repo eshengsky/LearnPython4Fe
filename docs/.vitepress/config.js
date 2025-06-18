@@ -164,6 +164,20 @@ export default defineConfig({
     socialLinks: [
       { icon: 'github', link: 'https://github.com/eshengsky/LearnPython4Fe' }
     ],
+
+    editLink: {
+      pattern: 'https://github.com/eshengsky/LearnPython4Fe/edit/main/docs/:path',
+      text: '在 GitHub 上编辑此页面'
+    },
+
+    lastUpdated: {
+      text: '最后更新于',
+    },
+
+    docFooter: {
+      prev: '上一页',
+      next: '下一页'
+    },
     
     footer: {
       message: '基于 MIT 许可发布',
