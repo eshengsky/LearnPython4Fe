@@ -265,6 +265,11 @@ function setupIntersectionObserver(): void {
 // 重置代码
 function resetCode(): void {
   const processedCode = processCode(props.code)
+  
+  // 先销毁现有编辑器
+  destroy()
+  
+  // 重新初始化编辑器
   initializeEditor(props.lang, processedCode, {
     maxHeight: '600px'
   })
