@@ -289,16 +289,23 @@ obj2 = obj1  # 引用同一个对象
 print("对象引用:", obj1 is obj2)  # True
 print("对象 ID:", id(obj1), id(obj2))  # id() 显示内存地址，相同说明是同一对象
 
-# Python 的数字缓存机制
+# Python 的整数对象优化机制
 a = 100
 b = 100
-print("小整数缓存:", a is b)  # True
-print("ID 对比:", id(a), id(b))  # 小整数会被缓存，ID 相同
+print("小整数缓存:", a is b)  # True，-5 到 256 的整数会被缓存
+print("小整数 ID:", id(a), id(b))  # 相同
 
+# Python 对整数字面量的编译时优化
 c = 1000
-d = 1000
-print("大整数:", c is d)  # 可能是 False
-print("大整数 ID:", id(c), id(d))  # 大整数每次创建新对象，ID 不同
+d = 1000  
+print("整数字面量:", c is d)  # True，编译时优化
+print("大整数 ID:", id(c), id(d))  # 相同
+
+# 只有运行时动态创建的整数才可能不同
+e = int('1000')  # 运行时创建
+f = int('1000')  # 再次运行时创建
+print("动态创建整数:", e is f)  # False
+print("动态创建 ID:", id(e), id(f))  # 不同
 ```
 
 ## 可变与不可变对象
@@ -343,78 +350,96 @@ Python 变量管理体现了"简洁胜过复杂"的设计哲学：
 
 ## 练习
 
-完成以下变量操作任务，输出个人资料信息：
-
-```
-=== 个人资料 ===
-姓名: 李华  
-年龄: 28 岁
-邮箱: li.hua@example.com
-是否VIP: 是
-爱好: 游泳, 阅读
-=== 变量演示 ===
-年龄类型: <class 'int'>
-内存地址: 140xxx
-年龄+10: 38 岁
-```
+完成以下变量定义与操作任务，练习本章所学的变量知识点：
 
 ```python runner
-# 给定数据：姓名="李华", 年龄=28, 邮箱="li.hua@example.com"
-
-# 1. 使用多重赋值同时创建姓名、年龄、邮箱三个变量
-
-
-# 2. 创建 VIP 状态变量（布尔值 True）
-
-
-# 3. 创建爱好列表 ["游泳", "阅读"] 
+# 1. 定义基本变量
+# 按要求创建以下变量（注意使用蛇形命名法）：
+# - 产品名称: "Python 教程"
+# - 价格: 99.9
+# - 是否有库存: True
 
 
-# 4. 使用 type() 检查年龄的数据类型
+# 2. 定义常量（使用命名约定）
+# 为以下内容定义常量（注意使用全大写+下划线）：
+# - 最大学生数: 50
+# - 课程版本: "1.0"
 
 
-# 5. 使用 id() 获取姓名变量的内存地址
+# 3. 使用多重赋值同时创建三个变量
+# 分别表示：作者="张三", 出版社="科技出版社", 年份=2024
 
 
-# 6. 计算年龄+10的结果
+# 4. 演示动态类型
+# 创建一个变量表示"状态"，先赋值为数字 100，然后改为字符串 "已完成"
 
 
-# 7. 按格式输出所有信息
+# 5. 使用 type() 函数检查变量类型
+# 输出上面定义的价格和库存状态变量的数据类型
+
+
+# 6. 使用 id() 函数查看内存地址
+# 创建两个相同值为 10 的数字变量
+# 输出它们的内存地址，观察是否相同
+
+
+# 7. 变量重新赋值
+# 修改价格变量为 89.9，然后输出修改前后的对比信息
+
+
+# 8. 输出所有变量信息
+# 使用 print() 输出所有创建的变量
 
 
 ```
 
 ::: details 点击查看参考答案
 ```python runner
-# 1. 使用多重赋值同时创建姓名、年龄、邮箱三个变量
-user_name, user_age, user_email = "李华", 28, "li.hua@example.com"
+# 1. 定义基本变量
+product_name = "Python 教程"
+price = 99.9
+in_stock = True
 
-# 2. 创建 VIP 状态变量（布尔值 True）
-is_vip = True
+# 2. 定义常量（使用命名约定）
+MAX_STUDENTS = 50
+COURSE_VERSION = "1.0"
 
-# 3. 创建爱好列表
-hobbies = ["游泳", "阅读"]
+# 3. 使用多重赋值同时创建三个变量
+author, publisher, year = "张三", "科技出版社", 2024
 
-# 4. 使用 type() 检查年龄的数据类型
-age_type = type(user_age)
+# 4. 演示动态类型
+dynamic_var = 100
+print("dynamic_var 初始值:", dynamic_var, "类型:", type(dynamic_var))
+dynamic_var = "已完成"
+print("dynamic_var 修改后:", dynamic_var, "类型:", type(dynamic_var))
 
-# 5. 使用 id() 获取姓名变量的内存地址
-name_id = id(user_name)
+# 5. 使用 type() 函数检查变量类型
+print("price 的类型:", type(price))
+print("in_stock 的类型:", type(in_stock))
 
-# 6. 计算年龄+10的结果
-age_plus_10 = user_age + 10
+# 6. 使用 id() 函数查看内存地址
+num1 = 10
+num2 = 10
+print("num1 的内存地址:", id(num1))
+print("num2 的内存地址:", id(num2))
+print("两个变量是否指向同一对象:", num1 is num2)
 
-# 7. 按格式输出所有信息
-print("=== 个人资料 ===")
-print(f"姓名: {user_name}")
-print(f"年龄: {user_age} 岁")
-print(f"邮箱: {user_email}")
-print(f"是否VIP: {'是' if is_vip else '否'}")
-print(f"爱好: {', '.join(hobbies)}")
-print("=== 变量演示 ===")
-print(f"年龄类型: {age_type}")
-print(f"内存地址: {name_id}")
-print(f"年龄+10: {age_plus_10} 岁")
+# 7. 变量重新赋值
+print("price 修改前:", price)
+price = 89.9
+print("price 修改后:", price)
+
+# 8. 输出所有变量信息
+print("\n=== 所有变量信息 ===")
+print("产品名称:", product_name)
+print("价格:", price)
+print("是否有库存:", in_stock)
+print("最大学生数:", MAX_STUDENTS)
+print("课程版本:", COURSE_VERSION)
+print("作者:", author)
+print("出版社:", publisher)
+print("年份:", year)
+print("动态变量当前值:", dynamic_var)
 ```
 :::
 
