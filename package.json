@@ -1,7 +1,7 @@
 {
   "name": "learnpython4fe",
   "version": "1.0.0",
-  "description": "给前端开发者的Python入门教程",
+  "description": "给前端开发者的Python教程",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev docs",

@@ -4,7 +4,8 @@
     <div class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
       <div class="px-4 py-3 flex justify-between items-center">
         <div class="flex items-center gap-3">
-          <div class="lang-selector-container text-xl">
+          <div class="text-xl text-gray-900 dark:text-gray-100">代码实验室</div>
+          <div class="lang-selector-container">
             <select v-model="selectedLang" 
                     class="language-selector text-lg font-semibold bg-transparent border-none outline-none cursor-pointer text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
               <option value="py">Python</option>
@@ -14,7 +15,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
           </div>
-          <div class="text-xl text-gray-900 dark:text-gray-100">Playground</div>
         </div>
         <div class="flex items-center gap-2">
           <button @click="copyCode"
@@ -24,7 +24,7 @@
             <CheckIcon v-else :size="16" />
             <span>{{ copySuccess ? '已复制' : '复制' }}</span>
           </button>
-                     <button @click="() => runCode(selectedLang)"
+          <button @click="() => runCode(selectedLang)"
              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
              :disabled="isRunning || (selectedLang === 'py' && !pyodideReady)"
              :title="getButtonText(selectedLang)">
@@ -116,37 +116,109 @@ const {
 // 默认代码模板
 const defaultCode = computed(() => {
   if (selectedLang.value === 'py') {
-    return `# 欢迎使用 Python Playground
-# 你可以在这里编写和运行 Python 代码
+    return `# 密码生成器
 
-print("Hello, Python!")
+import random
 
-# 试试一些基本操作
-name = "Python"
-version = 3.12
-print(f"我正在学习 {name} {version}")
+def generate_password(length=12):
+    """生成安全密码"""
+    # 定义字符集
+    letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    numbers = "0123456789"
+    symbols = "!@#$%^&*"
+    
+    # 组合所有字符
+    all_chars = letters + numbers + symbols
+    
+    # 生成密码
+    password = ""
+    for i in range(length):
+        password += random.choice(all_chars)
+    
+    return password
 
-# 创建一个简单的列表
-fruits = ["苹果", "香蕉", "橘子"]
-for fruit in fruits:
-    print(f"我喜欢 {fruit}")
+def get_strength_emoji(password):
+    """根据密码特征返回强度表情"""
+    has_upper = any(c.isupper() for c in password)
+    has_lower = any(c.islower() for c in password) 
+    has_digit = any(c.isdigit() for c in password)
+    has_symbol = any(c in "!@#$%^&*" for c in password)
+    
+    char_types = sum([has_upper, has_lower, has_digit, has_symbol])
+    
+    if char_types == 4:
+        return "🟢 强"
+    elif char_types == 3:
+        return "🟡 中等"
+    else:
+        return "🔴 弱"
+
+# 生成几个不同的密码选项
+print("推荐几个安全密码:\\n")
+
+passwords = [
+    generate_password(12),
+    generate_password(14),
+    generate_password(16)
+]
+
+for i, pwd in enumerate(passwords, 1):
+    strength = get_strength_emoji(pwd)
+    print(f"{i}. {pwd} {strength}")
 `
   } else {
-    return `// 欢迎使用 JavaScript Playground
-// 你可以在这里编写和运行 JavaScript 代码
+    return `// 密码生成器
 
-console.log("Hello, JavaScript!")
+function generatePassword(length = 12) {
+    // 生成安全密码
+    const letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const numbers = "0123456789";
+    const symbols = "!@#$%^&*";
+    
+    // 组合所有字符
+    const allChars = letters + numbers + symbols;
+    
+    // 生成密码
+    let password = "";
+    for (let i = 0; i < length; i++) {
+        const randomIndex = Math.floor(Math.random() * allChars.length);
+        password += allChars[randomIndex];
+    }
+    
+    return password;
+}
 
-// 试试一些基本操作
-const name = "JavaScript"
-const year = 2024
-console.log(\`我正在学习 \${name} - \${year}\`)
+function getStrengthEmoji(password) {
+    // 根据密码特征返回强度表情
+    const hasUpper = /[A-Z]/.test(password);
+    const hasLower = /[a-z]/.test(password);
+    const hasDigit = /[0-9]/.test(password);
+    const hasSymbol = /[!@#$%^&*]/.test(password);
+    
+    const charTypes = [hasUpper, hasLower, hasDigit, hasSymbol].filter(Boolean).length;
+    
+    if (charTypes === 4) {
+        return "🟢 强";
+    } else if (charTypes === 3) {
+        return "🟡 中等";
+    } else {
+        return "🔴 弱";
+    }
+}
 
-// 创建一个简单的数组
-const fruits = ["苹果", "香蕉", "橘子"]
-fruits.forEach(fruit => {
-    console.log(\`我喜欢 \${fruit}\`)
-})
+// 生成几个不同的密码选项
+console.log("推荐几个安全密码:\\n");
+
+const passwords = [
+    generatePassword(12),
+    generatePassword(14),
+    generatePassword(16)
+];
+
+passwords.forEach((pwd, index) => {
+    const strength = getStrengthEmoji(pwd);
+    console.log(\`\${index + 1}. \${pwd} \${strength}\`);
+});
 `
   }
 })

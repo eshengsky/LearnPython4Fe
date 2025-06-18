@@ -1,2 +1,3 @@
-# LearnPython4Fe
-给前端开发者的Python入门教程
+# 给前端开发者的 Python 教程
+
+状态：进行中
