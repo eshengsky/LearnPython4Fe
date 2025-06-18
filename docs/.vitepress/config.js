@@ -174,4 +174,5 @@ export default defineConfig({
       provider: 'local'
     },
   },
+  base: '/LearnPython4Fe/'
 }) 
