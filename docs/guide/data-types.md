@@ -18,32 +18,81 @@ Python 和 JavaScript 在类型系统设计上有重要差异：
 
 ## 可变性：Python 的核心概念
 
-Python 中，数据类型按可变性分为两大类：
+Python 中，数据类型按可变性分为两大类。理解这个概念的关键是：**变量只是指向对象的标签，可变性说的是对象本身能否被修改**。
 
 **不可变类型（Immutable）**：
-- 一旦创建，内容不能修改
+- 对象一旦创建，**对象内容**不能修改
 - 包括：`int`、`float`、`str`、`bool`、`tuple`、`frozenset`
-- 类似于 JavaScript 中的字符串，修改时会创建新对象
+- 变量可以指向新对象，但原对象不变
 
 **可变类型（Mutable）**：
-- 创建后可修改内容
+- 对象创建后，**对象内容**可以修改
 - 包括：`list`、`dict`、`set`
-- 类似于 JavaScript 中的数组和对象
+- 可以直接修改对象内部的数据
+
+让我们用具体例子来理解这个概念：
 
 ```python runner
-# 不可变类型示例
-name = "Alice"
-original_name = name
-name = name + " Smith"  # 创建了新字符串对象
-print(f"原始值: {original_name}")  # Alice
-print(f"修改后: {name}")           # Alice Smith
+# 不可变类型：整数
+print("=== 不可变类型：整数 ===")
+age = 10
+print(f"age 指向的对象 id: {id(age)}")
+age = 20  # 这不是修改原对象，而是让 age 指向新对象
+print(f"age 指向的对象 id: {id(age)}")  # 不同的 id，说明是新对象
+print("整数 10 和 20 是不同的对象，10 没有被修改")
 
-# 可变类型示例  
+# 不可变类型：字符串
+print("\n=== 不可变类型：字符串 ===")
+name = "Alice"
+original_id = id(name)
+name = name + " Smith"  # 创建新字符串对象
+print(f"原字符串对象还存在，id 改变了: {id(name) != original_id}")
+
+# 可变类型：列表
+print("\n=== 可变类型：列表 ===")  
 friends = ["Bob", "Charlie"]
-original_friends = friends
-friends.append("Dave")  # 修改原对象
-print(f"原始引用: {original_friends}")  # ['Bob', 'Charlie', 'Dave']
-print(f"当前值: {friends}")            # ['Bob', 'Charlie', 'Dave']
+original_id = id(friends)
+friends.append("Dave")  # 修改原对象内容
+print(f"列表对象本身没变，id 相同: {id(friends) == original_id}")
+print(f"但内容被修改了: {friends}")
+```
+
+再看一个更清楚的对比：
+
+```python runner
+# 演示变量赋值 vs 对象修改的区别
+print("=== 变量赋值（创建新对象）===")
+x = [1, 2, 3]
+y = x          # y 和 x 指向同一个列表对象
+x = [4, 5, 6]  # x 指向新对象，y 还指向原对象
+print(f"x: {x}")  # [4, 5, 6]
+print(f"y: {y}")  # [1, 2, 3] - 原对象没变
+
+print("\n=== 对象修改（修改对象内容）===")
+a = [1, 2, 3]
+b = a          # b 和 a 指向同一个列表对象  
+a.append(4)    # 修改对象内容，不是创建新对象
+print(f"a: {a}")  # [1, 2, 3, 4]
+print(f"b: {b}")  # [1, 2, 3, 4] - 同一个对象被修改了
+```
+
+这就像 JavaScript 中的基本类型 vs 引用类型：
+
+```javascript runner
+// JavaScript 中的类似概念
+// 基本类型 - 类似 Python 的不可变类型
+let num1 = 10;
+let num2 = num1;
+num1 = 20;
+console.log('num1:', num1); // 20
+console.log('num2:', num2); // 10 - 原值不变
+
+// 引用类型 - 类似 Python 的可变类型
+let arr1 = [1, 2, 3];
+let arr2 = arr1;
+arr1.push(4);
+console.log('arr1:', arr1); // [1, 2, 3, 4]
+console.log('arr2:', arr2); // [1, 2, 3, 4] - 同一个对象
 ```
 
 ## 内置数据类型
@@ -75,6 +124,27 @@ print(type(y))           # <class 'str'>
 
 z = [1, 2, 3]
 print(type(z))           # <class 'list'>
+```
+
+`type()` 返回的是类对象，形如 `<class 'int'>`，这种格式不够直观，也无法直接进行字符串比较。如果需要获取类型名称的字符串形式，可以使用 `type().__name__`：
+
+```python runner
+# 使用 type().__name__ 获取类型名称字符串
+x = 5
+y = "Hello World"
+z = [1, 2, 3]
+
+print(f"x 的类型: {type(x).__name__}")      # int
+print(f"y 的类型: {type(y).__name__}")      # str  
+print(f"z 的类型: {type(z).__name__}")      # list
+
+# 这样就可以进行字符串比较了
+if type(x).__name__ == 'int':
+    print("x 是整数类型")
+
+# 但更推荐使用 isinstance() 进行类型检查
+if isinstance(x, int):
+    print("推荐的方式：x 是整数类型")
 ```
 
 ## 数据类型的自动识别
@@ -225,45 +295,34 @@ Python 的数据类型体系与 JavaScript 有显著差异，主要体现在：
 
 ## 练习
 
-分析不同数据类型，输出详细的类型信息：
-
-```
-=== 数据类型分析 ===
-整数 42: <class 'int'> (不可变)
-浮点数 3.14: <class 'float'> (不可变)  
-字符串 "Python": <class 'str'> (不可变)
-列表 [1, 2, 3]: <class 'list'> (可变)
-元组 (1, 2, 3): <class 'tuple'> (不可变)
-字典 {'a': 1}: <class 'dict'> (可变)
-=== 类型检查 ===
-42 是数值类型: True
-"Python" 是字符串: True
-None 值检查: True
-=== 类型转换 ===
-"123" -> 123 (str to int)
-3.14 -> "3.14" (float to str)
-[1, 2] -> (1, 2) (list to tuple)
-```
+创建不同类型的变量，练习类型检查和转换：
 
 ```python runner
-# 给定数据：整数42, 浮点数3.14, 字符串"Python", 列表[1,2,3], 元组(1,2,3), 字典{'a':1}, None值
-
 # 1. 创建各种类型的变量
+number = 42
+price = 99.99
+name = "Python"
+skills = ["JavaScript", "Python"]
+empty_value = None
+
+# 2. 输出每个变量的类型名称（使用 type().__name__）
+# 期望输出：number 的类型: int
 
 
-# 2. 定义可变类型和不可变类型的列表
+# 3. 检查 number 是否为数值类型，name 是否为字符串类型
+# 期望输出：number 是数值类型: True
 
 
-# 3. 分析每个变量的类型，判断可变性并输出
+# 4. 创建两个变量指向同一个列表，修改其中一个，观察另一个的变化
+# 期望看到：两个变量都发生了变化
 
 
-# 4. 使用 isinstance() 检查类型
+# 5. 将字符串 "123" 转为整数，将 price 转为字符串并输出
+# 期望输出："123" -> 123 (int)
 
 
-# 5. 演示类型转换
-
-
-# 6. 检查 None 值
+# 6. 检查 empty_value 是否为 None，number 是否不为 None
+# 期望输出：empty_value 是 None: True
 
 
 ```
@@ -271,51 +330,45 @@ None 值检查: True
 ::: details 点击查看参考答案
 ```python runner
 # 1. 创建各种类型的变量
-num_int = 42
-num_float = 3.14
-text = "Python"
-my_list = [1, 2, 3]
-my_tuple = (1, 2, 3)
-my_dict = {'a': 1}
-none_value = None
+number = 42
+price = 99.99
+name = "Python"
+skills = ["JavaScript", "Python"]
+empty_value = None
 
-# 2. 定义可变类型和不可变类型的列表
-mutable_types = (list, dict, set)
-immutable_types = (int, float, str, tuple, bool, type(None))
+# 2. 使用 type() 和 type().__name__ 查看类型
+print("=== 类型查看 ===")
+print(f"number 的类型: {type(number).__name__}")
+print(f"price 的类型: {type(price).__name__}")
+print(f"name 的类型: {type(name).__name__}")
+print(f"skills 的类型: {type(skills).__name__}")
 
-# 3. 分析每个变量的类型，判断可变性并输出
-variables = [
-    ("整数 42", num_int),
-    ("浮点数 3.14", num_float), 
-    ('字符串 "Python"', text),
-    ("列表 [1, 2, 3]", my_list),
-    ("元组 (1, 2, 3)", my_tuple),
-    ("字典 {'a': 1}", my_dict)
-]
+# 3. 使用 isinstance() 进行类型检查
+print("\n=== 类型检查 ===")
+print(f"number 是数值类型: {isinstance(number, (int, float))}")
+print(f"name 是字符串: {isinstance(name, str)}")
+print(f"skills 是列表: {isinstance(skills, list)}")
 
-print("=== 数据类型分析 ===")
-for name, var in variables:
-    var_type = type(var)
-    is_mutable = isinstance(var, mutable_types)
-    mutability = "可变" if is_mutable else "不可变"
-    print(f"{name}: {var_type} ({mutability})")
+# 4. 演示可变性差异
+print("\n=== 可变性演示 ===")
+list1 = [1, 2, 3]
+list2 = list1  # 指向同一个对象
+list1.append(4)
+print(f"list1: {list1}")  # [1, 2, 3, 4]
+print(f"list2: {list2}")  # [1, 2, 3, 4] - 同一个对象被修改
 
-# 4. 使用 isinstance() 检查类型
-print("=== 类型检查 ===")
-print(f"42 是数值类型: {isinstance(num_int, (int, float))}")
-print(f'"Python" 是字符串: {isinstance(text, str)}')
-print(f"None 值检查: {none_value is None}")
+# 5. 进行类型转换
+print("\n=== 类型转换 ===")
+str_number = "123"
+converted_int = int(str_number)
+print(f'"{str_number}" -> {converted_int} ({type(converted_int).__name__})')
 
-# 5. 演示类型转换
-print("=== 类型转换 ===")
-str_num = "123"
-converted_int = int(str_num)
-print(f'"{str_num}" -> {converted_int} (str to int)')
+converted_str = str(price)
+print(f'{price} -> "{converted_str}" ({type(converted_str).__name__})')
 
-converted_str = str(num_float)
-print(f"{num_float} -> \"{converted_str}\" (float to str)")
-
-converted_tuple = tuple(my_list[:2])
-print(f"{my_list[:2]} -> {converted_tuple} (list to tuple)")
+# 6. 检查 None 值
+print("\n=== None 值检查 ===")
+print(f"empty_value 是 None: {empty_value is None}")
+print(f"number 不是 None: {number is not None}")
 ```
 :::
