@@ -2,12 +2,12 @@
   <div class="playground-editor fixed top-[64px] left-0 right-0 bottom-0 flex flex-col bg-white dark:bg-gray-900">
     <!-- 顶部工具栏 -->
     <div class="border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
-      <div class="px-4 py-3 flex justify-between items-center">
-        <div class="flex items-center gap-3">
-          <div class="text-xl text-gray-900 dark:text-gray-100">代码实验室</div>
-          <div class="lang-selector-container">
+      <div class="px-3 sm:px-4 py-2 sm:py-3 flex justify-between items-center">
+        <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+          <div class="text-lg sm:text-xl text-gray-900 dark:text-gray-100 truncate">代码实验室</div>
+          <div class="lang-selector-container flex-shrink-0">
             <select v-model="selectedLang" 
-                    class="language-selector text-lg font-semibold bg-transparent border-none outline-none cursor-pointer text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+                    class="language-selector text-sm sm:text-lg font-semibold bg-transparent border-none outline-none cursor-pointer text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
               <option value="py">Python</option>
               <option value="js">JavaScript</option>
             </select>
@@ -16,22 +16,28 @@
             </svg>
           </div>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1 sm:gap-2 flex-shrink-0">
+          <!-- 移动端显示切换按钮 -->
+          <button @click="toggleMobileView" 
+                  class="md:hidden text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1"
+                  :class="{ 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400': showMobileOutput }">
+            <span>{{ showMobileOutput ? '代码' : '结果' }}</span>
+          </button>
           <SimpleTooltip content="复制代码" placement="bottom">
             <button @click="copyCode"
-              class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1">
+              class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 px-2 sm:px-3 py-1.5 rounded-md text-xs sm:text-sm cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1">
               <CopyIcon v-if="!copySuccess" :size="16" />
               <CheckIcon v-else :size="16" />
-              <span>{{ copySuccess ? '已复制' : '复制' }}</span>
+              <span class="hidden sm:inline">{{ copySuccess ? '已复制' : '复制' }}</span>
             </button>
           </SimpleTooltip>
           <SimpleTooltip :content="`${getButtonText(selectedLang)} (Ctrl/⌘+Enter)`" placement="bottom-end">
             <button @click="() => runCode(selectedLang)"
-              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-2 sm:px-4 py-1.5 rounded-md text-xs sm:text-sm cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 sm:gap-2"
               :disabled="isRunning || (selectedLang === 'py' && !pyodideReady)">
               <LoaderIcon v-if="isRunning || (selectedLang === 'py' && !pyodideReady)" :size="16" class="animate-spin" />
               <PlayIcon v-else :size="16" />
-              <span>{{ getSimpleButtonText(selectedLang) }}</span>
+              <span class="whitespace-nowrap">{{ getSimpleButtonText(selectedLang) }}</span>
             </button>
           </SimpleTooltip>
         </div>
@@ -39,9 +45,10 @@
     </div>
 
     <!-- 主要编辑区域 -->
-    <div class="flex-1 flex overflow-hidden">
+    <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
       <!-- 左侧代码编辑器 -->
-      <div class="flex-1 flex flex-col border-r border-gray-200 dark:border-gray-700">
+      <div class="flex-1 flex flex-col md:border-r border-gray-200 dark:border-gray-700"
+           :class="{ 'hidden md:flex': showMobileOutput }">
         <div class="flex-1 relative">
           <!-- 懒加载占位符 -->
           <div v-if="!isInitialized" 
@@ -58,7 +65,8 @@
       </div>
 
       <!-- 右侧输出区域 -->
-      <div class="w-96 flex flex-col bg-gray-50 dark:bg-gray-800">
+      <div class="w-full md:w-80 lg:w-96 flex flex-col bg-gray-50 dark:bg-gray-800 border-t md:border-t-0 border-gray-200 dark:border-gray-700"
+           :class="{ 'hidden md:flex': !showMobileOutput }">
         <div class="h-[40px] px-4 flex justify-between items-center bg-gray-100 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
           <span class="text-sm text-gray-600 dark:text-gray-400">输出结果</span>
           <button v-if="output" @click="clearOutput"
@@ -88,11 +96,17 @@ import SimpleTooltip from './SimpleTooltip.vue'
 
 const placeholderRef: Ref<HTMLElement | null> = ref(null)
 const selectedLang: Ref<string> = ref('py')
+const showMobileOutput: Ref<boolean> = ref(false)
 
 // 代码变化时的回调 - 重置输出
 const onCodeChange = () => {
   output.value = ''
   hasError.value = false
+}
+
+// 移动端视图切换
+const toggleMobileView = (): void => {
+  showMobileOutput.value = !showMobileOutput.value
 }
 
 // 使用 composable
@@ -325,11 +339,18 @@ onUnmounted((): void => {
   position: relative;
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
+  gap: 2px;
+  padding: 2px 6px;
   border-radius: 6px;
   transition: all 0.2s ease;
   cursor: pointer;
+}
+
+@media (min-width: 640px) {
+  .lang-selector-container {
+    gap: 4px;
+    padding: 4px 8px;
+  }
 }
 
 .lang-selector-container:hover {
@@ -418,5 +439,38 @@ html.dark .playground-editor :deep(.cm-gutters) {
 html.dark .language-selector option {
   background: #374151;
   color: #f9fafb;
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+  .playground-editor {
+    top: 64px;
+  }
+  
+  /* 确保移动端编辑器区域有足够高度 */
+  .playground-editor :deep(.cm-editor) {
+    min-height: 50vh;
+  }
+  
+  /* 移动端输出区域高度限制 */
+  .playground-editor .w-full.md\\:w-80 {
+    max-height: 50vh;
+  }
+}
+
+/* 确保在极小屏幕上的可用性 */
+@media (max-width: 480px) {
+  .playground-editor {
+    font-size: 14px;
+  }
+  
+  .playground-editor :deep(.cm-content) {
+    padding: 8px 0;
+  }
+  
+  .playground-editor :deep(.cm-lineNumbers .cm-gutterElement) {
+    min-width: 32px;
+    font-size: 12px;
+  }
 }
 </style> 

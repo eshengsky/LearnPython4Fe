@@ -285,4 +285,11 @@ html.dark .tooltip-content {
   background: rgba(255, 255, 255, 0.7);
   color: #1f2937;
 }
+
+/* 移动端隐藏 tooltip */
+@media (max-width: 768px) {
+  .tooltip-content {
+    display: none !important;
+  }
+}
 </style> 
