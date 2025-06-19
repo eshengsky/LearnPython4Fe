@@ -470,6 +470,129 @@ web-app/
 - [mypy](https://mypy.readthedocs.io/) - Python 静态类型检查器
 :::
 
+## 如何运行 Python 代码
+
+环境搭建完成后，你就可以开始运行 Python 代码了。JavaScript 开发者熟悉多种代码执行环境：浏览器控制台、网页 script 标签、Node.js 脚本文件。Python 的执行方式更加统一简洁。
+
+### 交互式解释器（REPL）
+
+类似于浏览器控制台，Python 提供了交互式解释器（Read-Eval-Print Loop，简称 REPL）。这是学习和测试 Python 代码的绝佳方式：
+
+```bash
+# 启动 Python 交互式解释器
+python3
+# 或者
+python
+```
+
+进入 REPL 后，你会看到类似这样的提示符：
+
+```python
+Python 3.12.0 (main, Oct  2 2023, 13:38:27) 
+[Clang 14.0.3 (clang-1403.0.22.14.1)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+>>> 
+```
+
+现在你可以逐行输入和执行 Python 代码：
+
+```python runner
+# 在 REPL 中可以逐行输入和执行
+print("Hello, Python!")
+x = 5
+y = 10
+print(f"x + y = {x + y}")
+
+# 直接输入表达式会显示结果
+2 + 3
+"Hello" + " World"
+```
+
+**REPL 的优势**：
+- 立即看到代码执行结果，类似浏览器控制台
+- 适合快速测试想法和调试代码片段
+- 内置的 `help()` 函数可以查看文档
+- 可以导入库并立即测试功能
+
+要退出 REPL，输入 `exit()` 或使用快捷键 `Ctrl+D`（macOS/Linux）或 `Ctrl+Z`（Windows）。
+
+### 脚本文件执行
+
+对于较复杂的程序，我们通常将代码保存在 `.py` 文件中，然后执行整个文件。这相当于 Node.js 中运行 `.js` 文件：
+
+**创建 Python 脚本**
+
+创建一个名为 `hello.py` 的文件：
+
+```python
+# hello.py
+print("Hello, World!")
+name = "Python 学习者"
+age = 25
+print(f"欢迎 {name}，你今年 {age} 岁")
+
+# 简单的计算
+numbers = [1, 2, 3, 4, 5]
+total = sum(numbers)
+print(f"数字之和: {total}")
+```
+
+**执行脚本文件**
+
+在终端中运行：
+
+```bash
+python3 hello.py
+# 或者
+python hello.py
+```
+
+**比较 JavaScript 和 Python 的执行方式**：
+
+```javascript
+// JavaScript 文件 hello.js
+console.log("Hello, World!");
+const name = "JavaScript 开发者";
+const age = 25;
+console.log(`欢迎 ${name}，你今年 ${age} 岁`);
+
+// 运行命令：node hello.js
+```
+
+```python
+# Python 文件 hello.py  
+print("Hello, World!")
+name = "Python 学习者"
+age = 25
+print(f"欢迎 {name}，你今年 {age} 岁")
+
+# 运行命令：python hello.py
+```
+
+### Python 执行环境的优势
+
+相比 JavaScript 需要不同的运行环境（浏览器、Node.js），Python 的执行方式更加统一：
+
+- **环境统一**：同样的代码在不同平台行为一致，不存在浏览器兼容性问题
+- **工具丰富**：Python 解释器自带大量标准库，无需额外安装就能完成很多任务
+- **学习简单**：不需要考虑前端开发中的复杂环境配置和兼容性问题
+- **即时执行**：解释型语言的特性让代码修改后立即生效，无需编译步骤
+
+### 开发工具中的 Python 执行
+
+大多数现代编辑器都内置了 Python 执行功能：
+
+**VS Code**：
+- 安装 Python 扩展后，可以直接在编辑器中运行 Python 文件
+- 支持交互式 Python 窗口，类似 Jupyter Notebook
+- 内置终端可以运行 Python 命令
+
+**PyCharm**：
+- 专业的 Python IDE，内置强大的执行和调试功能
+- 支持交互式控制台和科学计算模式
+
+对于学习 Python，推荐从 REPL 开始熟悉语法，然后逐步过渡到编写和执行脚本文件。
+
 ## 小结
 
 Python 的环境搭建相比 Node.js 稍显复杂，但概念很相似。主要差异包括：
@@ -477,6 +600,7 @@ Python 的环境搭建相比 Node.js 稍显复杂，但概念很相似。主要�
 - **版本管理**：Python 有 pyenv（类似 nvm），用于管理多个 Python 版本
 - **包管理**：pip 是默认选择（类似 npm），但没有内置的锁定文件机制
 - **虚拟环境**：Python 需要手动创建项目级依赖隔离（Node.js 的 node_modules 是自动的）
+- **代码执行**：交互式 REPL 和脚本文件执行，环境统一性好
 - **开发工具**：VS Code 对 Python 支持很好，配置方式和 JavaScript 项目类似
 
 对于学习阶段，推荐使用本教程提供的在线环境，可以跳过复杂的配置过程，专注于 Python 语言本身的学习。当你需要开发实际项目时，再根据项目需求搭建本地开发环境。
