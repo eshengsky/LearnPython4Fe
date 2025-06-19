@@ -126,6 +126,106 @@ print("交换后:", a, b)
 
 **关于常量的约定**：虽然 Python 没有`const`关键字，但社区约定使用全大写的变量名来表示常量，比如`MAX_SIZE = 100`、`PI = 3.14159`。这是一个约定俗成的规则，虽然这些"常量"在技术上仍然可以被修改。
 
+## 命名规范
+
+JavaScript 社区广泛采用驼峰式命名（camelCase）作为变量命名规范，这已经成为前端开发的标准：
+
+```javascript runner
+// JavaScript 的驼峰式命名
+let userName = "张三";
+let userAge = 25;
+let isLoggedIn = true;
+let maxRetryCount = 3;
+
+console.log(userName, userAge, isLoggedIn, maxRetryCount);
+
+// 对象属性也使用驼峰式
+const userInfo = {
+    firstName: "三",
+    lastName: "张",
+    emailAddress: "zhangsan@example.com"
+};
+
+console.log(userInfo);
+```
+
+Python 社区则偏好蛇形式命名（snake_case），这被写入了 PEP 8 官方编码规范中：
+
+```python runner
+# Python 的蛇形式命名
+user_name = "张三"
+user_age = 25
+is_logged_in = True
+max_retry_count = 3
+
+print(user_name, user_age, is_logged_in, max_retry_count)
+
+# 字典键也通常使用蛇形式
+user_info = {
+    "first_name": "三",
+    "last_name": "张", 
+    "email_address": "zhangsan@example.com"
+}
+
+print(user_info)
+```
+
+**Python 命名规范的细节**
+
+需要注意的是，Python 的命名规范并不是完全统一的蛇形式。实际上存在几个不同的层次：
+
+```python runner
+# 1. 用户自定义的变量和函数：snake_case
+my_variable = "用户定义变量"
+def my_function():
+    return "用户定义函数"
+
+# 2. 类名：PascalCase
+class MyClass:
+    pass
+
+# 3. 常量：UPPER_CASE
+MAX_CONNECTIONS = 100
+
+# 4. 内置方法：很多使用驼峰命名（历史原因）
+text = "Hello World"
+print("字符串内置方法示例:")
+print("isdigit():", "123".isdigit())  # 驼峰命名
+print("isalpha():", "abc".isalpha())  # 驼峰命名  
+print("startswith():", text.startswith("Hello"))  # 驼峰命名
+print("endswith():", text.endswith("World"))  # 驼峰命名
+
+# 5. 特殊方法：双下划线包围
+class Example:
+    def __init__(self):  # 特殊方法
+        pass
+    
+    def __str__(self):  # 特殊方法
+        return "示例对象"
+
+print("类示例:", Example())
+```
+
+**为什么 Python 的内置方法使用驼峰命名？**
+
+这是历史原因造成的。Python 早期受到了其他语言的影响，很多内置方法沿用了驼峰命名。随着语言的发展，PEP 8 规范确立了蛇形式命名的偏好，但为了向后兼容，内置方法的命名没有改变。现在的规则是：
+
+- **新的用户代码**：遵循 PEP 8，使用蛇形式
+- **内置方法**：保持现有的驼峰命名以确保兼容性
+- **第三方库**：大多数遵循 PEP 8，但也有例外
+
+```python runner
+# 对比展示
+def check_user_input(text):  # 用户函数：蛇形式
+    return text.isdigit()    # 内置方法：驼峰式
+
+user_input = "12345"
+is_number = check_user_input(user_input)
+print(f"输入 '{user_input}' 是数字: {is_number}")
+
+# 这种混合使用在 Python 中是正常的
+```
+
 ## 注释
 
 JavaScript 开发者熟悉两种主要的注释方式：单行的`//`和多行的`/* */`。JSDoc 风格的注释更是前端开发中不可或缺的文档化工具：
@@ -255,60 +355,18 @@ print(long_string)
 
 **最佳实践建议**：Python 强烈鼓励一行写一个语句的风格，这让代码逻辑更清晰，也更容易调试。这种约束看起来可能限制了灵活性，但实际上能让代码质量显著提升。
 
-## 代码执行方式
 
-JavaScript 开发者熟悉多种代码执行环境：浏览器控制台、网页 script 标签、Node.js 脚本文件。Python 的执行方式更加统一简洁。
-
-**JavaScript 的执行环境**
-
-```javascript runner
-// 浏览器控制台或 Node.js
-console.log("Hello, World!");
-```
-
-```html
-<!-- 网页中的 script 标签 -->
-<script>
-    console.log("Hello, World!");
-</script>
-```
-
-**Python 的执行方式**
-
-Python 主要有两种执行方式，都使用统一的 Python 解释器：
-
-1. **交互式解释器（REPL）**：类似浏览器控制台，在终端输入`python`进入交互模式
-
-```python runner
-print("Hello, World!")
-# 在 REPL 中可以逐行输入和执行
-```
-
-2. **脚本文件执行**：创建`.py`文件，然后在终端运行`python filename.py`
-
-```python runner
-# 保存为 hello.py，然后运行：python hello.py
-print("Hello, World!")
-```
-
-**Python 执行环境的优势**
-
-相比 JavaScript 需要不同的运行环境，Python 的优势在于：
-
-- **环境统一**：同样的代码在不同平台行为一致
-- **工具丰富**：Python 解释器自带大量标准库
-- **学习简单**：不需要考虑浏览器兼容性等复杂问题
 
 ## 小结
 
-Python 基础概念体现了"优雅胜过丑陋，明了胜过晦涩"的核心理念：
+Python 基础语法概念体现了"优雅胜过丑陋，明了胜过晦涩"的核心理念：
 
 1. **缩进定义代码块**：使用 4 个空格缩进，强制保持代码整洁，提高可读性
 2. **变量赋值简洁**：无需声明关键字，直接赋值创建变量，支持多重赋值和元组解包
-3. **注释系统丰富**：`#`号单行注释，docstring 文档字符串提供运行时可访问的文档
-4. **语句结束清晰**：换行即表示语句结束，必要时可用反斜杠或括号进行续行
-5. **执行方式统一**：交互式 REPL 和脚本文件执行，环境一致性好
+3. **命名规范统一**：采用 snake_case 蛇形式命名，不同类型标识符有不同约定，与内置方法的历史驼峰命名共存
+4. **注释系统丰富**：`#`号单行注释，docstring 文档字符串提供运行时可访问的文档
+5. **语句结束清晰**：换行即表示语句结束，必要时可用反斜杠或括号进行续行
 6. **文档字符串特色**：三重引号 docstring 是语言内置特性，支持运行时访问和工具生成文档
 
-Python 的设计哲学强制开发者编写整洁、可读的代码，这种"约束"实际上提高了代码质量和团队协作效率。掌握这些基础概念，是编写优秀 Python 代码的第一步。
+Python 的设计哲学强制开发者编写整洁、可读的代码，这种"约束"实际上提高了代码质量和团队协作效率。掌握这些基础语法概念，是编写优秀 Python 代码的第一步。
 
