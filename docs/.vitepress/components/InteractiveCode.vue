@@ -1,6 +1,6 @@
 <template>
   <div class="interactive-code border-gray-200 dark:border-gray-700 my-4">
-    <div class="border border-gray-200 dark:border-gray-700 rounded-t-lg overflow-hidden sticky top-[64px] z-10">
+    <div class="interactive-code-header border border-gray-200 dark:border-gray-700 rounded-t-lg overflow-hidden sticky z-10">
       <div class="px-4 py-2 flex justify-between items-center text-xs font-semibold bg-gray-50 dark:bg-[#1e1e1e]"
         :class="[colorTheme.text]">
         <span class="text-sm">{{ computedTitle }}</span>
@@ -368,5 +368,21 @@ onUnmounted((): void => {
 
 .readonly-code :deep(.cm-cursor) {
   display: none !important;
+}
+
+.interactive-code-header {
+  top: 47px;
+}
+
+@media (min-width: 960px) {
+  .interactive-code-header {
+    top: 111px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .interactive-code-header {
+    top: 64px;
+  }
 }
 </style> 
