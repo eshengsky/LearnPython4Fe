@@ -220,10 +220,10 @@ const tooltipStyle = computed(() => {
 .tooltip-content {
   background: rgba(0, 0, 0, 0.8);
   color: white;
-  padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  line-height: 1.4;
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.2;
   white-space: nowrap;
   z-index: 9999;
   pointer-events: none;
