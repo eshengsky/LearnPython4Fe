@@ -665,6 +665,29 @@ Python 字符串提供了强大而直观的文本处理能力：
 - `replace()` 默认全局替换，无需 `replaceAll()`
 - `" | ".join(list)` 连接方式与 `array.join()` 相反
 
+**常用方法速查表**：
+
+| 方法 | 描述 | 示例 |
+|------|------|------|
+| `len(text)` | 获取字符串长度（函数调用） | `len("hello")` → `5` |
+| `text[index]` | 索引访问字符（支持负索引） | `"hello"[1]` → `'e'` |
+| `text[start:end]` | 切片操作（左闭右开） | `"hello"[1:4]` → `'ell'` |
+| `"sub" in text` | 检查子字符串 | `"ll" in "hello"` → `True` |
+| `text.upper()` | 转为大写 | `"hello".upper()` → `'HELLO'` |
+| `text.lower()` | 转为小写 | `"HELLO".lower()` → `'hello'` |
+| `text.title()` | 标题格式（每个单词首字母大写） | `"hello world".title()` → `'Hello World'` |
+| `text.strip()` | 去除两端空白 | `" hello ".strip()` → `'hello'` |
+| `text.replace(old, new)` | 字符串替换（默认全局） | `"hi hi".replace("hi", "bye")` → `'bye bye'` |
+| `text.split(sep)` | 分割字符串为列表 | `"a,b,c".split(",")` → `['a', 'b', 'c']` |
+| `sep.join(list)` | 连接列表为字符串（字符串调用） | `",".join(['a', 'b'])` → `'a,b'` |
+| `text.find(sub)` | 查找子字符串位置（未找到返回 -1） | `"hello".find("ll")` → `2` |
+| `text.startswith(prefix)` | 检查开头 | `"hello".startswith("he")` → `True` |
+| `text.endswith(suffix)` | 检查结尾 | `"hello".endswith("lo")` → `True` |
+| `text.isdigit()` | 是否全为数字 | `"123".isdigit()` → `True` |
+| `text.isalpha()` | 是否全为字母 | `"abc".isalpha()` → `True` |
+| `text * n` | 重复字符串 | `"hi" * 3` → `'hihihi'` |
+| `f"text {var}"` | f-string 格式化（推荐） | `f"Hello {name}"` |
+
 ## 练习
 
 处理用户输入数据，输出用户卡片：
