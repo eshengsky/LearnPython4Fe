@@ -225,7 +225,8 @@ export function useCodeEditor(options: UseCodeEditorOptions = {}) {
       },
       '.cm-content': {
         padding: '16px',
-        minHeight: '100px'
+        minHeight: '100px',
+        maxHeight: '600px'
       },
       '.cm-gutters': {
         display: 'none'
