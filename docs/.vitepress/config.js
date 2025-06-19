@@ -45,15 +45,15 @@ export default defineConfig({
             { text: '数据类型', link: '/guide/data-types' },
           ]
         },
-        // {
-        //   text: '基本数据类型',
-        //   collapsed: false,
-        //   items: [
-        //     { text: '字符串', link: '/guide/strings' },
-        //     { text: '数字', link: '/guide/numbers' },
-        //     { text: '布尔值', link: '/guide/booleans' },
-        //   ]
-        // },
+        {
+          text: '基本数据类型',
+          collapsed: false,
+          items: [
+            { text: '字符串', link: '/guide/strings' },
+            // { text: '数字', link: '/guide/numbers' },
+            // { text: '布尔值', link: '/guide/booleans' },
+          ]
+        },
         // {
         //   text: '数据结构',
         //   collapsed: false,
