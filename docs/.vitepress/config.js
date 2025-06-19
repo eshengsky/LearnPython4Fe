@@ -50,7 +50,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '字符串', link: '/guide/strings' },
-            // { text: '数字', link: '/guide/numbers' },
+            { text: '数字', link: '/guide/numbers' },
             // { text: '布尔值', link: '/guide/booleans' },
           ]
         },

@@ -650,25 +650,11 @@ print(title)
 print(border)
 ```
 
-## 小结
-
-Python 字符串提供了强大而直观的文本处理能力：
-
-**核心特性**：
-- **不可变性**：字符串创建后不可修改，所有操作返回新字符串
-- **序列操作**：支持索引访问 `text[0]` 和切片 `text[1:5]`，负索引更方便
-- **格式化**：f-string 语法简洁，功能强大，是首选方案
-
-**易与 JavaScript 混淆的点**：
-- `len(text)` 获取长度，而非 `.length` 属性
-- `"substring" in text` 检查子字符串，比 `.includes()` 更直观
-- `replace()` 默认全局替换，无需 `replaceAll()`
-- `" | ".join(list)` 连接方式与 `array.join()` 相反
-
-**常用方法速查表**：
+## 常用方法一览
 
 | 方法 | 描述 | 示例 |
 |------|------|------|
+| `f"text {var}"` | f-string 格式化（推荐） | `f"Hello {name}"` |
 | `len(text)` | 获取字符串长度（函数调用） | `len("hello")` → `5` |
 | `text[index]` | 索引访问字符（支持负索引） | `"hello"[1]` → `'e'` |
 | `text[start:end]` | 切片操作（左闭右开） | `"hello"[1:4]` → `'ell'` |
@@ -686,7 +672,21 @@ Python 字符串提供了强大而直观的文本处理能力：
 | `text.isdigit()` | 是否全为数字 | `"123".isdigit()` → `True` |
 | `text.isalpha()` | 是否全为字母 | `"abc".isalpha()` → `True` |
 | `text * n` | 重复字符串 | `"hi" * 3` → `'hihihi'` |
-| `f"text {var}"` | f-string 格式化（推荐） | `f"Hello {name}"` |
+
+## 小结
+
+Python 字符串提供了强大而直观的文本处理能力：
+
+**核心特性**：
+- **不可变性**：字符串创建后不可修改，所有操作返回新字符串
+- **序列操作**：支持索引访问 `text[0]` 和切片 `text[1:5]`，负索引更方便
+- **格式化**：f-string 语法简洁，功能强大，是首选方案
+
+**易与 JavaScript 混淆的点**：
+- `len(text)` 获取长度，而非 `.length` 属性
+- `"substring" in text` 检查子字符串，比 `.includes()` 更直观
+- `replace()` 默认全局替换，无需 `replaceAll()`
+- `" | ".join(list)` 连接方式与 `array.join()` 相反
 
 ## 练习
 
