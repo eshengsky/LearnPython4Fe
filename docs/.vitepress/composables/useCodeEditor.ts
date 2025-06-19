@@ -19,6 +19,7 @@ interface UseCodeEditorOptions {
   lang?: string
   runnable?: boolean
   onCodeChange?: () => void
+  customRunFunction?: (lang: string) => Promise<void>
 }
 
 export function useCodeEditor(options: UseCodeEditorOptions = {}) {
@@ -33,6 +34,7 @@ export function useCodeEditor(options: UseCodeEditorOptions = {}) {
 
   let pyodide: any = null
   let editorView: EditorView | null = null
+  let keyboardCleanup: (() => void) | null = null
 
   // 创建JavaScript补全
   function createJavaScriptCompletions(context: CompletionContext): CompletionResult | null {
@@ -331,6 +333,69 @@ export function useCodeEditor(options: UseCodeEditorOptions = {}) {
     return editorView ? editorView.state.doc.toString() : ''
   }
 
+  // 键盘快捷键处理
+  function setupKeyboardShortcuts(langRef?: Ref<string>): (() => void) | undefined {
+    if (!editorRef.value || !options.runnable) return
+
+    const editor = editorRef.value.querySelector('.cm-editor')
+    if (!editor) return
+
+    const handleKeyDown = (event: Event) => {
+      const keyboardEvent = event as KeyboardEvent
+      // Ctrl+Enter 或 Cmd+Enter 运行代码
+      if ((keyboardEvent.ctrlKey || keyboardEvent.metaKey) && keyboardEvent.key === 'Enter') {
+        // 立即阻止默认行为，防止产生换行
+        keyboardEvent.preventDefault()
+        keyboardEvent.stopPropagation()
+        keyboardEvent.stopImmediatePropagation()
+        
+        // 获取当前语言（如果提供了 langRef 则使用它，否则使用默认的 lang）
+        const currentLang = langRef ? langRef.value : (options.lang || 'js')
+        
+        // 检查是否可以运行
+        if (!isRunning.value && (currentLang !== 'py' || pyodideReady.value)) {
+          // 使用自定义运行函数（如果提供）或默认的 runCode
+          if (options.customRunFunction) {
+            options.customRunFunction(currentLang)
+          } else {
+            runCode(currentLang)
+          }
+        }
+        
+        return false
+      }
+    }
+
+    editor.addEventListener('keydown', handleKeyDown, true) // 使用捕获模式
+    
+    // 返回清理函数
+    return () => {
+      editor.removeEventListener('keydown', handleKeyDown, true)
+    }
+  }
+
+  // 设置快捷键
+  function enableKeyboardShortcuts(langRef?: Ref<string>): void {
+    // 清理旧的快捷键
+    if (keyboardCleanup) {
+      keyboardCleanup()
+      keyboardCleanup = null
+    }
+    
+    // 设置新的快捷键
+    nextTick(() => {
+      keyboardCleanup = setupKeyboardShortcuts(langRef) || null
+    })
+  }
+
+  // 清理快捷键
+  function cleanupKeyboardShortcuts(): void {
+    if (keyboardCleanup) {
+      keyboardCleanup()
+      keyboardCleanup = null
+    }
+  }
+
   // 初始化 Pyodide
   async function initializePyodide(): Promise<void> {
     if ((window as any).pyodide) {
@@ -514,6 +579,7 @@ except Exception as e:
 
   // 清理
   function destroy() {
+    cleanupKeyboardShortcuts()
     if (editorView) {
       editorView.destroy()
       editorView = null
@@ -540,6 +606,8 @@ except Exception as e:
     copyCode,
     getButtonText,
     getSimpleButtonText,
+    enableKeyboardShortcuts,
+    cleanupKeyboardShortcuts,
     destroy
   }
 } 

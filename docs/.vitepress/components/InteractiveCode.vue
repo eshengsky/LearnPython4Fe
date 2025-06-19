@@ -1,36 +1,41 @@
 <template>
-  <div class="interactive-code border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden my-4">
-    <div class="border-b border-gray-200 dark:border-gray-700">
-      <div class="px-4 py-2 flex justify-between items-center text-xs font-semibold bg-transparent dark:bg-[#1e1e1e]"
+  <div class="interactive-code border-gray-200 dark:border-gray-700 my-4">
+    <div class="border border-gray-200 dark:border-gray-700 rounded-t-lg overflow-hidden sticky top-[64px] z-10">
+      <div class="px-4 py-2 flex justify-between items-center text-xs font-semibold bg-gray-50 dark:bg-[#1e1e1e]"
         :class="[colorTheme.text]">
         <span class="text-sm">{{ computedTitle }}</span>
         <div class="flex items-center gap-1">
-          <button @click="copyCode"
-            class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 flex items-center gap-1"
-            :class="[colorTheme.hover]" title="复制代码">
-            <CopyIcon v-if="!copySuccess" :size="14" />
-            <CheckIcon v-else :size="14" />
-            <span class="text-xs">{{ copySuccess ? '已复制' : '复制' }}</span>
-          </button>
-          <button v-if="runnable" @click="resetCode"
-            class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 flex items-center gap-1"
-            :class="[colorTheme.hover]" title="重置代码">
-            <RotateCcwIcon :size="14" />
-            <span class="text-xs">重置</span>
-          </button>
-          <button v-if="runnable" @click="() => customRunCode(lang)"
-            class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
-            :class="[colorTheme.hover]" :disabled="isRunning || (lang === 'py' && !pyodideReady)"
-            :title="getButtonText(lang)">
-            <LoaderIcon v-if="isRunning || (lang === 'py' && !pyodideReady)" :size="14" class="animate-spin" />
-            <PlayIcon v-else :size="14" />
-            <span class="text-xs">{{ getSimpleButtonText(lang) }}</span>
-          </button>
+          <SimpleTooltip content="复制代码">
+            <button @click="copyCode"
+              class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 flex items-center gap-1"
+              :class="[colorTheme.hover]">
+              <CopyIcon v-if="!copySuccess" :size="14" />
+              <CheckIcon v-else :size="14" />
+              <span class="text-xs">{{ copySuccess ? '已复制' : '复制' }}</span>
+            </button>
+          </SimpleTooltip>
+          <SimpleTooltip v-if="runnable" content="重置代码">
+            <button @click="resetCode"
+              class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 flex items-center gap-1"
+              :class="[colorTheme.hover]">
+              <RotateCcwIcon :size="14" />
+              <span class="text-xs">重置</span>
+            </button>
+          </SimpleTooltip>
+          <SimpleTooltip v-if="runnable" :content="`${getButtonText(lang)} (Ctrl/⌘+Enter)`">
+            <button @click="handleRunCode"
+              class="text-current px-2 py-1.5 rounded-md text-xs cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1"
+              :class="[colorTheme.hover]" :disabled="isRunning || (lang === 'py' && !pyodideReady)">
+              <LoaderIcon v-if="isRunning || (lang === 'py' && !pyodideReady)" :size="14" class="animate-spin" />
+              <PlayIcon v-else :size="14" />
+              <span class="text-xs">{{ getSimpleButtonText(lang) }}</span>
+            </button>
+          </SimpleTooltip>
         </div>
       </div>
     </div>
 
-    <div class="flex flex-col">
+    <div class="flex flex-col border border-gray-200 dark:border-gray-700 rounded-b-lg overflow-hidden border-t-0">
       <div class="relative" :class="{ 'readonly-code': !runnable }">
         <!-- 懒加载占位符 -->
         <div v-if="!isInitialized" 
@@ -69,6 +74,7 @@
 import { ref, computed, nextTick, onMounted, onUnmounted, type Ref } from 'vue'
 import { PlayIcon, LoaderIcon, RotateCcwIcon, CopyIcon, CheckIcon, XIcon } from 'lucide-vue-next'
 import { useCodeEditor } from '../composables/useCodeEditor'
+import SimpleTooltip from './SimpleTooltip.vue'
 
 interface Props {
   lang: string
@@ -114,8 +120,23 @@ const {
   copyCode,
   getButtonText,
   getSimpleButtonText,
+  enableKeyboardShortcuts,
   destroy
-} = useCodeEditor({ runnable: props.runnable, onCodeChange })
+} = useCodeEditor({ 
+  runnable: props.runnable, 
+  onCodeChange, 
+  lang: props.lang,
+  customRunFunction: async (lang: string) => {
+    await runCode(lang)
+    showOutput.value = true
+  }
+})
+
+// 本地运行函数（用于按钮点击）
+const handleRunCode = async () => {
+  await runCode(props.lang)
+  showOutput.value = true
+}
 
 // 计算属性
 const computedTitle = computed((): string => {
@@ -202,6 +223,9 @@ async function initializeLazyEditor(): Promise<void> {
   }
 
   setupThemeObserver()
+  
+  // 设置键盘快捷键
+  enableKeyboardShortcuts()
 }
 
 // 设置主题观察器
@@ -266,13 +290,16 @@ function setupIntersectionObserver(): void {
 function resetCode(): void {
   const processedCode = processCode(props.code)
   
-  // 先销毁现有编辑器
+  // 先销毁现有编辑器（会自动清理快捷键）
   destroy()
   
   // 重新初始化编辑器
   initializeEditor(props.lang, processedCode, {
     maxHeight: '600px'
   })
+
+  // 重新设置键盘快捷键
+  enableKeyboardShortcuts()
 
   output.value = ''
   hasError.value = false
@@ -284,12 +311,7 @@ function closeOutput(): void {
   showOutput.value = false
 }
 
-// 覆盖运行函数以显示输出
-const originalRunCode = runCode
-const customRunCode = async (lang: string) => {
-  await originalRunCode(lang)
-  showOutput.value = true
-}
+
 
 onMounted(async (): Promise<void> => {
   await nextTick()
@@ -302,7 +324,7 @@ onMounted(async (): Promise<void> => {
 })
 
 onUnmounted((): void => {
-  destroy()
+  destroy() // destroy 函数会自动清理快捷键
   if (intersectionObserver) {
     intersectionObserver.disconnect()
     intersectionObserver = null

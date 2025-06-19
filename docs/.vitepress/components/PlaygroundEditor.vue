@@ -17,21 +17,23 @@
           </div>
         </div>
         <div class="flex items-center gap-2">
-          <button @click="copyCode"
-            class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1"
-            title="复制代码">
-            <CopyIcon v-if="!copySuccess" :size="16" />
-            <CheckIcon v-else :size="16" />
-            <span>{{ copySuccess ? '已复制' : '复制' }}</span>
-          </button>
-          <button @click="() => runCode(selectedLang)"
-             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
-             :disabled="isRunning || (selectedLang === 'py' && !pyodideReady)"
-             :title="getButtonText(selectedLang)">
-             <LoaderIcon v-if="isRunning || (selectedLang === 'py' && !pyodideReady)" :size="16" class="animate-spin" />
-             <PlayIcon v-else :size="16" />
-             <span>{{ getSimpleButtonText(selectedLang) }}</span>
-           </button>
+          <SimpleTooltip content="复制代码" placement="bottom">
+            <button @click="copyCode"
+              class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 px-3 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-1">
+              <CopyIcon v-if="!copySuccess" :size="16" />
+              <CheckIcon v-else :size="16" />
+              <span>{{ copySuccess ? '已复制' : '复制' }}</span>
+            </button>
+          </SimpleTooltip>
+          <SimpleTooltip :content="`${getButtonText(selectedLang)} (Ctrl/⌘+Enter)`" placement="bottom-end">
+            <button @click="() => runCode(selectedLang)"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-1.5 rounded-md text-sm cursor-pointer transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+              :disabled="isRunning || (selectedLang === 'py' && !pyodideReady)">
+              <LoaderIcon v-if="isRunning || (selectedLang === 'py' && !pyodideReady)" :size="16" class="animate-spin" />
+              <PlayIcon v-else :size="16" />
+              <span>{{ getSimpleButtonText(selectedLang) }}</span>
+            </button>
+          </SimpleTooltip>
         </div>
       </div>
     </div>
@@ -82,6 +84,7 @@
 import { ref, onMounted, computed, nextTick, onUnmounted, watch, type Ref } from 'vue'
 import { PlayIcon, LoaderIcon, CopyIcon, CheckIcon, XIcon } from 'lucide-vue-next'
 import { useCodeEditor } from '../composables/useCodeEditor'
+import SimpleTooltip from './SimpleTooltip.vue'
 
 const placeholderRef: Ref<HTMLElement | null> = ref(null)
 const selectedLang: Ref<string> = ref('py')
@@ -110,6 +113,7 @@ const {
   copyCode,
   getButtonText,
   getSimpleButtonText,
+  enableKeyboardShortcuts,
   destroy
 } = useCodeEditor({ runnable: true, onCodeChange })
 
@@ -263,8 +267,11 @@ const playgroundTheme = {
 }
 
 // 监听语言变化
-watch(selectedLang, (newLang) => {
+watch(selectedLang, async (newLang) => {
   updateEditorLanguage(newLang, defaultCode.value, playgroundTheme)
+  
+  // 重新设置快捷键以适配新语言
+  enableKeyboardShortcuts(selectedLang)
   
   // 切换语言时清空输出
   output.value = ''
@@ -280,6 +287,9 @@ onMounted(async (): Promise<void> => {
   // 初始化 Pyodide
   await initializePyodide()
 
+  // 设置键盘快捷键
+  enableKeyboardShortcuts(selectedLang)
+
   // 监听主题变化
   const observer = new MutationObserver(() => {
     handleThemeChange(selectedLang.value, playgroundTheme)
@@ -292,7 +302,7 @@ onMounted(async (): Promise<void> => {
 })
 
 onUnmounted((): void => {
-  destroy()
+  destroy() // destroy 函数会自动清理快捷键
 })
 </script> 
 <style scoped>
