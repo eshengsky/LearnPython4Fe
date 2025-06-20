@@ -545,7 +545,7 @@ print(f"四舍五入: {round(num, 2)}")
 
 ## 随机数
 
-在 Web 开发中经常需要生成随机数，JavaScript 使用`Math.random()`：
+JavaScript 使用 `Math.random()` 生成 0-1 之间的随机浮点数，然后通过数学运算得到需要的范围：
 
 ```javascript runner
 // JavaScript 随机数
@@ -568,14 +568,22 @@ let j = Math.floor(Math.random() * numbers.length);
 console.log("打乱后:", numbers);
 ```
 
-Python 使用 random 模块：
+Python 的 random 模块提供了更丰富和便利的随机数函数：
+
+* **`random.random()`** - 与 JavaScript 相同，生成 0-1 之间的随机浮点数
+* **`random.randint(a, b)`** - 生成 a 到 b 之间的随机整数，**两端都包含**
+* **`random.randrange(start, stop)`** - 生成 start 到 stop 之间的随机整数，**含左不含右**（类似 `range()` 函数）
+* **`random.uniform(a, b)`** - 生成 a 到 b 之间的随机浮点数
+* **`random.choice(seq)`** - 从序列中随机选择一个元素
+* **`random.shuffle(list)`** - 随机打乱列表（原地修改）
 
 ```python runner
 import random
 
 print("=== 随机数生成 ===")
 print(f"0-1 之间: {random.random():.4f}")
-print(f"1-10 之间: {random.randint(1, 10)}")
+print(f"1-10 之间: {random.randint(1, 10)}")      # 包含 1 和 10
+print(f"1-9 之间: {random.randrange(1, 10)}")     # 包含 1，不包含 10
 print(f"浮点数 (1-10): {random.uniform(1, 10):.2f}")
 
 # 从列表中随机选择
@@ -671,21 +679,11 @@ print(f"float('nan') 是 NaN: {math.isnan(float('nan'))}")
 | 乘除赋值 | `*=` `/=` | `*=` `/=` |
 | 幂运算赋值 | `**=` | `**=` |
 | 取余赋值 | `%=` | `%=` |
-| 整除赋值 | `Math.floor(x / y)` | `x //= y` |
-| **数学函数** |
-| 绝对值 | `Math.abs(x)` | `abs(x)` |
-| 平方根 | `Math.sqrt(x)` | `math.sqrt(x)` |
-| 向上取整 | `Math.ceil(x)` | `math.ceil(x)` |
-| 向下取整 | `Math.floor(x)` | `math.floor(x)` |
-| 四舍五入 | `Math.round(x)` | `round(x, 位数)` |
+| 整除赋值 | `x = Math.floor(x / y)` | `x //= y` |
+| **统计函数** |
 | 最大值 | `Math.max(a, b, c)` | `max(a, b, c)` |
 | 最小值 | `Math.min(a, b, c)` | `min(a, b, c)` |
-| 三角函数 | `Math.sin(x)` `Math.cos(x)` | `math.sin(x)` `math.cos(x)` |
-| 对数 | `Math.log(x)` `Math.log10(x)` | `math.log(x)` `math.log10(x)` |
-| 指数 | `Math.exp(x)` | `math.exp(x)` |
-| **常数** |
-| 圆周率 | `Math.PI` | `math.pi` |
-| 自然常数 | `Math.E` | `math.e` |
+| 求和 | `array.reduce((a,b)=>a+b, 0)` | `sum(iterable)` |
 | **特殊值** |
 | 正无穷 | `Infinity` | `float('inf')` |
 | 负无穷 | `-Infinity` | `float('-inf')` |
@@ -712,7 +710,18 @@ print(f"float('nan') 是 NaN: {math.isnan(float('nan'))}")
 | 转八进制 | `num.toString(8)` | `oct(num)[2:]` |
 | 转十六进制 | `num.toString(16)` | `hex(num)[2:]` |
 | 解析进制 | `parseInt(str, base)` | `int(str, base)` |
-
+| **数学函数** |
+| 绝对值 | `Math.abs(x)` | `abs(x)` |
+| 平方根 | `Math.sqrt(x)` | `math.sqrt(x)` |
+| 向上取整 | `Math.ceil(x)` | `math.ceil(x)` |
+| 向下取整 | `Math.floor(x)` | `math.floor(x)` |
+| 四舍五入 | `Math.round(x)` | `round(x, 位数)` |
+| 三角函数 | `Math.sin(x)` `Math.cos(x)` | `math.sin(x)` `math.cos(x)` |
+| 对数函数 | `Math.log(x)` `Math.log10(x)` | `math.log(x)` `math.log10(x)` |
+| 指数函数 | `Math.exp(x)` | `math.exp(x)` |
+| **常数** |
+| 圆周率 | `Math.PI` | `math.pi` |
+| 自然常数 | `Math.E` | `math.e` |
 ## 小结
 
 Python 的数值系统相比 JavaScript 更加丰富和精确：
@@ -729,50 +738,80 @@ Python 的数值系统相比 JavaScript 更加丰富和精确：
 
 ## 练习
 
-完成购物价格计算系统，输出详细的计算结果：
+完成一个餐厅订单计算系统，练习数字运算和格式化：
 
 ```
-=== 购物计算器 ===
-商品单价: ¥29.99
-购买数量: 3 件
-商品总价: ¥89.97
-折扣金额: ¥9.00 (10% 折扣)
-最终价格: ¥80.97
-=== 支付计算 ===
-每人平均: ¥26.99 (3人分摊)
-找零金额: ¥19.03 (支付 ¥100)
-积分奖励: 80 分 (1元=1分)
-=== 数据分析 ===
-价格平方根: 5.48
-税前价格: ¥73.61 (税率10%)
-随机抽奖号: 8847
+=== 餐厅订单计算系统 ===
+商品价格: [28.5, 32.8, 45.0]
+商品名称: ["牛肉面", "宫保鸡丁", "红烧肉"]
+
+=== 价格统计 ===
+最贵菜品: ¥45.00
+最便宜菜品: ¥28.50
+总计金额: ¥106.30
+平均价格: ¥35.43
+
+=== 优惠计算 ===
+满100减10元: ¥96.30
+服务费 (10%): ¥9.63
+最终金额: ¥105.93
+
+=== 支付处理 ===
+向上取整金额: ¥106
+向下取整金额: ¥105  
+四舍五入金额: ¥106
+2人分摊: 每人 ¥52.97
+
+=== 随机活动 ===
+随机折扣: 85%
+折扣后金额: ¥90.04
+抽奖编号: 7392
 ```
 
 ```python runner
-# 商品信息：单价29.99元，购买3件，9折优惠，3人分摊，支付100元
+import math
+import random
 
-# 1. 创建基本数据并导入必要模块
+# 商品数据
+prices = [28.5, 32.8, 45.0]
+items = ["牛肉面", "宫保鸡丁", "红烧肉"]
 
+print("=== 餐厅订单计算系统 ===")
+print(f"商品价格: {prices}")
+print(f"商品名称: {items}")
 
-# 2. 计算原价、折扣后价格
-
-
-# 3. 计算人均分摊金额
-
-
-# 4. 计算找零
-
-
-# 5. 计算积分奖励
+print("\n=== 价格统计 ===")
+# 1. 使用内置函数计算价格统计
 
 
-# 6. 计算价格平方根
+# 2. 计算总金额和平均价格
 
 
-# 7. 反推税前价格（假设现价含10%税）
+print("\n=== 优惠计算 ===")
+# 3. 满100减10元优惠
 
 
-# 8. 生成随机抽奖号
+# 4. 计算10%服务费
+
+
+# 5. 计算最终金额
+
+
+print("\n=== 支付处理 ===")
+# 6. 使用不同取整方式处理金额
+
+
+# 7. 计算2人分摊金额
+
+
+print("\n=== 随机活动 ===")
+# 8. 生成随机折扣 (75%-95%，整数百分比)
+
+
+# 9. 计算折扣后金额
+
+
+# 10. 生成4位随机抽奖编号
 
 
 ```
@@ -782,51 +821,64 @@ Python 的数值系统相比 JavaScript 更加丰富和精确：
 import math
 import random
 
-# 1. 创建基本数据并导入必要模块
-unit_price = 29.99
-quantity = 3
-discount_rate = 0.9  # 9折
-people_count = 3
-payment = 100
+# 商品数据
+prices = [28.5, 32.8, 45.0]
+items = ["牛肉面", "宫保鸡丁", "红烧肉"]
 
-print("=== 购物计算器 ===")
-print(f"商品单价: ¥{unit_price}")
-print(f"购买数量: {quantity} 件")
+print("=== 餐厅订单计算系统 ===")
+print(f"商品价格: {prices}")
+print(f"商品名称: {items}")
 
-# 2. 计算原价、折扣后价格
-original_total = unit_price * quantity
-discount_amount = original_total * (1 - discount_rate)
-final_price = original_total - discount_amount
+print("\n=== 价格统计 ===")
+# 1. 使用内置函数计算价格统计
+max_price = max(prices)
+min_price = min(prices)
+print(f"最贵菜品: ¥{max_price:.2f}")
+print(f"最便宜菜品: ¥{min_price:.2f}")
 
-print(f"商品总价: ¥{original_total:.2f}")
-print(f"折扣金额: ¥{discount_amount:.2f} ({int((1-discount_rate)*100)}% 折扣)")
-print(f"最终价格: ¥{final_price:.2f}")
+# 2. 计算总金额和平均价格
+total_amount = sum(prices)
+avg_price = total_amount / len(prices)
+print(f"总计金额: ¥{total_amount:.2f}")
+print(f"平均价格: ¥{avg_price:.2f}")
 
-print("=== 支付计算 ===")
-# 3. 计算人均分摊金额
-per_person = final_price / people_count
-print(f"每人平均: ¥{per_person:.2f} ({people_count}人分摊)")
+print("\n=== 优惠计算 ===")
+# 3. 满100减10元优惠
+discounted_amount = total_amount - 10
+print(f"满100减10元: ¥{discounted_amount:.2f}")
 
-# 4. 计算找零
-change = payment - final_price
-print(f"找零金额: ¥{change:.2f} (支付 ¥{payment})")
+# 4. 计算10%服务费
+service_fee = discounted_amount * 0.1
+print(f"服务费 (10%): ¥{service_fee:.2f}")
 
-# 5. 计算积分奖励
-points = int(final_price)  # 取整数部分
-print(f"积分奖励: {points} 分 (1元=1分)")
+# 5. 计算最终金额
+final_amount = discounted_amount + service_fee
+print(f"最终金额: ¥{final_amount:.2f}")
 
-print("=== 数据分析 ===")
-# 6. 计算价格平方根
-price_sqrt = math.sqrt(final_price)
-print(f"价格平方根: {price_sqrt:.2f}")
+print("\n=== 支付处理 ===")
+# 6. 使用不同取整方式处理金额
+ceil_amount = math.ceil(final_amount)
+floor_amount = math.floor(final_amount)
+round_amount = round(final_amount)
+print(f"向上取整金额: ¥{ceil_amount}")
+print(f"向下取整金额: ¥{floor_amount}")
+print(f"四舍五入金额: ¥{round_amount}")
 
-# 7. 反推税前价格
-tax_rate = 0.1
-price_before_tax = final_price / (1 + tax_rate)
-print(f"税前价格: ¥{price_before_tax:.2f} (税率{int(tax_rate*100)}%)")
+# 7. 计算2人分摊金额
+per_person = final_amount / 2
+print(f"2人分摊: 每人 ¥{per_person:.2f}")
 
-# 8. 生成随机抽奖号
-lottery_num = random.randint(1000, 9999)
-print(f"随机抽奖号: {lottery_num}")
+print("\n=== 随机活动 ===")
+# 8. 生成随机折扣 (75%-95%，整数百分比)
+discount_rate = random.randint(75, 95)
+print(f"随机折扣: {discount_rate}%")
+
+# 9. 计算折扣后金额
+discounted_final = final_amount * (discount_rate / 100)
+print(f"折扣后金额: ¥{discounted_final:.2f}")
+
+# 10. 生成4位随机抽奖编号
+lottery_number = random.randint(1000, 9999)
+print(f"抽奖编号: {lottery_number}")
 ```
 :::
