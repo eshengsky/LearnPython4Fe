@@ -586,6 +586,41 @@ print("abc123".isalnum())        # 是否全为字母和数字
 print("Hello World".istitle())   # 是否为标题格式（每个单词首字母大写）
 ```
 
+## str() 与 repr()
+
+Python 提供了两种字符串显示方式：`str()` 用于用户友好显示，`repr()` 用于开发者调试。
+
+```python runner
+text1 = "Hello World"
+text2 = ""
+text3 = "Line 1\nLine 2"
+
+print("=== str() / print() 显示效果 ===")
+print(str(text1))          # Hello World
+print(text2)          # (空行)
+print(text3)          # Line 1
+                      # Line 2
+
+print("\n=== repr() 显示效果 ===")
+print(repr(text1))    # 'Hello World'
+print(repr(text2))    # ''
+print(repr(text3))    # 'Line 1\nLine 2'
+```
+
+`repr()` 主要用于调试，显示字符串的真实内容：
+
+```python runner
+# 调试用户输入问题
+user_input = "  hello world  \n"
+
+print("用户输入:", user_input)
+print("实际内容:", repr(user_input))
+print("清理后:", repr(user_input.strip()))
+
+# f-string 中使用 !r 快速调用 repr()
+print(f"对比: {user_input!r} -> {user_input.strip()!r}")
+```
+
 ## 转义字符
 
 转义字符是用反斜杠 `\` 开头的特殊字符序列，用来表示一些无法直接输入或有特殊含义的字符，比如换行符、制表符、引号等。
@@ -621,6 +656,45 @@ print(text3)
 print(text4)
 print(text5)
 ```
+
+### 使用 repr() 查看转义字符
+
+前面我们学了 `repr()` 方法，它在处理转义字符时特别有用，可以清楚地显示字符串的真实内容：
+
+```python runner
+# 使用 repr() 查看转义字符的真实表示
+escape_examples = [
+    "Hello\nWorld",      # 换行符
+    "Column1\tColumn2",  # 制表符
+    "Say \"Hi\"",        # 双引号
+    "It's okay",         # 单引号（不需要转义）
+    "Path: C:\\Users",   # 反斜杠
+    "Bell sound: \a",    # 响铃符（很少用）
+]
+
+print("转义字符示例对比:")
+print("序号\tprint() 输出\t\trepr() 显示")
+print("-" * 50)
+
+for i, text in enumerate(escape_examples, 1):
+    print(f"{i}\t{text}\t\t{repr(text)}")
+```
+
+这样可以清楚地看到：
+- `\n` 在 `print()` 中显示为换行，在 `repr()` 中显示为 `\n` 字符
+- `\t` 在 `print()` 中显示为制表符间距，在 `repr()` 中显示为 `\t` 字符
+- `\"` 在字符串中表示双引号字符
+
+### 常见转义字符表
+
+| 转义序列 | 含义 | print() 效果 | repr() 显示 |
+|---------|------|-------------|-------------|
+| `\"` | 双引号 | Hello "World" | `"Hello \"World\""` |
+| `\'` | 单引号 | It's okay | `"It\'s okay"` |
+| `\\` | 反斜杠 | C:\Users | `"C:\\\\Users"` |
+| `\n` | 换行符 | Line1<br>Line2 | `"Line1\\nLine2"` |
+| `\t` | 制表符 | A&nbsp;&nbsp;&nbsp;&nbsp;B | `"A\\tB"` |
+| `\r` | 回车符 | World（覆盖前面内容） | `"Hello\\rWorld"` |
 
 ## 重复操作
 
