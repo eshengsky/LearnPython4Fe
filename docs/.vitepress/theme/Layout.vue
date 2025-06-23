@@ -19,21 +19,29 @@ export default {
     const route = useRoute()
     
     // 处理交互式代码块的函数
-    const handleCodeBlocks = async () => {
+    const handleCodeBlocks = async (force = false) => {
       await nextTick()
-      await processInteractiveCodeBlocks()
+      await processInteractiveCodeBlocks(force)
     }
     
     // 页面首次加载时处理
-    onMounted(handleCodeBlocks)
+    onMounted(() => handleCodeBlocks())
     
     // DOM 更新后处理（包括路由变化）
-    onUpdated(handleCodeBlocks)
+    onUpdated(() => handleCodeBlocks())
     
     // 监听路由变化
     watch(() => route.path, async () => {
-      await handleCodeBlocks()
+      await handleCodeBlocks(true) // 路由变化时强制重新处理
     }, { flush: 'post' })
+
+    // 热更新时的额外处理
+    if (import.meta.hot) {
+      import.meta.hot.on('vite:afterUpdate', () => {
+        // 延迟处理，确保 DOM 已经更新
+        setTimeout(() => handleCodeBlocks(true), 100)
+      })
+    }
 
     return {}
   }
@@ -52,7 +60,7 @@ function base64DecodeUtf8(str) {
 }
 
 // 处理交互式代码块的函数
-async function processInteractiveCodeBlocks() {
+async function processInteractiveCodeBlocks(force = false) {
   // 查找所有需要处理的标记
   const blocks = document.querySelectorAll('.interactive-code-block')
   
@@ -63,7 +71,7 @@ async function processInteractiveCodeBlocks() {
   
   blocks.forEach((block, index) => {
     // 检查是否已经处理过了（避免重复处理）
-    if (block.querySelector('.interactive-code')) {
+    if (!force && block.querySelector('.interactive-code')) {
       return
     }
         
@@ -82,6 +90,17 @@ async function processInteractiveCodeBlocks() {
       const decodedCode = base64DecodeUtf8(encodedCode)
       const decodedTitle = encodedTitle ? base64DecodeUtf8(encodedTitle) : ''
       
+      // 如果是强制重新处理，需要先清理旧的实例
+      if (force && block._vueApp) {
+        try {
+          block._vueApp.unmount()
+        } catch (e) {
+          // 忽略卸载错误
+          console.warn('Warning during Vue app unmount:', e)
+        }
+        delete block._vueApp
+      }
+      
       // 清空原有内容
       block.innerHTML = ''
       
@@ -92,6 +111,9 @@ async function processInteractiveCodeBlocks() {
         code: decodedCode,
         runnable: runnable  // 传递 runnable 属性
       })
+      
+      // 保存应用实例的引用，便于后续清理
+      block._vueApp = app
       
       // 挂载到当前位置
       app.mount(block)
