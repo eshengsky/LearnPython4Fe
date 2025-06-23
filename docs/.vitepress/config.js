@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitepress'
 import { interactiveCodePlugin } from './plugins/interactive-code-plugin.ts'
+import { readingTimePlugin } from './plugins/reading-time-plugin.ts'
 
 export default defineConfig({
   title: 'Python 教程（进行中）',
@@ -15,6 +16,7 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       interactiveCodePlugin(md);
+      readingTimePlugin(md);
     }
   },
   
@@ -54,16 +56,16 @@ export default defineConfig({
             { text: '布尔值', link: '/guide/booleans' },
           ]
         },
-        // {
-        //   text: '数据结构',
-        //   collapsed: false,
-        //   items: [
-        //     { text: '列表', link: '/guide/lists' },
-        //     { text: '元组', link: '/guide/tuples' },
-        //     { text: '字典', link: '/guide/dictionaries' },
-        //     { text: '集合', link: '/guide/sets' },
-        //   ]
-        // },
+        {
+          text: '数据结构',
+          collapsed: false,
+          items: [
+            // { text: '列表', link: '/guide/lists' },
+            // { text: '元组', link: '/guide/tuples' },
+            // { text: '字典', link: '/guide/dictionaries' },
+            // { text: '集合', link: '/guide/sets' },
+          ]
+        },
         // {
         //   text: '程序控制',
         //   collapsed: false,

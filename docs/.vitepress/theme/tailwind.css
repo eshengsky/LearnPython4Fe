@@ -10,3 +10,70 @@ code {
   background-color: transparent;
   padding: 0;
 }
+
+/* 阅读时间组件样式 */
+.reading-time-wrapper {
+  margin: 1.5rem 0;
+}
+
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--vp-c-text-2);
+  font-size: 0.875rem;
+  padding: 0.5rem 0.8rem;
+  background-color: var(--vp-c-bg-soft);
+  border-radius: 6px;
+  border: 1px solid var(--vp-c-divider);
+  transition: all 0.2s ease;
+  cursor: default;
+}
+
+.reading-time:hover {
+  background-color: var(--vp-c-bg-mute);
+}
+
+.reading-time-icon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  stroke-width: 2;
+}
+
+.reading-time-text {
+  line-height: 1;
+  font-weight: 500;
+}
+
+.reading-time-count {
+  margin: 0 0.15em;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .reading-time {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+  
+  .reading-time-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  
+  .reading-time-wrapper {
+    margin: 1rem 0;
+  }
+}
+
+/* 暗色主题优化 */
+@media (prefers-color-scheme: dark) {
+  .reading-time {
+    background-color: var(--vp-c-bg-soft);
+  }
+  
+  .reading-time:hover {
+    background-color: var(--vp-c-bg-mute);
+  }
+}
