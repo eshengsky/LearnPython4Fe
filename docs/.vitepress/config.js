@@ -61,7 +61,7 @@ export default defineConfig({
           collapsed: false,
           items: [
             { text: '列表', link: '/guide/lists' },
-            // { text: '元组', link: '/guide/tuples' },
+            { text: '元组', link: '/guide/tuples' },
             // { text: '字典', link: '/guide/dictionaries' },
             // { text: '集合', link: '/guide/sets' },
           ]
