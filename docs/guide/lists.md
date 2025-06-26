@@ -125,7 +125,7 @@ fruits = ["apple", "banana", "cherry"]
 print(len(fruits))
 ```
 
-## 列表比较
+## 比较
 
 JavaScript 数组的比较主要基于引用：
 
@@ -156,11 +156,18 @@ print(f"不同对象但内容相同: {list1 is list2}")  # False
 # 注意：列表比较是顺序敏感的
 list4 = [3, 2, 1]
 print(f"顺序不同: {list1 == list4}")  # False
+
+# 列表支持大小比较（按字典序）
+print(f"[1, 2] < [1, 3]: {[1, 2] < [1, 3]}")    # True
+print(f"[1, 2] < [2, 1]: {[1, 2] < [2, 1]}")    # True
+print(f"['a', 'b'] < ['a', 'c']: {['a', 'b'] < ['a', 'c']}")  # True
 ```
 
 关于`==`和`is`的详细差异，请参考布尔值章节的比较运算符部分。
 
 ## 元素查找
+
+### 检查元素存在
 
 JavaScript 中使用`.includes()`方法：
 
@@ -183,7 +190,68 @@ print("orange" in fruits)  # 输出: False
 print("orange" not in fruits)  # 输出: True
 ```
 
+### 索引查找
 
+JavaScript 使用`.indexOf()`方法查找元素的索引：
+
+```javascript runner
+let fruits = ["apple", "banana", "cherry", "banana"];
+
+console.log(fruits.indexOf("banana"));   // 输出: 1 (第一次出现的位置)
+console.log(fruits.indexOf("orange"));   // 输出: -1 (不存在)
+
+// 查找最后一次出现的位置
+console.log(fruits.lastIndexOf("banana")); // 输出: 3
+```
+
+Python 使用`.index()`方法，但不存在时会报错：
+
+```python runner
+fruits = ["apple", "banana", "cherry", "banana"]
+
+# 查找元素的索引
+index = fruits.index("banana")
+print(f"banana 的索引: {index}")  # 第一次出现的位置
+
+# 查找不存在的元素会报错
+try:
+    index = fruits.index("orange")
+except ValueError:
+    print("orange 不在列表中")
+
+# 安全的查找方式
+if "orange" in fruits:
+    index = fruits.index("orange")
+    print(f"orange 的索引: {index}")
+else:
+    print("orange 不在列表中")
+```
+
+### 计数
+
+JavaScript 需要使用`filter()`方法来计数：
+
+```javascript runner
+let numbers = [1, 2, 3, 2, 4, 2, 5];
+
+// 计算元素出现次数
+let count = numbers.filter(x => x === 2).length;
+console.log(`数字 2 出现次数: ${count}`);
+
+// 或使用 reduce
+let count2 = numbers.reduce((acc, val) => val === 2 ? acc + 1 : acc, 0);
+console.log(`数字 2 出现次数: ${count2}`);
+```
+
+Python 提供了简洁的`.count()`方法：
+
+```python runner
+numbers = [1, 2, 3, 2, 4, 2, 5]
+
+# 计算元素出现次数
+count = numbers.count(2)
+print(f"数字 2 出现次数: {count}")
+```
 
 ## 切片
 
@@ -594,8 +662,6 @@ Python 提供了多种删除列表元素的方法，每种方法适用于不同�
 | `del lst[start:end]` | `del lst[1:3]` | 删除指定范围的元素 | None | 删除连续的多个元素 |
 | `clear()` | `lst.clear()` | 删除所有元素 | None | 清空整个列表 |
 
-
-
 ## 排序
 
 ### 原地排序
@@ -717,8 +783,6 @@ def get_ones_digit(num):
 sorted_by_ones = sorted(numbers, key=get_ones_digit, reverse=True)
 print(f"按个位数降序排序: {sorted_by_ones}")
 ```
-
-
 
 ## 反转列表
 
@@ -937,6 +1001,86 @@ result_padded = list(zip(padded_short, long_list, another_list))
 print(f"填充后组合: {result_padded}")
 ```
 
+## 解包
+
+JavaScript 中有数组解构赋值：
+
+```javascript runner
+// JavaScript 数组解构
+const coordinates = [10, 20];
+const [x, y] = coordinates;
+console.log(`坐标: x=${x}, y=${y}`);
+
+// 交换变量
+let a = 1, b = 2;
+[a, b] = [b, a];
+console.log(`交换后: a=${a}, b=${b}`);
+
+// 忽略元素
+const numbers = [1, 2, 3, 4, 5];
+const [first, , third] = numbers;  // 忽略第二个元素
+console.log(`第一个: ${first}, 第三个: ${third}`);
+```
+
+Python 的列表解包功能类似，但语法更简洁：
+
+```python runner
+# 基本解包
+coordinates = [10, 20]
+x, y = coordinates
+print(f"坐标: x={x}, y={y}")
+
+# 变量交换
+a, b = 1, 2
+a, b = b, a
+print(f"交换后: a={a}, b={b}")
+
+# 忽略元素
+numbers = [1, 2, 3, 4, 5]
+first, _, third, *_ = numbers  # 使用 _ 忽略不需要的元素
+print(f"第一个: {first}, 第三个: {third}")
+```
+
+### 扩展解包
+
+Python 支持使用星号（*）进行扩展解包：
+
+```python runner
+# 扩展解包：收集多个元素
+numbers = [1, 2, 3, 4, 5]
+
+# 取第一个和最后一个，中间的收集到列表中
+first, *middle, last = numbers
+print(f"第一个: {first}")
+print(f"中间部分: {middle}")  # 这是一个列表
+print(f"最后一个: {last}")
+
+# 取前两个，剩余的收集起来
+a, b, *rest = numbers
+print(f"前两个: {a}, {b}")
+print(f"剩余: {rest}")
+
+# 只取前三个，忽略其余
+x, y, z, *_ = numbers  # 使用 _ 表示忽略
+print(f"前三个: {x}, {y}, {z}")
+```
+
+### 嵌套列表解包
+
+对于嵌套的列表结构，也可以进行解包：
+
+```python runner
+# 解包嵌套结构
+coordinate_data = [[10, 20], [30, 40]]
+point1, point2 = coordinate_data
+x1, y1 = point1
+x2, y2 = point2
+print(f"第一个点: ({x1}, {y1})")
+print(f"第二个点: ({x2}, {y2})")
+```
+
+
+
 ## 列表推导式
 
 JavaScript 中处理数组时，我们经常需要使用`.map()`、`.filter()`等方法来变换和过滤数据：
@@ -1063,7 +1207,17 @@ print(f"乘法表: {multiplication_table}")
 | `*` | 重复列表 | `[1, 2] * 3` | 新列表 |
 | `in` | 检查元素是否存在 | `'apple' in fruits` | 布尔值 |
 | `not in` | 检查元素是否不存在 | `'apple' not in fruits` | 布尔值 |
+| `==` | 比较列表内容 | `[1, 2] == [1, 2]` | 布尔值 |
+| `<`, `>`, `<=`, `>=` | 按字典序比较 | `[1, 2] < [1, 3]` | 布尔值 |
 | `del` | 删除元素或切片 | `del lst[0]` 或 `del lst[1:3]` | None |
+
+### 切片操作
+
+| 操作 | 功能 | 示例 | 返回值 |
+|------|------|------|--------|
+| `lst[start:end]` | 切片 | `lst[1:3]` | 新列表 |
+| `lst[start:end:step]` | 带步长切片 | `lst[::2]` | 新列表 |
+| `lst[::-1]` | 反转列表 | `lst[::-1]` | 新列表 |
 
 ## 小结
 
