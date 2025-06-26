@@ -349,6 +349,34 @@ print(f"终点: ({end_x}, {end_y})")
 ```
 
 
+## 元组推导式
+
+在列表章节中，我们学习了列表推导式的强大功能。你可能会问：元组有推导式吗？
+
+答案是：**元组本身没有推导式语法**。使用圆括号的表达式 `(expression for item in iterable)` 实际上创建的是**生成器表达式**，而不是元组：
+
+```python runner
+# 这不是元组推导式，而是生成器表达式
+squares_generator = (x * x for x in range(5))
+print(f"生成器对象: {squares_generator}")
+print(f"类型: {type(squares_generator)}")
+```
+
+### 创建元组的正确方式
+
+要创建元组，需要将生成器表达式或其他可迭代对象传递给 `tuple()` 构造函数：
+
+```python runner
+# 使用 tuple() + 生成器表达式创建元组
+squares_tuple = tuple(x * x for x in range(5))
+print(f"元组推导式结果: {squares_tuple}")
+print(f"类型: {type(squares_tuple)}")
+
+# 带条件的元组创建
+even_squares = tuple(x * x for x in range(10) if x % 2 == 0)
+print(f"偶数的平方: {even_squares}")
+```
+
 ## 命名元组
 
 虽然不是本章的重点，但值得了解 Python 还提供了命名元组，让元组更具可读性：
@@ -511,6 +539,15 @@ class_c = ("高一3班", 47, "王老师")
 # 创建另一个班级信息，并比较是否相同
 # class_a_copy = ("高一1班", 45, "张老师")
 
+# 任务 9: 使用"元组推导式"（tuple() + 生成器表达式）
+# 创建一个包含所有班级学生人数平方的元组
+# student_count_squares = ...
+
+# 任务 10: 创建班级代码元组
+# 将班级名称转换为代码格式，如 "高一1班" -> "G1C1"（高一1班）
+# 使用 tuple() + 生成器表达式
+# class_codes = ...
+
 ```
 
 ::: details 点击查看参考答案
@@ -556,5 +593,14 @@ print(f"班级和老师信息: {class_teacher_pairs}")
 class_a_copy = ("高一1班", 45, "张老师")
 print(f"班级信息是否相同: {class_a == class_a_copy}")
 print(f"是否为同一个对象: {class_a is class_a_copy}")  # 注意：可能因Python优化而为True
+
+# 任务 9: 使用"元组推导式"（tuple() + 生成器表达式）
+student_count_squares = tuple(cls[1] * cls[1] for cls in all_classes)
+print(f"学生人数的平方: {student_count_squares}")
+
+# 任务 10: 创建班级代码元组
+# 将 "高一1班" 转换为 "G1C1" 格式
+class_codes = tuple(f"G{cls[0][2]}C{cls[0][3]}" for cls in all_classes)
+print(f"班级代码: {class_codes}")
 ```
 ::: 
